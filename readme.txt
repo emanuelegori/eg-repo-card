@@ -4,7 +4,7 @@ Tags: repository, github, forgejo, card, shortcode
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,9 @@ Data for each repository is stored as a WordPress transient. The duration is con
 2. Admin settings page: API tokens, cache duration, colours.
 
 == Changelog ==
+
+= 1.2.4 =
+* Fixed: `phpcs:ignore` on `echo $notice` — false positive, variable already built with `esc_html__()` and `esc_html()`
 
 = 1.2.3 =
 * Fixed: `translators:` comment moved to the line immediately above `esc_html__()` (PHPCS compliance)

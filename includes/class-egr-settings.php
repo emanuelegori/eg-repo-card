@@ -270,6 +270,7 @@ class EGR_Settings {
                 $label = ( 'github' === $platform ) ? 'GitHub' : 'Forgejo';
                 /* translators: %s: nome piattaforma (GitHub o Forgejo) */
                 $notice = sprintf( esc_html__( 'Token %s rimosso.', 'eg-ranking-repo' ), esc_html( $label ) );
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $notice già costruita con esc_html__() e esc_html()
                 echo '<div class="notice notice-success is-dismissible"><p>' . $notice . '</p></div>';
             }
         }

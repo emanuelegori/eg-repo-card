@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.4] - 2026-06-02
+
+### Corretto
+- `phpcs:ignore` su `echo $notice` — falso positivo: la variabile è già costruita con `esc_html__()` e `esc_html()`, PHPCS non traccia l'escaping su righe precedenti
+
 ## [1.2.3] - 2026-06-02
 
 ### Corretto
