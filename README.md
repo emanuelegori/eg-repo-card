@@ -1,6 +1,6 @@
 # EG Ranking Repo
 
-[![Version](https://img.shields.io/badge/Version-1.4.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
+[![Version](https://img.shields.io/badge/Version-1.4.3-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
