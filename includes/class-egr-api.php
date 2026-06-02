@@ -52,7 +52,10 @@ class EGR_API {
             if ( isset( $cached['egr_error'] ) ) {
                 return new WP_Error( $cached['egr_error_code'] ?? 'egr_api_error', $cached['egr_error'] );
             }
-            return $cached;
+            // Cache da versione precedente senza campo 'version': lascia passare per rifare il fetch
+            if ( array_key_exists( 'version', $cached ) ) {
+                return $cached;
+            }
         }
 
         // Build API endpoint
@@ -154,24 +157,41 @@ class EGR_API {
      * Returns '' if no releases exist or the request fails.
      */
     private static function fetch_latest_version( bool $is_github, string $host, string $owner, string $repo, array $headers ): string {
+        // Prova prima le releases (formato semanticamente corretto)
         $url = $is_github
             ? "https://api.github.com/repos/{$owner}/{$repo}/releases/latest"
             : "https://{$host}/api/v1/repos/{$owner}/{$repo}/releases?limit=1";
 
         $response = wp_safe_remote_get( $url, [ 'timeout' => 8, 'headers' => $headers ] );
+        $code     = is_wp_error( $response ) ? 0 : (int) wp_remote_retrieve_response_code( $response );
 
-        if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+        if ( 200 === $code ) {
+            $body = json_decode( wp_remote_retrieve_body( $response ), true );
+            if ( is_array( $body ) ) {
+                $tag = $is_github ? ( $body['tag_name'] ?? '' ) : ( $body[0]['tag_name'] ?? '' );
+                if ( '' !== $tag ) {
+                    return sanitize_text_field( (string) $tag );
+                }
+            }
+        }
+
+        // Fallback: tag git (repo che non usano le releases ufficiali)
+        $tags_url = $is_github
+            ? "https://api.github.com/repos/{$owner}/{$repo}/tags"
+            : "https://{$host}/api/v1/repos/{$owner}/{$repo}/tags?limit=1";
+
+        $tags_response = wp_safe_remote_get( $tags_url, [ 'timeout' => 8, 'headers' => $headers ] );
+
+        if ( is_wp_error( $tags_response ) || 200 !== (int) wp_remote_retrieve_response_code( $tags_response ) ) {
             return '';
         }
 
-        $body = json_decode( wp_remote_retrieve_body( $response ), true );
-        if ( ! is_array( $body ) ) {
+        $tags = json_decode( wp_remote_retrieve_body( $tags_response ), true );
+        if ( ! is_array( $tags ) || empty( $tags ) ) {
             return '';
         }
 
-        // GitHub returns a single object; Forgejo returns an array
-        $tag = $is_github ? ( $body['tag_name'] ?? '' ) : ( $body[0]['tag_name'] ?? '' );
-        return sanitize_text_field( (string) $tag );
+        return sanitize_text_field( (string) ( $tags[0]['name'] ?? '' ) );
     }
 
     /**
