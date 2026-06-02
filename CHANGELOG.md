@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.6] - 2026-06-02
+
+### Aggiunto
+- `.distignore`: `README.it-IT.md` e `.gitignore` esclusi dall'installazione WordPress tramite il nuovo supporto `.distignore` di EG Forgejo Updater
+
 ## [1.2.5] - 2026-06-02
 
 ### Aggiunto
