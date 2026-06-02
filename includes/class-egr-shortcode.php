@@ -40,7 +40,7 @@ class EGR_Shortcode {
 
         if ( empty( $atts['url'] ) ) {
             return '<p class="egr-error">'
-                . esc_html__( 'Attributo url mancante nello shortcode.', 'eg-ranking-repo' )
+                . esc_html__( 'Missing url attribute in the shortcode.', 'eg-ranking-repo' )
                 . '</p>';
         }
 
@@ -52,7 +52,7 @@ class EGR_Shortcode {
         if ( is_wp_error( $data ) ) {
             return sprintf(
                 '<p class="egr-error">%s: %s</p>',
-                esc_html__( 'Errore', 'eg-ranking-repo' ),
+                esc_html__( 'Error', 'eg-ranking-repo' ),
                 esc_html( $data->get_error_message() )
             );
         }
@@ -107,17 +107,17 @@ class EGR_Shortcode {
                    class="egr-btn egr-btn--website"
                    target="_blank"
                    rel="noopener noreferrer"
-                   title="<?php esc_attr_e( 'Sito web del progetto', 'eg-ranking-repo' ); ?>">
+                   title="<?php esc_attr_e( 'Project website', 'eg-ranking-repo' ); ?>">
                     <?php echo self::icon_globe(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
-                    <?php echo esc_html__( 'Sito Web', 'eg-ranking-repo' ); ?>
+                    <?php echo esc_html__( 'Website', 'eg-ranking-repo' ); ?>
                 </a>
                 <?php else : ?>
                 <span class="egr-btn egr-btn--disabled"
                       aria-disabled="true"
                       tabindex="-1"
-                      title="<?php esc_attr_e( 'Nessun sito web impostato nel repository', 'eg-ranking-repo' ); ?>">
+                      title="<?php esc_attr_e( 'No website set in the repository', 'eg-ranking-repo' ); ?>">
                     <?php echo self::icon_globe(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
-                    <?php echo esc_html__( 'Nessun sito', 'eg-ranking-repo' ); ?>
+                    <?php echo esc_html__( 'No website', 'eg-ranking-repo' ); ?>
                 </span>
                 <?php endif; ?>
 
@@ -125,20 +125,20 @@ class EGR_Shortcode {
                    class="egr-btn egr-btn--source"
                    target="_blank"
                    rel="noopener noreferrer"
-                   title="<?php esc_attr_e( 'Vai al repository', 'eg-ranking-repo' ); ?>">
+                   title="<?php esc_attr_e( 'Go to repository', 'eg-ranking-repo' ); ?>">
                     <?php echo self::icon_code(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html__( 'Source Code', 'eg-ranking-repo' ); ?>
                 </a>
 
                 <span class="egr-btn egr-btn--badge"
-                      title="<?php esc_attr_e( 'Ultimo aggiornamento', 'eg-ranking-repo' ); ?>">
+                      title="<?php esc_attr_e( 'Last updated', 'eg-ranking-repo' ); ?>">
                     <?php echo self::icon_calendar(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html( $date_formatted ); ?>
                 </span>
 
                 <?php if ( $version !== '' ) : ?>
                 <span class="egr-btn egr-btn--badge"
-                      title="<?php esc_attr_e( 'Ultima versione rilasciata', 'eg-ranking-repo' ); ?>">
+                      title="<?php esc_attr_e( 'Latest release', 'eg-ranking-repo' ); ?>">
                     <?php echo self::icon_tag(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html( $version ); ?>
                 </span>

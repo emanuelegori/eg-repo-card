@@ -26,7 +26,7 @@ class EGR_API {
         if ( ! $parsed || empty( $parsed['host'] ) || empty( $parsed['path'] ) ) {
             return new WP_Error(
                 'egr_invalid_url',
-                __( 'URL repository non valido.', 'eg-ranking-repo' )
+                __( 'Invalid repository URL.', 'eg-ranking-repo' )
             );
         }
 
@@ -36,7 +36,7 @@ class EGR_API {
         if ( count( $parts ) < 2 ) {
             return new WP_Error(
                 'egr_invalid_url',
-                __( 'URL repository non valido: owner/repo mancante nel percorso.', 'eg-ranking-repo' )
+                __( 'Invalid repository URL: missing owner/repo in path.', 'eg-ranking-repo' )
             );
         }
 
@@ -102,7 +102,7 @@ class EGR_API {
         if ( 200 !== (int) $http_code ) {
             $msg = sprintf(
                 /* translators: %d: HTTP response status code */
-                __( 'Errore API: stato HTTP %d.', 'eg-ranking-repo' ),
+                __( 'API error: HTTP status %d.', 'eg-ranking-repo' ),
                 (int) $http_code
             );
             set_transient( $cache_key, [ 'egr_error_code' => 'egr_api_error', 'egr_error' => $msg ], 5 * MINUTE_IN_SECONDS );
@@ -113,7 +113,7 @@ class EGR_API {
         $data = json_decode( $body, true );
 
         if ( ! is_array( $data ) ) {
-            $msg = __( 'Impossibile analizzare la risposta JSON dell\'API.', 'eg-ranking-repo' );
+            $msg = __( 'Could not parse the API JSON response.', 'eg-ranking-repo' );
             set_transient( $cache_key, [ 'egr_error_code' => 'egr_parse_error', 'egr_error' => $msg ], 5 * MINUTE_IN_SECONDS );
             return new WP_Error( 'egr_parse_error', $msg );
         }
@@ -219,14 +219,14 @@ class EGR_API {
      */
     public static function format_date( string $iso_date ): string {
         if ( empty( $iso_date ) ) {
-            return __( 'N/D', 'eg-ranking-repo' );
+            return __( 'N/A', 'eg-ranking-repo' );
         }
         try {
             $dt = new DateTime( $iso_date, new DateTimeZone( 'UTC' ) );
             $dt->setTimezone( wp_timezone() );
             return $dt->format( 'd-m-Y' );
         } catch ( Exception $e ) {
-            return __( 'N/D', 'eg-ranking-repo' );
+            return __( 'N/A', 'eg-ranking-repo' );
         }
     }
 }

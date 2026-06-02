@@ -38,12 +38,12 @@ class EGR_Settings {
         $settings_link = sprintf(
             '<a href="%s">%s</a>',
             esc_url( admin_url( 'options-general.php?page=' . self::PAGE_SLUG ) ),
-            esc_html__( 'Impostazioni', 'eg-ranking-repo' )
+            esc_html__( 'Settings', 'eg-ranking-repo' )
         );
         $docs_link = sprintf(
             '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
             esc_url( 'https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo' ),
-            esc_html__( 'Documentazione', 'eg-ranking-repo' )
+            esc_html__( 'Documentation', 'eg-ranking-repo' )
         );
         array_unshift( $links, $docs_link, $settings_link );
         return $links;
@@ -87,10 +87,10 @@ class EGR_Settings {
         // -- Section: API Tokens --
         add_settings_section(
             'egr_sec_api',
-            __( 'Token API', 'eg-ranking-repo' ),
+            __( 'API Tokens', 'eg-ranking-repo' ),
             static function () {
                 echo '<p class="description">'
-                    . esc_html__( 'Token opzionali per aumentare il rate limit delle chiamate API.', 'eg-ranking-repo' )
+                    . esc_html__( 'Optional tokens to increase API rate limits.', 'eg-ranking-repo' )
                     . '</p>';
             },
             self::PAGE_SLUG
@@ -101,15 +101,15 @@ class EGR_Settings {
             __( 'GitHub Personal Access Token', 'eg-ranking-repo' ),
             'egr_sec_api',
             'password',
-            __( 'Senza token: 60 richieste/ora. Con token: 5000 richieste/ora.', 'eg-ranking-repo' )
+            __( 'Without token: 60 requests/hour. With token: 5,000 requests/hour.', 'eg-ranking-repo' )
         );
 
         self::add_field(
             'egr_forgejo_token',
-            __( 'Forgejo API Token (opzionale)', 'eg-ranking-repo' ),
+            __( 'Forgejo API Token (optional)', 'eg-ranking-repo' ),
             'egr_sec_api',
             'password',
-            __( 'Necessario solo per repository privati o istanze con autenticazione obbligatoria.', 'eg-ranking-repo' )
+            __( 'Required only for private repositories or instances with mandatory authentication.', 'eg-ranking-repo' )
         );
 
         // -- Section: Cache --
@@ -118,7 +118,7 @@ class EGR_Settings {
             __( 'Cache', 'eg-ranking-repo' ),
             static function () {
                 echo '<p class="description">'
-                    . esc_html__( 'I dati dei repository vengono messi in cache per ridurre le chiamate API.', 'eg-ranking-repo' )
+                    . esc_html__( 'Repository data is cached to reduce API calls.', 'eg-ranking-repo' )
                     . '</p>';
             },
             self::PAGE_SLUG
@@ -126,7 +126,7 @@ class EGR_Settings {
 
         add_settings_field(
             'egr_cache_hours',
-            __( 'Durata cache (ore)', 'eg-ranking-repo' ),
+            __( 'Cache duration (hours)', 'eg-ranking-repo' ),
             static function () {
                 $val = (int) get_option( 'egr_cache_hours', 6 );
                 printf(
@@ -134,7 +134,7 @@ class EGR_Settings {
                             value="%s" min="1" max="168" class="small-text">
                      <p class="description">%s</p>',
                     esc_attr( (string) $val ),
-                    esc_html__( 'Valori consigliati: 6–24 ore. Massimo 168 (1 settimana).', 'eg-ranking-repo' )
+                    esc_html__( 'Recommended values: 6–24 hours. Maximum 168 (1 week).', 'eg-ranking-repo' )
                 );
             },
             self::PAGE_SLUG,
@@ -144,10 +144,10 @@ class EGR_Settings {
         // -- Section: Stile card --
         add_settings_section(
             'egr_sec_style',
-            __( 'Stile card', 'eg-ranking-repo' ),
+            __( 'Card style', 'eg-ranking-repo' ),
             static function () {
                 echo '<p class="description">'
-                    . esc_html__( 'Personalizza i colori della card. I valori predefiniti garantiscono la massima leggibilità.', 'eg-ranking-repo' )
+                    . esc_html__( 'Customise the card colours. The default values ensure maximum readability.', 'eg-ranking-repo' )
                     . '</p>';
             },
             self::PAGE_SLUG
@@ -155,25 +155,25 @@ class EGR_Settings {
 
         self::add_color_field(
             'egr_card_bg_color',
-            __( 'Colore sfondo card', 'eg-ranking-repo' ),
+            __( 'Card background colour', 'eg-ranking-repo' ),
             self::DEFAULTS['egr_card_bg_color']
         );
 
         self::add_color_field(
             'egr_card_txt_color',
-            __( 'Colore testo card', 'eg-ranking-repo' ),
+            __( 'Card text colour', 'eg-ranking-repo' ),
             self::DEFAULTS['egr_card_txt_color']
         );
 
         self::add_color_field(
             'egr_btn_bg_color',
-            __( 'Colore sfondo bottoni', 'eg-ranking-repo' ),
+            __( 'Button background colour', 'eg-ranking-repo' ),
             self::DEFAULTS['egr_btn_bg_color']
         );
 
         self::add_color_field(
             'egr_btn_txt_color',
-            __( 'Colore testo bottoni', 'eg-ranking-repo' ),
+            __( 'Button text colour', 'eg-ranking-repo' ),
             self::DEFAULTS['egr_btn_txt_color']
         );
     }
@@ -269,7 +269,7 @@ class EGR_Settings {
                 delete_option( $option_key );
                 $label = ( 'github' === $platform ) ? 'GitHub' : 'Forgejo';
                 /* translators: %s: nome piattaforma (GitHub o Forgejo) */
-                $notice = sprintf( esc_html__( 'Token %s rimosso.', 'eg-ranking-repo' ), esc_html( $label ) );
+                $notice = sprintf( esc_html__( 'Token %s removed.', 'eg-ranking-repo' ), esc_html( $label ) );
                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $notice già costruita con esc_html__() e esc_html()
                 echo '<div class="notice notice-success is-dismissible"><p>' . $notice . '</p></div>';
             }
@@ -282,31 +282,31 @@ class EGR_Settings {
         ) {
             self::flush_all_cache();
             echo '<div class="notice notice-success is-dismissible"><p>'
-                . esc_html__( 'Cache svuotata.', 'eg-ranking-repo' )
+                . esc_html__( 'Cache cleared.', 'eg-ranking-repo' )
                 . '</p></div>';
         }
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e( 'EG Ranking Repo — Impostazioni', 'eg-ranking-repo' ); ?></h1>
+            <h1><?php esc_html_e( 'EG Ranking Repo — Settings', 'eg-ranking-repo' ); ?></h1>
 
             <form method="post" action="options.php">
                 <?php
                 settings_fields( self::OPTION_GROUP );
                 do_settings_sections( self::PAGE_SLUG );
-                submit_button( __( 'Salva impostazioni', 'eg-ranking-repo' ) );
+                submit_button( __( 'Save settings', 'eg-ranking-repo' ) );
                 ?>
             </form>
 
             <hr>
 
-            <h2><?php esc_html_e( 'Svuota cache', 'eg-ranking-repo' ); ?></h2>
+            <h2><?php esc_html_e( 'Flush cache', 'eg-ranking-repo' ); ?></h2>
             <p class="description">
-                <?php esc_html_e( 'Forza il recupero aggiornato dei dati dai repository alla prossima visualizzazione.', 'eg-ranking-repo' ); ?>
+                <?php esc_html_e( 'Forces a fresh data fetch from repositories on next page view.', 'eg-ranking-repo' ); ?>
             </p>
             <form method="post">
                 <?php wp_nonce_field( 'egr_flush_cache_nonce' ); ?>
                 <?php submit_button(
-                    __( 'Svuota cache ora', 'eg-ranking-repo' ),
+                    __( 'Flush cache now', 'eg-ranking-repo' ),
                     'secondary',
                     'egr_flush_cache',
                     false
@@ -315,9 +315,9 @@ class EGR_Settings {
 
             <hr>
 
-            <h2><?php esc_html_e( 'Rimuovi token API', 'eg-ranking-repo' ); ?></h2>
+            <h2><?php esc_html_e( 'Remove API tokens', 'eg-ranking-repo' ); ?></h2>
             <p class="description">
-                <?php esc_html_e( 'Usa questi pulsanti per eliminare un token salvato (ad esempio se è stato compromesso).', 'eg-ranking-repo' ); ?>
+                <?php esc_html_e( 'Use these buttons to delete a saved token (e.g. if it has been compromised).', 'eg-ranking-repo' ); ?>
             </p>
             <?php
             $has_any_token = false;
@@ -330,7 +330,7 @@ class EGR_Settings {
                         <?php wp_nonce_field( 'egr_delete_' . $platform . '_token_nonce' ); ?>
                         <?php submit_button(
                             /* translators: %s: platform name (GitHub or Forgejo) */
-                            sprintf( __( 'Rimuovi token %s', 'eg-ranking-repo' ), $label ),
+                            sprintf( __( 'Remove %s token', 'eg-ranking-repo' ), $label ),
                             'delete',
                             'egr_delete_' . $platform . '_token',
                             false
@@ -341,19 +341,19 @@ class EGR_Settings {
             endforeach;
             if ( ! $has_any_token ) :
                 ?>
-                <p class="description"><?php esc_html_e( 'Nessun token salvato.', 'eg-ranking-repo' ); ?></p>
+                <p class="description"><?php esc_html_e( 'No token saved.', 'eg-ranking-repo' ); ?></p>
                 <?php
             endif;
             ?>
 
             <hr>
 
-            <h2><?php esc_html_e( 'Utilizzo shortcode', 'eg-ranking-repo' ); ?></h2>
+            <h2><?php esc_html_e( 'Shortcode usage', 'eg-ranking-repo' ); ?></h2>
             <table class="widefat" style="max-width:600px;">
                 <thead>
                     <tr>
-                        <th><?php esc_html_e( 'Piattaforma', 'eg-ranking-repo' ); ?></th>
-                        <th><?php esc_html_e( 'Esempio shortcode', 'eg-ranking-repo' ); ?></th>
+                        <th><?php esc_html_e( 'Platform', 'eg-ranking-repo' ); ?></th>
+                        <th><?php esc_html_e( 'Shortcode example', 'eg-ranking-repo' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -368,7 +368,7 @@ class EGR_Settings {
                 </tbody>
             </table>
             <p class="description" style="margin-top:8px;">
-                <?php esc_html_e( 'Funziona con qualsiasi istanza Forgejo o Gitea self-hosted.', 'eg-ranking-repo' ); ?>
+                <?php esc_html_e( 'Works with any self-hosted Forgejo or Gitea instance.', 'eg-ranking-repo' ); ?>
             </p>
 
             <hr>
@@ -376,7 +376,7 @@ class EGR_Settings {
                 <?php
                 printf(
                     /* translators: %s: plugin version number */
-                    esc_html__( 'Versione plugin: %s', 'eg-ranking-repo' ),
+                    esc_html__( 'Plugin version: %s', 'eg-ranking-repo' ),
                     '<strong>' . esc_html( EGR_VERSION ) . '</strong>'
                 );
                 ?>
