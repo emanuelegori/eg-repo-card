@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.7] - 2026-06-02
+
+### Modificato
+- Card: rimosso `max-width: 420px` e cambiato `inline-flex` → `flex` — la card si allarga fino alla colonna del post e si adatta al tema responsive
+
 ## [1.2.6] - 2026-06-02
 
 ### Aggiunto
