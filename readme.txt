@@ -8,92 +8,93 @@ Stable tag: 1.2.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode.
+Display a compact card with repository data from GitHub or Forgejo via shortcode.
 
 == Description ==
 
-EG Ranking Repo visualizza una card compatta con i dati di un repository GitHub o di qualsiasi istanza Forgejo/Gitea tramite shortcode `[eg-ranking-repo url="..."]`.
+EG Ranking Repo displays a compact card with data from a GitHub repository or any Forgejo/Gitea instance via the shortcode `[eg-ranking-repo url="..."]`.
 
-Funzionalità:
+Features:
 
-* Supporto GitHub REST API v3 e Forgejo/Gitea API v1
-* Visualizza nome, descrizione, stelle e data ultimo aggiornamento
-* Bottone "Source Code" e "Sito Web" (se impostato nel repository)
-* Cache via WordPress transients configurabile per ridurre le chiamate API
-* Colori personalizzabili dalla pagina admin (sfondo card, testo, bottoni)
-* Icone SVG inline: nessuna dipendenza da CDN o font esterni
-* Protezione anti-SSRF con `wp_safe_remote_get()`
-* Internazionalizzato (it_IT incluso)
+* GitHub REST API v3 and Forgejo/Gitea API v1 support
+* Displays repository name, description, star count, and last updated date
+* "Source Code" and "Website" buttons (the latter shown only when a homepage is set)
+* Configurable transient cache to reduce API calls
+* Customisable colours from the admin settings page (card background, text, buttons)
+* Inline SVG icons — no CDN or external font dependency
+* Anti-SSRF protection via `wp_safe_remote_get()`
+* Internationalised (it_IT included)
 
 == Installation ==
 
-1. Carica la cartella `eg-ranking-repo` in `/wp-content/plugins/`
-2. Attiva il plugin dalla pagina **Plugin** di WordPress
-3. Vai in **Impostazioni > EG Ranking Repo** per configurare token API e colori
+1. Upload the `eg-ranking-repo` folder to `/wp-content/plugins/`
+2. Activate the plugin from the WordPress **Plugins** page
+3. Go to **Settings > EG Ranking Repo** to configure API tokens and colours
 
-== Utilizzo ==
+== Usage ==
 
-Inserisci lo shortcode in qualsiasi post, pagina o widget:
+Insert the shortcode in any post, page, or widget:
 
   [eg-ranking-repo url="https://github.com/owner/repo"]
   [eg-ranking-repo url="https://git.emanuelegori.uno/owner/repo"]
 
-Funziona con qualsiasi istanza Forgejo o Gitea self-hosted.
+Works with any self-hosted Forgejo or Gitea instance.
 
 == Frequently Asked Questions ==
 
-= Posso usare il plugin con un'istanza Gitea? =
+= Can I use this plugin with a Gitea instance? =
 
-Sì. La Gitea API v1 è compatibile con quella di Forgejo.
+Yes. The Gitea API v1 is compatible with the Forgejo API.
 
-= Il token API è obbligatorio? =
+= Is the API token required? =
 
-No. Senza token GitHub permette 60 richieste/ora per IP. Il token eleva il limite a 5000/ora e consente l'accesso a repository privati.
+No. Without a token, GitHub allows 60 requests/hour per IP. A personal access token raises the limit to 5,000/hour and enables access to private repositories.
 
-= Come funziona la cache? =
+= How does the cache work? =
 
-I dati di ogni repository vengono memorizzati come WordPress transient. La durata è configurabile (default 6 ore, massimo 168). La pagina admin include un pulsante per svuotare manualmente la cache.
+Data for each repository is stored as a WordPress transient. The duration is configurable (default 6 hours, maximum 168). The admin page includes a button to flush the cache manually. Errors (connection failures, non-200 HTTP responses) are also cached for 5 minutes to avoid hammering the API on every page load.
 
 == Screenshots ==
 
-1. Card repository con nome, descrizione, stelle, data aggiornamento e bottoni azione.
-2. Pagina impostazioni admin: token API, durata cache, colori.
+1. Repository card showing name, description, star count, last updated date, and action buttons.
+2. Admin settings page: API tokens, cache duration, colours.
 
 == Changelog ==
 
 = 1.2.2 =
-* Corretto: `$val` nel campo cache ora usa `esc_attr()` (Plugin Check compliance)
-* Corretto: aggiunto commento `translators:` alla stringa "Token %s rimosso"
-* Corretto: `phpcs:ignore` su query DELETE transient (uso legittimo, non cachabile)
-* Corretto: `$style` nella card ora usa `esc_attr()` esplicitamente
-* Corretto: `phpcs:ignore` sulle icone SVG hardcoded inline
-* Rimosso: `load_plugin_textdomain()` — non necessario da WP 4.6+ se esiste il file `.mo`
-* Aggiunto: `languages/eg-ranking-repo-it_IT.mo` compilato da `.po`
-* Aggiornato: "Tested up to" a 7.0
+* Fixed: `$val` in cache duration field now uses `esc_attr()` (Plugin Check compliance)
+* Fixed: added `translators:` comment to "Token %s removed" string
+* Fixed: `phpcs:ignore` on transient DELETE query in `flush_all_cache()` and `uninstall.php` (legitimate bulk delete, not cacheable)
+* Fixed: `$style` in card output now uses `esc_attr()` explicitly
+* Fixed: `phpcs:ignore` on the five hardcoded inline SVG icon calls
+* Fixed: translated readme.txt to English (Plugin Check compliance)
+* Removed: `load_plugin_textdomain()` — no longer needed since WP 4.6+ with a compiled `.mo` file
+* Added: `languages/eg-ranking-repo-it_IT.mo` compiled from `.po`
+* Updated: "Tested up to" to 7.0
 
 = 1.2.1 =
-* Corretto: aggiunto `rel="noopener noreferrer"` al link "Documentazione" (target="_blank" senza rel)
-* Corretto: tooltip stelle ora usa `_n()` ed è traducibile correttamente
+* Fixed: added `rel="noopener noreferrer"` to the Documentation action link
+* Fixed: star tooltip now uses `_n()` and is properly translatable
 
 = 1.2.0 =
-* Sicurezza: HTTPS forzato per le chiamate API Forgejo/Gitea
-* Sicurezza: `flush_all_cache()` usa `$wpdb->prepare()` con `$wpdb->esc_like()`
-* Aggiunto: link "Documentazione" nella lista plugin
-* Aggiunto: sezione "Rimuovi token API" nella pagina admin
-* Aggiunto: `uninstall.php` per rimuovere opzioni e transient alla disinstallazione
-* Corretto: errori API messi in cache per 5 minuti
-* Corretto: `tabindex="-1"` sul bottone "Nessun sito" disabilitato
+* Security: enforced HTTPS for Forgejo/Gitea API calls
+* Security: `flush_all_cache()` uses `$wpdb->prepare()` with `$wpdb->esc_like()`
+* Added: Documentation link in the plugin action links
+* Added: Remove API Token section in the admin page
+* Added: `uninstall.php` to clean up options and transients on uninstall
+* Fixed: API errors are now cached for 5 minutes
+* Fixed: `tabindex="-1"` on the disabled Website button
 
 = 1.1.0 =
-* Aggiunto: header `Forgejo Plugin URI` per auto-update tramite EG Forgejo Updater
-* Aggiunto: link "Impostazioni" nella lista plugin
-* Aggiunto: opzione colore testo card
-* Aggiunto: descrizione del repository nella card
-* Corretto: colori testo hardcoded sostituiti con CSS custom properties
-* Corretto: campo token non espone più il valore nel DOM HTML
-* Corretto: protezione anti-SSRF con `wp_safe_remote_get()`
-* Migliorato: `add_shortcode()` spostato sull'hook `init`
-* Migliorato: `format_date()` rispetta il timezone di WordPress
+* Added: `Forgejo Plugin URI` header for auto-updates via EG Forgejo Updater
+* Added: Settings link in the plugin action links
+* Added: card text colour option
+* Added: repository description in the card
+* Fixed: hardcoded text colours replaced with CSS custom properties
+* Fixed: token field no longer exposes the stored value in the HTML DOM
+* Fixed: anti-SSRF protection via `wp_safe_remote_get()`
+* Improved: `add_shortcode()` moved to the `init` hook
+* Improved: `format_date()` now respects the WordPress timezone
 
 = 1.0.0 =
-* Prima release
+* Initial release
