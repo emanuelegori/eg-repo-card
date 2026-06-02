@@ -401,5 +401,8 @@ class EGR_Settings {
                 $wpdb->esc_like( '_transient_timeout_egr_' ) . '%'
             )
         );
+        // Svuota anche l'object cache (Redis/Memcached) se presente,
+        // altrimenti get_transient() continuerebbe a restituire i valori vecchi.
+        wp_cache_flush();
     }
 }
