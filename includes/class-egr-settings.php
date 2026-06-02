@@ -391,6 +391,12 @@ class EGR_Settings {
      */
     private static function flush_all_cache(): void {
         global $wpdb;
+        // Incrementa il generation counter: le nuove richieste useranno una
+        // cache key diversa, rendendo obsolete le entry precedenti in Redis/Memcached
+        // senza doverle cancellare esplicitamente (compatibile con selective flush).
+        update_option( 'egr_cache_gen', (int) get_option( 'egr_cache_gen', 1 ) + 1 );
+
+        // Pulizia DB: rimuove i transient della vecchia generazione.
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Bulk DELETE di transient per pattern, non cachabile
         $wpdb->query(
             $wpdb->prepare(
@@ -401,8 +407,5 @@ class EGR_Settings {
                 $wpdb->esc_like( '_transient_timeout_egr_' ) . '%'
             )
         );
-        // Svuota anche l'object cache (Redis/Memcached) se presente,
-        // altrimenti get_transient() continuerebbe a restituire i valori vecchi.
-        wp_cache_flush();
     }
 }

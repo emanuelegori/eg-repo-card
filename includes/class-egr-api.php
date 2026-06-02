@@ -44,8 +44,11 @@ class EGR_API {
         $repo      = $parts[1];
         $is_github = ( $host === 'github.com' );
 
-        // Transient cache key: unique per host + owner + repo
-        $cache_key = 'egr_' . md5( "{$host}/{$owner}/{$repo}" );
+        // Transient cache key: unique per generation + host + owner + repo.
+        // La generation viene incrementata ad ogni flush manuale, rendendo
+        // obsolete le entry precedenti senza dover svuotare Redis/Memcached.
+        $gen       = (int) get_option( 'egr_cache_gen', 1 );
+        $cache_key = 'egr_' . $gen . '_' . md5( "{$host}/{$owner}/{$repo}" );
         $cached    = get_transient( $cache_key );
 
         if ( false !== $cached ) {
