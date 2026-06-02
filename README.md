@@ -1,86 +1,86 @@
 # EG Ranking Repo
 
-Plugin WordPress che mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode.
+WordPress plugin that displays a compact card with repository data from GitHub or Forgejo via shortcode.
 
-## Requisiti
+## Requirements
 
-- WordPress 6.0 o superiore
-- PHP 8.0 o superiore
-- EG Forgejo Updater (per gli aggiornamenti automatici)
+- WordPress 6.0 or higher
+- PHP 8.0 or higher
+- EG Forgejo Updater (for automatic updates)
 
-## Installazione
+## Installation
 
-1. Caricare la cartella `eg-ranking-repo` in `wp-content/plugins/`
-2. Attivare il plugin dal pannello Plugin di WordPress
-3. Configurare le opzioni in **Impostazioni > EG Ranking Repo**
+1. Upload the `eg-ranking-repo` folder to `wp-content/plugins/`
+2. Activate the plugin from the WordPress Plugins page
+3. Configure the options under **Settings > EG Ranking Repo**
 
-## Utilizzo
+## Usage
 
-Inserire lo shortcode in qualsiasi pagina, post o widget con supporto agli shortcode:
+Insert the shortcode in any page, post, or widget that supports shortcodes:
 
 ```
 [eg-ranking-repo url="https://github.com/owner/repo"]
 [eg-ranking-repo url="https://git.emanuelegori.uno/owner/repo"]
 ```
 
-Funziona con GitHub e con qualsiasi istanza Forgejo o Gitea self-hosted.
+Works with GitHub and any self-hosted Forgejo or Gitea instance.
 
-## Dati mostrati nella card
+## Card Data
 
-| Elemento        | Fonte                              |
-|-----------------|------------------------------------|
-| Nome repository | Campo `full_name` dell'API         |
-| Stelle          | `stargazers_count` / `stars_count` |
-| Ultimo aggiornamento | `updated_at`                  |
-| Source Code     | URL passato nello shortcode        |
-| Sito Web        | `homepage` / `website` del repo    |
+| Field          | Source                             |
+|----------------|------------------------------------|
+| Repository name | `full_name` API field             |
+| Stars           | `stargazers_count` / `stars_count` |
+| Last updated    | `updated_at`                       |
+| Source Code     | URL passed in the shortcode        |
+| Website         | `homepage` / `website` of the repo |
 
-Se il repository non ha un sito web impostato, il bottone viene mostrato come disabilitato con la scritta "Nessun sito".
+If no website is set in the repository, the button is shown as disabled with the label "No website".
 
-## Configurazione
+## Configuration
 
-Andare in **Impostazioni > EG Ranking Repo**:
+Go to **Settings > EG Ranking Repo**:
 
-- **GitHub Personal Access Token**: senza token il limite è 60 richieste/ora. Con token personale il limite sale a 5000 richieste/ora.
-- **Forgejo API Token**: necessario solo per repository privati.
-- **Durata cache**: i dati vengono messi in cache tramite WordPress transients. Default: 6 ore.
-- **Colori**: è possibile personalizzare il colore dello sfondo della card, lo sfondo e il testo dei bottoni.
-- **Rimuovi token**: sezione dedicata per eliminare un token compromesso senza accedere al database.
+- **GitHub Personal Access Token**: without a token the limit is 60 requests/hour. With a personal token it rises to 5,000 requests/hour.
+- **Forgejo API Token**: required only for private repositories.
+- **Cache duration**: data is cached via WordPress transients. Default: 6 hours.
+- **Colours**: customise the card background, button background, and button text colour.
+- **Remove token**: dedicated section to delete a compromised token without accessing the database.
 
-## Aggiornamenti
+## Updates
 
-Il plugin si integra con **EG Forgejo Updater** tramite l'hook:
+The plugin integrates with **EG Forgejo Updater** via the hook:
 
 ```php
 do_action('eg_forgejo_updater_register', __FILE__, 'eg-ranking-repo');
 ```
 
-Per rilasciare una nuova versione:
+To release a new version:
 
-1. Aggiornare `EGR_VERSION` in `eg-ranking-repo.php` e il campo `Version:` nell'header
-2. Fare commit e push sul repository Forgejo
+1. Update `EGR_VERSION` in `eg-ranking-repo.php` and the `Version:` field in the header
+2. Commit and push to the Forgejo repository
 
-EG Forgejo Updater rileva la nuova versione leggendo direttamente il campo `Version:` dal file sorgente sul branch `main` — non sono necessari release o tag.
+EG Forgejo Updater detects the new version by reading the `Version:` field directly from the source file on the `main` branch — no releases or tags required.
 
-## Struttura file
+## File Structure
 
 ```
 eg-ranking-repo/
-├── eg-ranking-repo.php          Header WP, costanti, bootstrap
-├── uninstall.php                Cleanup opzioni e transient alla disinstallazione
+├── eg-ranking-repo.php          WP header, constants, bootstrap
+├── uninstall.php                Options and transient cleanup on uninstall
 ├── includes/
-│   ├── class-egr-main.php       Init, hook EG Forgejo Updater
-│   ├── class-egr-api.php        Chiamate API GitHub/Forgejo, cache, formattazione
-│   ├── class-egr-shortcode.php  Shortcode e rendering HTML card
-│   └── class-egr-settings.php  Pagina impostazioni wp-admin
+│   ├── class-egr-main.php       Init, EG Forgejo Updater hook
+│   ├── class-egr-api.php        GitHub/Forgejo API calls, cache, formatting
+│   ├── class-egr-shortcode.php  Shortcode and card HTML rendering
+│   └── class-egr-settings.php  wp-admin settings page
 ├── assets/
 │   └── css/
-│       └── eg-ranking-repo.css  Stili frontend card
+│       └── eg-ranking-repo.css  Frontend card styles
 └── languages/
-    ├── eg-ranking-repo.pot      Template traduzioni
-    └── eg-ranking-repo-it_IT.po Traduzione italiana
+    ├── eg-ranking-repo.pot      Translation template
+    └── eg-ranking-repo-it_IT.po Italian translation
 ```
 
-## Licenza
+## Licence
 
 GPL-2.0-or-later — https://www.gnu.org/licenses/gpl-2.0.html

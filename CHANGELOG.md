@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.5] - 2026-06-02
+
+### Aggiunto
+- `README.it-IT.md` — documentazione in italiano (Forgejo serve questo file automaticamente ai browser con lingua italiana)
+- `README.md` tradotto in inglese — fallback per tutte le altre lingue
+
 ## [1.2.4] - 2026-06-02
 
 ### Corretto
