@@ -1,6 +1,6 @@
 # EG Ranking Repo
 
-[![Version](https://img.shields.io/badge/Version-1.4.3-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
+[![Version](https://img.shields.io/badge/Version-1.4.5-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -102,9 +102,14 @@ eg-ranking-repo/
 
 ## Changelog
 
-### [1.4.0] - 2026-06-02
-- Full i18n refactor: all PHP strings now use English msgids (WordPress convention)
-- `it_IT.po`/`.mo` rebuilt with English→Italian translations
+### [1.4.5] - 2026-06-02
+- Cache invalidation via generation counter — reliable with Redis selective flush
+
+### [1.4.x] - 2026-06-02
+- i18n refactor: English msgids, `it_IT.mo` Italian translations
+- Version badges in README, unified EN/IT structure
+- Plugin header description in English
+- Screenshot with absolute URL in readme.txt
 
 ### [1.3.x] - 2026-06-02
 - Version badge from API releases/tags

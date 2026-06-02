@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.4.5] - 2026-06-02
+
+### Fixed
+- Cache invalidation now uses a generation counter (`egr_cache_gen` option) instead of relying on `wp_cache_flush()`, which may be a no-op on Redis with selective flush enabled. Old cache entries become orphaned automatically on flush.
+
+## [1.4.4] - 2026-06-02
+
+### Fixed
+- `flush_all_cache()` now also calls `wp_cache_flush()` to clear Redis/Memcached object cache alongside the DB transient delete.
+
+## [1.4.3] - 2026-06-02
+
+### Added
+- Screenshot with absolute Forgejo URL in readme.txt and README files for correct rendering in "View Details" popup.
+
+## [1.4.2] - 2026-06-02
+
+### Fixed
+- Plugin header `Description:` translated to English (was hardcoded Italian).
+
+## [1.4.1] - 2026-06-02
+
+### Added
+- Version badges (shields.io) in README.md and README.it-IT.md.
+- Unified structure between English and Italian README files.
+
 ## [1.4.0] - 2026-06-02
 
 ### Changed

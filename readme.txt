@@ -65,9 +65,22 @@ Repository card: name, description, unified action row (Website, Source Code, Da
 == Changelog ==
 
 = 1.4.5 =
-* Changed: full i18n refactor — all PHP strings now use English msgids (WordPress convention)
-* Changed: it_IT.po/mo rebuilt with English→Italian translations
-* Fixed: plugin shows correctly in English when WordPress is set to English
+* Fixed: cache invalidation via generation counter — works correctly with Redis selective flush
+
+= 1.4.4 =
+* Fixed: flush cache now also calls wp_cache_flush() to clear Redis/Memcached object cache
+
+= 1.4.3 =
+* Added: screenshot with absolute Forgejo URL in readme.txt and README files
+
+= 1.4.2 =
+* Fixed: plugin header Description translated to English
+
+= 1.4.1 =
+* Added: version badges in README.md and README.it-IT.md, unified structure
+
+= 1.4.0 =
+* Changed: full i18n refactor — English msgids, it_IT.po/mo with Italian translations
 
 = 1.2.7 =
 * Changed: card now fills the full post column width — removed fixed `max-width: 420px`, switched to block-level `flex`
