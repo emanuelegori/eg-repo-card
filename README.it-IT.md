@@ -7,7 +7,7 @@
 
 Plugin WordPress che mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode.
 
-![Card di esempio](screenshot-1.png)
+![Card di esempio](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo/raw/branch/main/screenshot-1.png)
 
 ---
 
