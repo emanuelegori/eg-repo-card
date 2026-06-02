@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.3] - 2026-06-02
+
+### Corretto
+- Commento `translators:` spostato sulla riga immediatamente sopra `esc_html__()` per compliance PHPCS
+- `readme.txt` tradotto in inglese (Plugin Check compliance)
+
 ## [1.2.2] - 2026-06-02
 
 ### Rimosso
