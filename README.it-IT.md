@@ -1,32 +1,41 @@
 # EG Ranking Repo
 
+[![Versione](https://img.shields.io/badge/Versione-1.4.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
+[![Licenza](https://img.shields.io/badge/Licenza-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
+[![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
+[![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
+
 Plugin WordPress che mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode.
 
 ![Card di esempio](screenshot-1.png)
+
+---
 
 ## Caratteristiche
 
 - Card responsive, larga quanto la colonna del post
 - Riga azioni unificata: **Sito Web · Source Code · Data · Versione · Stelle · ?**
-- Badge versione letto dalla release più recente; se non esistono release, usa l'ultimo tag git
-- Tooltip localizzati su ogni elemento (italiano / inglese in base alla lingua di WordPress)
+- Badge versione letto dalla release più recente; fallback all'ultimo tag git
+- Tooltip localizzati su ogni elemento (in base alla lingua di WordPress)
 - Badge `?` con link al repository del plugin
 - Cache via WordPress transients, durata configurabile (default 6 ore)
 - Protezione anti-SSRF con `wp_safe_remote_get()`
 - Colori personalizzabili dalla pagina admin
 - Internazionalizzato (it_IT incluso)
 
-## Requisiti
-
-- WordPress 6.0 o superiore
-- PHP 8.0 o superiore
-- EG Forgejo Updater (per gli aggiornamenti automatici)
+---
 
 ## Installazione
 
 1. Caricare la cartella `eg-ranking-repo` in `wp-content/plugins/`
 2. Attivare il plugin dal pannello Plugin di WordPress
 3. Configurare le opzioni in **Impostazioni > EG Ranking Repo**
+
+### Aggiornamenti automatici
+
+Installare [EG Forgejo Updater](https://git.emanuelegori.uno/emanuelegori/eg-forgejo-updater) per ricevere aggiornamenti automatici direttamente da WordPress.
+
+---
 
 ## Utilizzo
 
@@ -38,6 +47,8 @@ Inserire lo shortcode in qualsiasi pagina, post o widget:
 ```
 
 Funziona con GitHub e con qualsiasi istanza Forgejo o Gitea self-hosted.
+
+---
 
 ## Dati mostrati nella card
 
@@ -53,6 +64,8 @@ Funziona con GitHub e con qualsiasi istanza Forgejo o Gitea self-hosted.
 
 Se il repository non ha un sito web impostato, il bottone viene mostrato come disabilitato.
 
+---
+
 ## Configurazione
 
 Andare in **Impostazioni > EG Ranking Repo**:
@@ -63,20 +76,7 @@ Andare in **Impostazioni > EG Ranking Repo**:
 - **Colori**: personalizza sfondo card, testo card, sfondo bottoni e testo bottoni.
 - **Rimuovi token**: elimina un token compromesso senza accedere al database.
 
-## Aggiornamenti
-
-Il plugin si integra con **EG Forgejo Updater** tramite l'hook:
-
-```php
-do_action('eg_forgejo_updater_register', __FILE__, 'eg-ranking-repo');
-```
-
-Per rilasciare una nuova versione:
-
-1. Aggiornare `EGR_VERSION` in `eg-ranking-repo.php` e il campo `Version:` nell'header
-2. Fare commit e push sul repository Forgejo
-
-EG Forgejo Updater rileva la nuova versione leggendo direttamente il campo `Version:` dal file sorgente sul branch `main` — non sono necessari release o tag.
+---
 
 ## Struttura file
 
@@ -98,6 +98,30 @@ eg-ranking-repo/
     └── eg-ranking-repo-it_IT.po Traduzione italiana
 ```
 
+---
+
+## Changelog
+
+### [1.4.0] - 2026-06-02
+- Refactoring i18n completo: msgid in inglese (convenzione WordPress), `it_IT.mo` con traduzioni italiane
+
+### [1.3.x] - 2026-06-02
+- Badge versione da API releases/tag git
+- Riga azioni unificata: Sito Web · Source Code · Data · Versione · Stelle · ?
+- Badge `?` con link al repository del plugin
+- Card full-width responsive
+
+### [1.2.x] - 2026-06-02
+- Compliance Plugin Check, HTTPS forzato API Forgejo, cache errori, uninstall.php
+
+---
+
 ## Licenza
 
 GPL-2.0-or-later — https://www.gnu.org/licenses/gpl-2.0.html
+
+---
+
+## Autore
+
+**Emanuele Gori** — [emanuelegori.uno](https://emanuelegori.uno)
