@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0] - 2026-06-02
+
+### Changed
+- Full i18n refactor: all PHP strings now use English msgids (WordPress convention)
+- `it_IT.po`/`.mo` rebuilt with proper English→Italian translations
+- `en_US.po`/`.mo` not needed — English is the native fallback
+
 ## [1.3.0] - 2026-06-02
 
 ### Aggiunto

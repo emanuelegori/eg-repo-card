@@ -63,6 +63,11 @@ Data for each repository is stored as a WordPress transient. The duration is con
 
 == Changelog ==
 
+= 1.4.0 =
+* Changed: full i18n refactor — all PHP strings now use English msgids (WordPress convention)
+* Changed: it_IT.po/mo rebuilt with English→Italian translations
+* Fixed: plugin shows correctly in English when WordPress is set to English
+
 = 1.2.7 =
 * Changed: card now fills the full post column width — removed fixed `max-width: 420px`, switched to block-level `flex`
 
