@@ -13,12 +13,13 @@
     background-color: var(--egr-card-bg, #f8f8f8);
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 6px;
-    padding: 14px 16px;
+    padding: 14px 16px 32px;
     font-family: inherit;
     font-size: 0.875rem;
     line-height: 1.5;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
 }
 
 /* ── Header: repo name + platform badge ─────────────── */
@@ -135,6 +136,33 @@
     user-select: none;
 }
 
+/* ── Badge info plugin (angolo basso sinistra) ───────── */
+
+.egr-card__repo-badge {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.07);
+    color: var(--egr-card-txt, #888888);
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.egr-card__repo-badge:hover {
+    background-color: rgba(0, 0, 0, 0.14);
+    color: var(--egr-card-txt, #444444);
+    text-decoration: none;
+}
+
 /* ── Error message ───────────────────────────────────── */
 
 .egr-error {
@@ -144,6 +172,17 @@
 }
 
 /* ── Responsive: shrink on very narrow viewports ─────── */
+
+@media ( max-width: 480px ) {
+    .egr-card__repo-badge {
+        position: static;
+        margin-top: 8px;
+        align-self: flex-start;
+    }
+    .egr-card {
+        padding-bottom: 14px;
+    }
+}
 
 @media ( max-width: 380px ) {
     .egr-card {

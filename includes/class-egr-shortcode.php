@@ -152,6 +152,12 @@ class EGR_Shortcode {
 
             </div>
 
+            <a href="https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo"
+               class="egr-card__repo-badge"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="<?php esc_attr_e( 'EG Ranking Repo — plugin info', 'eg-ranking-repo' ); ?>">?</a>
+
         </div>
         <?php
         return ob_get_clean();
