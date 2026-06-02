@@ -59,8 +59,8 @@ Per rilasciare una nuova versione:
 
 1. Aggiornare `EGR_VERSION` in `eg-ranking-repo.php` e il campo `Version:` nell'header
 2. Fare commit e push sul repository Forgejo
-3. Creare una nuova Release su Forgejo con tag corrispondente alla versione (es. `1.1.0`)
-4. Caricare lo ZIP del plugin come asset della release
+
+EG Forgejo Updater rileva la nuova versione leggendo direttamente il campo `Version:` dal file sorgente sul branch `main` — non sono necessari release o tag.
 
 ## Struttura file
 
