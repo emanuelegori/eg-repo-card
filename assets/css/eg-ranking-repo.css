@@ -1,0 +1,165 @@
+/*
+ * EG Ranking Repo — Frontend Card Styles
+ * Uses CSS custom properties injected via inline style attribute,
+ * so no external stylesheet overrides are needed for colour changes.
+ */
+
+/* ── Card container ─────────────────────────────────── */
+
+.egr-card {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--egr-card-bg, #f8f8f8);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    max-width: 420px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Header: repo name + platform badge ─────────────── */
+
+.egr-card__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.egr-card__name {
+    font-weight: 600;
+    color: var(--egr-card-txt, #111111);
+    word-break: break-all;
+}
+
+.egr-card__platform {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+
+.egr-card__platform--github {
+    background-color: #24292e;
+    color: #fff;
+}
+
+.egr-card__platform--forgejo {
+    background-color: #609926;
+    color: #fff;
+}
+
+/* ── Repository description ──────────────────────────── */
+
+.egr-card__description {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--egr-card-txt, #444444);
+    line-height: 1.5;
+}
+
+/* ── Meta row: stars + date ──────────────────────────── */
+
+.egr-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--egr-card-txt, #555555);
+    font-size: 0.82rem;
+}
+
+.egr-card__stars,
+.egr-card__updated {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ── Inline SVG icons ────────────────────────────────── */
+
+.egr-icon {
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+/* ── Action buttons ──────────────────────────────────── */
+
+.egr-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.egr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, filter 0.15s ease;
+    background-color: var(--egr-btn-bg, #e0e0e0);
+    color: var(--egr-btn-txt, #111111);
+    white-space: nowrap;
+}
+
+.egr-btn:visited {
+    color: var(--egr-btn-txt, #111111);
+}
+
+.egr-btn:hover {
+    opacity: 0.82;
+    text-decoration: none;
+    color: var(--egr-btn-txt, #111111);
+}
+
+.egr-btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Disabled state: "Nessun sito" */
+.egr-btn--disabled {
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ── Error message ───────────────────────────────────── */
+
+.egr-error {
+    color: #b91c1c;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* ── Responsive: shrink on very narrow viewports ─────── */
+
+@media ( max-width: 380px ) {
+    .egr-card {
+        padding: 11px 12px;
+    }
+    .egr-card__actions {
+        flex-direction: column;
+    }
+    .egr-btn {
+        justify-content: center;
+    }
+}

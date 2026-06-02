@@ -1,0 +1,177 @@
+# Copyright (C) 2026 Emanuele Egori
+# This file is distributed under the same license as the EG Ranking Repo plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: EG Ranking Repo 1.0.0\n"
+"Report-Msgid-Bugs-To: https://git.emanuelegori.uno/emanuele/eg-ranking-repo/issues\n"
+"POT-Creation-Date: 2026-01-01T00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: WP-CLI 2.x\n"
+"Domain: eg-ranking-repo\n"
+
+#. Plugin name
+msgid "EG Ranking Repo"
+msgstr ""
+
+#. Plugin description
+msgid "Mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode [eg-ranking-repo url=\"...\"]."
+msgstr ""
+
+#: includes/class-egr-api.php
+msgid "URL repository non valido."
+msgstr ""
+
+#: includes/class-egr-api.php
+msgid "URL repository non valido: owner/repo mancante nel percorso."
+msgstr ""
+
+#: includes/class-egr-api.php
+#, php-format
+msgid "Errore API: stato HTTP %d."
+msgstr ""
+
+#: includes/class-egr-api.php
+msgid "Impossibile analizzare la risposta JSON dell'API."
+msgstr ""
+
+#: includes/class-egr-api.php
+msgid "N/D"
+msgstr ""
+
+#: includes/class-egr-shortcode.php
+msgid "Attributo url mancante nello shortcode."
+msgstr ""
+
+#: includes/class-egr-shortcode.php
+msgid "Errore"
+msgstr ""
+
+#: includes/class-egr-shortcode.php
+msgid "Ultimo aggiornamento"
+msgstr ""
+
+#: includes/class-egr-shortcode.php
+msgid "Nessun sito web impostato nel repository"
+msgstr ""
+
+#: includes/class-egr-shortcode.php
+msgid "Source Code"
+msgstr ""
+
+#: includes/class-egr-shortcode.php
+msgid "Sito Web"
+msgstr ""
+
+#: includes/class-egr-shortcode.php
+msgid "Nessun sito"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Token API"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Token opzionali per aumentare il rate limit delle chiamate API."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "GitHub Personal Access Token"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Senza token: 60 richieste/ora. Con token: 5000 richieste/ora."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Forgejo API Token (opzionale)"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Necessario solo per repository privati o istanze con autenticazione obbligatoria."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Cache"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "I dati dei repository vengono messi in cache per ridurre le chiamate API."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Durata cache (ore)"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Valori consigliati: 6–24 ore. Massimo 168 (1 settimana)."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Stile card"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Personalizza i colori della card. I valori predefiniti garantiscono la massima leggibilità."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Colore sfondo card"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Colore sfondo bottoni"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Colore testo bottoni"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "EG Ranking Repo — Impostazioni"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Salva impostazioni"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Cache svuotata."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Svuota cache"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Forza il recupero aggiornato dei dati dai repository alla prossima visualizzazione."
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Svuota cache ora"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Utilizzo shortcode"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Piattaforma"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Esempio shortcode"
+msgstr ""
+
+#: includes/class-egr-settings.php
+msgid "Funziona con qualsiasi istanza Forgejo o Gitea self-hosted."
+msgstr ""
+
+#: includes/class-egr-settings.php
+#, php-format
+msgid "Versione plugin: %s"
+msgstr ""

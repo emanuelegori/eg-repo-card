@@ -1,0 +1,135 @@
+# Italian translation for EG Ranking Repo
+# Copyright (C) 2026 Emanuele Egori
+# This file is distributed under the same license as the EG Ranking Repo plugin.
+# Emanuele Egori <emanuele@emanuelegori.uno>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: EG Ranking Repo 1.0.0\n"
+"Report-Msgid-Bugs-To: https://git.emanuelegori.uno/emanuele/eg-ranking-repo/issues\n"
+"POT-Creation-Date: 2026-01-01T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-01-01T00:00:00+00:00\n"
+"Last-Translator: Emanuele Egori <emanuele@emanuelegori.uno>\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Manual\n"
+"Domain: eg-ranking-repo\n"
+
+msgid "URL repository non valido."
+msgstr "URL del repository non valido."
+
+msgid "URL repository non valido: owner/repo mancante nel percorso."
+msgstr "URL del repository non valido: manca la parte owner/repo nel percorso."
+
+#, php-format
+msgid "Errore API: stato HTTP %d."
+msgstr "Errore API: stato HTTP %d."
+
+msgid "Impossibile analizzare la risposta JSON dell'API."
+msgstr "Impossibile analizzare la risposta JSON dell'API."
+
+msgid "N/D"
+msgstr "N/D"
+
+msgid "Attributo url mancante nello shortcode."
+msgstr "Attributo url mancante nello shortcode."
+
+msgid "Errore"
+msgstr "Errore"
+
+msgid "Ultimo aggiornamento"
+msgstr "Ultimo aggiornamento"
+
+msgid "Nessun sito web impostato nel repository"
+msgstr "Nessun sito web impostato nel repository"
+
+msgid "Source Code"
+msgstr "Source Code"
+
+msgid "Sito Web"
+msgstr "Sito Web"
+
+msgid "Nessun sito"
+msgstr "Nessun sito"
+
+msgid "Token API"
+msgstr "Token API"
+
+msgid "Token opzionali per aumentare il rate limit delle chiamate API."
+msgstr "Token opzionali per aumentare il rate limit delle chiamate API."
+
+msgid "GitHub Personal Access Token"
+msgstr "GitHub Personal Access Token"
+
+msgid "Senza token: 60 richieste/ora. Con token: 5000 richieste/ora."
+msgstr "Senza token: 60 richieste/ora. Con token: 5000 richieste/ora."
+
+msgid "Forgejo API Token (opzionale)"
+msgstr "Forgejo API Token (opzionale)"
+
+msgid "Necessario solo per repository privati o istanze con autenticazione obbligatoria."
+msgstr "Necessario solo per repository privati o istanze con autenticazione obbligatoria."
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "I dati dei repository vengono messi in cache per ridurre le chiamate API."
+msgstr "I dati dei repository vengono messi in cache per ridurre le chiamate API."
+
+msgid "Durata cache (ore)"
+msgstr "Durata cache (ore)"
+
+msgid "Valori consigliati: 6–24 ore. Massimo 168 (1 settimana)."
+msgstr "Valori consigliati: 6–24 ore. Massimo 168 (1 settimana)."
+
+msgid "Stile card"
+msgstr "Stile card"
+
+msgid "Personalizza i colori della card. I valori predefiniti garantiscono la massima leggibilità."
+msgstr "Personalizza i colori della card. I valori predefiniti garantiscono la massima leggibilità."
+
+msgid "Colore sfondo card"
+msgstr "Colore sfondo card"
+
+msgid "Colore sfondo bottoni"
+msgstr "Colore sfondo bottoni"
+
+msgid "Colore testo bottoni"
+msgstr "Colore testo bottoni"
+
+msgid "EG Ranking Repo — Impostazioni"
+msgstr "EG Ranking Repo — Impostazioni"
+
+msgid "Salva impostazioni"
+msgstr "Salva impostazioni"
+
+msgid "Cache svuotata."
+msgstr "Cache svuotata correttamente."
+
+msgid "Svuota cache"
+msgstr "Svuota cache"
+
+msgid "Forza il recupero aggiornato dei dati dai repository alla prossima visualizzazione."
+msgstr "Forza il recupero aggiornato dei dati dai repository alla prossima visualizzazione della card."
+
+msgid "Svuota cache ora"
+msgstr "Svuota cache ora"
+
+msgid "Utilizzo shortcode"
+msgstr "Utilizzo shortcode"
+
+msgid "Piattaforma"
+msgstr "Piattaforma"
+
+msgid "Esempio shortcode"
+msgstr "Esempio shortcode"
+
+msgid "Funziona con qualsiasi istanza Forgejo o Gitea self-hosted."
+msgstr "Funziona con qualsiasi istanza Forgejo o Gitea self-hosted."
+
+#, php-format
+msgid "Versione plugin: %s"
+msgstr "Versione plugin: %s"
