@@ -3,8 +3,8 @@
  * Plugin Name:       EG Ranking Repo
  * Plugin URI:        https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo
  * Forgejo Plugin URI: emanuelegori/eg-ranking-repo
- * Description:       Mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode [eg-ranking-repo url="..."].
- * Version:           1.4.1
+ * Description:       Display a compact card with repository data from GitHub or Forgejo via shortcode [eg-ranking-repo url="..."].
+ * Version:           1.4.2
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Emanuele Egori
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'EGR_VERSION',     '1.4.1' );
+define( 'EGR_VERSION',     '1.4.2' );
 define( 'EGR_PLUGIN_FILE', __FILE__ );
 define( 'EGR_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'EGR_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );

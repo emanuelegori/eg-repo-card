@@ -4,7 +4,7 @@ Tags: repository, github, forgejo, card, shortcode
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,7 +63,7 @@ Data for each repository is stored as a WordPress transient. The duration is con
 
 == Changelog ==
 
-= 1.4.1 =
+= 1.4.2 =
 * Changed: full i18n refactor — all PHP strings now use English msgids (WordPress convention)
 * Changed: it_IT.po/mo rebuilt with English→Italian translations
 * Fixed: plugin shows correctly in English when WordPress is set to English
