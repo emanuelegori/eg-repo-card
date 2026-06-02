@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0] - 2026-06-02
+
+### Aggiunto
+- Badge "ultima versione rilasciata" nella card (da API releases GitHub/Forgejo); non mostrato se il repository non ha release
+- Icona SVG tag per il badge versione
+
+### Modificato
+- Stelle e data ora stilizzate come badge (stesso ritmo visivo dei pulsanti, non interattivi)
+- Tutti gli elementi unificati in un'unica riga: Sito Web | Source Code | Data | Versione | Stelle
+- Tooltip i18n aggiunti su tutti gli elementi (Sito Web, Vai al repository, Ultimo aggiornamento, Ultima versione rilasciata, Stelle)
+- Rimossa sezione `.egr-card__meta` separata
+
 ## [1.2.7] - 2026-06-02
 
 ### Modificato

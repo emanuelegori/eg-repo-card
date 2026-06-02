@@ -67,23 +67,6 @@
     line-height: 1.5;
 }
 
-/* ── Meta row: stars + date ──────────────────────────── */
-
-.egr-card__meta {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    color: var(--egr-card-txt, #555555);
-    font-size: 0.82rem;
-}
-
-.egr-card__stars,
-.egr-card__updated {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-}
-
 /* ── Inline SVG icons ────────────────────────────────── */
 
 .egr-icon {
@@ -131,6 +114,17 @@
 .egr-btn:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
+}
+
+/* Badge non interattivo: stelle, data, versione */
+.egr-btn--badge {
+    cursor: default;
+}
+
+.egr-btn--badge:hover {
+    opacity: 1;
+    filter: none;
+    color: var(--egr-btn-txt, #111111);
 }
 
 /* Disabled state: "Nessun sito" */

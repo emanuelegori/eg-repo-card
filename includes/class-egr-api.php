@@ -139,6 +139,7 @@ class EGR_API {
             'homepage'    => filter_var( $homepage, FILTER_VALIDATE_URL ) ? $homepage : '',
             'repo_url'    => esc_url_raw( rtrim( $url, '/' ) ),
             'platform'    => $is_github ? 'github' : 'forgejo',
+            'version'     => self::fetch_latest_version( $is_github, $host, $owner, $repo, $headers ),
         ];
 
         // Cache result
@@ -146,6 +147,31 @@ class EGR_API {
         set_transient( $cache_key, $result, $cache_hours * HOUR_IN_SECONDS );
 
         return $result;
+    }
+
+    /**
+     * Fetch the tag_name of the latest release from GitHub or Forgejo.
+     * Returns '' if no releases exist or the request fails.
+     */
+    private static function fetch_latest_version( bool $is_github, string $host, string $owner, string $repo, array $headers ): string {
+        $url = $is_github
+            ? "https://api.github.com/repos/{$owner}/{$repo}/releases/latest"
+            : "https://{$host}/api/v1/repos/{$owner}/{$repo}/releases?limit=1";
+
+        $response = wp_safe_remote_get( $url, [ 'timeout' => 8, 'headers' => $headers ] );
+
+        if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+            return '';
+        }
+
+        $body = json_decode( wp_remote_retrieve_body( $response ), true );
+        if ( ! is_array( $body ) ) {
+            return '';
+        }
+
+        // GitHub returns a single object; Forgejo returns an array
+        $tag = $is_github ? ( $body['tag_name'] ?? '' ) : ( $body[0]['tag_name'] ?? '' );
+        return sanitize_text_field( (string) $tag );
     }
 
     /**

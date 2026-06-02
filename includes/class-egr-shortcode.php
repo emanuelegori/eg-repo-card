@@ -73,6 +73,7 @@ class EGR_Shortcode {
             _n( '%s star', '%s stars', $data['stars'], 'eg-ranking-repo' ),
             $stars_raw
         );
+        $version         = $data['version'] ?? '';
 
         // Inline CSS custom properties carry the admin colour choices
         // without polluting the global stylesheet
@@ -99,34 +100,14 @@ class EGR_Shortcode {
             <p class="egr-card__description"><?php echo esc_html( $data['description'] ); ?></p>
             <?php endif; ?>
 
-            <div class="egr-card__meta">
-                <span class="egr-card__stars"
-                      title="<?php echo esc_attr( $stars_title ); ?>">
-                    <?php echo self::icon_star(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
-                    <?php echo esc_html( $stars_formatted ); ?>
-                </span>
-                <span class="egr-card__updated"
-                      title="<?php echo esc_attr__( 'Ultimo aggiornamento', 'eg-ranking-repo' ); ?>">
-                    <?php echo self::icon_calendar(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
-                    <?php echo esc_html( $date_formatted ); ?>
-                </span>
-            </div>
-
             <div class="egr-card__actions">
-
-                <a href="<?php echo esc_url( $data['repo_url'] ); ?>"
-                   class="egr-btn egr-btn--source"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    <?php echo self::icon_code(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
-                    <?php echo esc_html__( 'Source Code', 'eg-ranking-repo' ); ?>
-                </a>
 
                 <?php if ( $has_homepage ) : ?>
                 <a href="<?php echo esc_url( $data['homepage'] ); ?>"
                    class="egr-btn egr-btn--website"
                    target="_blank"
-                   rel="noopener noreferrer">
+                   rel="noopener noreferrer"
+                   title="<?php esc_attr_e( 'Sito web del progetto', 'eg-ranking-repo' ); ?>">
                     <?php echo self::icon_globe(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html__( 'Sito Web', 'eg-ranking-repo' ); ?>
                 </a>
@@ -139,6 +120,35 @@ class EGR_Shortcode {
                     <?php echo esc_html__( 'Nessun sito', 'eg-ranking-repo' ); ?>
                 </span>
                 <?php endif; ?>
+
+                <a href="<?php echo esc_url( $data['repo_url'] ); ?>"
+                   class="egr-btn egr-btn--source"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   title="<?php esc_attr_e( 'Vai al repository', 'eg-ranking-repo' ); ?>">
+                    <?php echo self::icon_code(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
+                    <?php echo esc_html__( 'Source Code', 'eg-ranking-repo' ); ?>
+                </a>
+
+                <span class="egr-btn egr-btn--badge"
+                      title="<?php esc_attr_e( 'Ultimo aggiornamento', 'eg-ranking-repo' ); ?>">
+                    <?php echo self::icon_calendar(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
+                    <?php echo esc_html( $date_formatted ); ?>
+                </span>
+
+                <?php if ( $version !== '' ) : ?>
+                <span class="egr-btn egr-btn--badge"
+                      title="<?php esc_attr_e( 'Ultima versione rilasciata', 'eg-ranking-repo' ); ?>">
+                    <?php echo self::icon_tag(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
+                    <?php echo esc_html( $version ); ?>
+                </span>
+                <?php endif; ?>
+
+                <span class="egr-btn egr-btn--badge"
+                      title="<?php echo esc_attr( $stars_title ); ?>">
+                    <?php echo self::icon_star(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
+                    <?php echo esc_html( $stars_formatted ); ?>
+                </span>
 
             </div>
 
@@ -174,6 +184,15 @@ class EGR_Shortcode {
                      stroke="currentColor" stroke-width="2">
                     <polyline points="16 18 22 12 16 6"/>
                     <polyline points="8 6 2 12 8 18"/>
+                </svg>';
+    }
+
+    private static function icon_tag(): string {
+        return '<svg class="egr-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     width="13" height="13" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                    <line x1="7" y1="7" x2="7.01" y2="7"/>
                 </svg>';
     }
 
