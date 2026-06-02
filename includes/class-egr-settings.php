@@ -269,9 +269,8 @@ class EGR_Settings {
                 delete_option( $option_key );
                 $label = ( 'github' === $platform ) ? 'GitHub' : 'Forgejo';
                 /* translators: %s: nome piattaforma (GitHub o Forgejo) */
-                echo '<div class="notice notice-success is-dismissible"><p>'
-                    . sprintf( esc_html__( 'Token %s rimosso.', 'eg-ranking-repo' ), esc_html( $label ) )
-                    . '</p></div>';
+                $notice = sprintf( esc_html__( 'Token %s rimosso.', 'eg-ranking-repo' ), esc_html( $label ) );
+                echo '<div class="notice notice-success is-dismissible"><p>' . $notice . '</p></div>';
             }
         }
 
