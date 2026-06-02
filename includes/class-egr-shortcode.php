@@ -86,7 +86,7 @@ class EGR_Shortcode {
 
         ob_start();
         ?>
-        <div class="egr-card" style="<?php echo $style; // Already escaped above ?>">
+        <div class="egr-card" style="<?php echo esc_attr( $style ); ?>">
 
             <div class="egr-card__header">
                 <span class="egr-card__name"><?php echo esc_html( $data['full_name'] ); ?></span>
@@ -102,12 +102,12 @@ class EGR_Shortcode {
             <div class="egr-card__meta">
                 <span class="egr-card__stars"
                       title="<?php echo esc_attr( $stars_title ); ?>">
-                    <?php echo self::icon_star(); ?>
+                    <?php echo self::icon_star(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html( $stars_formatted ); ?>
                 </span>
                 <span class="egr-card__updated"
                       title="<?php echo esc_attr__( 'Ultimo aggiornamento', 'eg-ranking-repo' ); ?>">
-                    <?php echo self::icon_calendar(); ?>
+                    <?php echo self::icon_calendar(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html( $date_formatted ); ?>
                 </span>
             </div>
@@ -118,7 +118,7 @@ class EGR_Shortcode {
                    class="egr-btn egr-btn--source"
                    target="_blank"
                    rel="noopener noreferrer">
-                    <?php echo self::icon_code(); ?>
+                    <?php echo self::icon_code(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html__( 'Source Code', 'eg-ranking-repo' ); ?>
                 </a>
 
@@ -127,7 +127,7 @@ class EGR_Shortcode {
                    class="egr-btn egr-btn--website"
                    target="_blank"
                    rel="noopener noreferrer">
-                    <?php echo self::icon_globe(); ?>
+                    <?php echo self::icon_globe(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html__( 'Sito Web', 'eg-ranking-repo' ); ?>
                 </a>
                 <?php else : ?>
@@ -135,7 +135,7 @@ class EGR_Shortcode {
                       aria-disabled="true"
                       tabindex="-1"
                       title="<?php esc_attr_e( 'Nessun sito web impostato nel repository', 'eg-ranking-repo' ); ?>">
-                    <?php echo self::icon_globe(); ?>
+                    <?php echo self::icon_globe(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG hardcoded interno ?>
                     <?php echo esc_html__( 'Nessun sito', 'eg-ranking-repo' ); ?>
                 </span>
                 <?php endif; ?>

@@ -2,9 +2,9 @@
 Contributors: emanuelegori
 Tags: repository, github, forgejo, card, shortcode
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,16 @@ I dati di ogni repository vengono memorizzati come WordPress transient. La durat
 2. Pagina impostazioni admin: token API, durata cache, colori.
 
 == Changelog ==
+
+= 1.2.2 =
+* Corretto: `$val` nel campo cache ora usa `esc_attr()` (Plugin Check compliance)
+* Corretto: aggiunto commento `translators:` alla stringa "Token %s rimosso"
+* Corretto: `phpcs:ignore` su query DELETE transient (uso legittimo, non cachabile)
+* Corretto: `$style` nella card ora usa `esc_attr()` esplicitamente
+* Corretto: `phpcs:ignore` sulle icone SVG hardcoded inline
+* Rimosso: `load_plugin_textdomain()` — non necessario da WP 4.6+ se esiste il file `.mo`
+* Aggiunto: `languages/eg-ranking-repo-it_IT.mo` compilato da `.po`
+* Aggiornato: "Tested up to" a 7.0
 
 = 1.2.1 =
 * Corretto: aggiunto `rel="noopener noreferrer"` al link "Documentazione" (target="_blank" senza rel)

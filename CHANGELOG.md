@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.2.2] - 2026-06-02
+
+### Rimosso
+- `load_plugin_textdomain()` — non necessario da WP 4.6+; WordPress carica automaticamente le traduzioni dal file `.mo` nella cartella `languages/`
+
+### Aggiunto
+- `languages/eg-ranking-repo-it_IT.mo` compilato dal file `.po` (necessario per il caricamento automatico delle traduzioni)
+
+### Corretto (Plugin Check compliance)
+- `$val` nel campo durata cache usa ora `esc_attr()` invece del formato `%d` non escaped
+- Commento `translators:` aggiunto alla stringa `esc_html__( 'Token %s rimosso.' )`
+- `phpcs:ignore` documentato sulla query DELETE di transient in `flush_all_cache()` e `uninstall.php` (uso legittimo, bulk per pattern, non cachabile)
+- `$style` nella card ora usa `esc_attr()` esplicitamente
+- `phpcs:ignore` documentato sulle 5 chiamate SVG inline hardcoded
+- "Tested up to" aggiornato a 7.0
+
 ## [1.2.1] - 2026-06-02
 
 ### Corretto

@@ -131,9 +131,9 @@ class EGR_Settings {
                 $val = (int) get_option( 'egr_cache_hours', 6 );
                 printf(
                     '<input type="number" id="egr_cache_hours" name="egr_cache_hours"
-                            value="%d" min="1" max="168" class="small-text">
+                            value="%s" min="1" max="168" class="small-text">
                      <p class="description">%s</p>',
-                    $val,
+                    esc_attr( (string) $val ),
                     esc_html__( 'Valori consigliati: 6–24 ore. Massimo 168 (1 settimana).', 'eg-ranking-repo' )
                 );
             },
@@ -268,6 +268,7 @@ class EGR_Settings {
             if ( isset( $_POST[ $post_key ] ) && check_admin_referer( $nonce_key ) ) {
                 delete_option( $option_key );
                 $label = ( 'github' === $platform ) ? 'GitHub' : 'Forgejo';
+                /* translators: %s: nome piattaforma (GitHub o Forgejo) */
                 echo '<div class="notice notice-success is-dismissible"><p>'
                     . sprintf( esc_html__( 'Token %s rimosso.', 'eg-ranking-repo' ), esc_html( $label ) )
                     . '</p></div>';
@@ -390,6 +391,7 @@ class EGR_Settings {
      */
     private static function flush_all_cache(): void {
         global $wpdb;
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Bulk DELETE di transient per pattern, non cachabile
         $wpdb->query(
             $wpdb->prepare(
                 "DELETE FROM {$wpdb->options}

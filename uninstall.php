@@ -18,6 +18,7 @@ foreach ( $options as $option ) {
 }
 
 global $wpdb;
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Bulk DELETE di transient per pattern, non cachabile
 $wpdb->query(
     $wpdb->prepare(
         "DELETE FROM {$wpdb->options}
