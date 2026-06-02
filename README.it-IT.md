@@ -2,6 +2,20 @@
 
 Plugin WordPress che mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode.
 
+![Card di esempio](screenshot-1.png)
+
+## Caratteristiche
+
+- Card responsive, larga quanto la colonna del post
+- Riga azioni unificata: **Sito Web · Source Code · Data · Versione · Stelle · ?**
+- Badge versione letto dalla release più recente; se non esistono release, usa l'ultimo tag git
+- Tooltip localizzati su ogni elemento (italiano / inglese in base alla lingua di WordPress)
+- Badge `?` con link al repository del plugin
+- Cache via WordPress transients, durata configurabile (default 6 ore)
+- Protezione anti-SSRF con `wp_safe_remote_get()`
+- Colori personalizzabili dalla pagina admin
+- Internazionalizzato (it_IT incluso)
+
 ## Requisiti
 
 - WordPress 6.0 o superiore
@@ -16,7 +30,7 @@ Plugin WordPress che mostra una card con i dati di un repository GitHub o Forgej
 
 ## Utilizzo
 
-Inserire lo shortcode in qualsiasi pagina, post o widget con supporto agli shortcode:
+Inserire lo shortcode in qualsiasi pagina, post o widget:
 
 ```
 [eg-ranking-repo url="https://github.com/owner/repo"]
@@ -27,25 +41,27 @@ Funziona con GitHub e con qualsiasi istanza Forgejo o Gitea self-hosted.
 
 ## Dati mostrati nella card
 
-| Elemento        | Fonte                              |
-|-----------------|------------------------------------|
-| Nome repository | Campo `full_name` dell'API         |
-| Stelle          | `stargazers_count` / `stars_count` |
-| Ultimo aggiornamento | `updated_at`                  |
-| Source Code     | URL passato nello shortcode        |
-| Sito Web        | `homepage` / `website` del repo    |
+| Elemento             | Fonte                                          |
+|----------------------|------------------------------------------------|
+| Nome repository      | Campo `full_name` dell'API                     |
+| Descrizione          | Campo `description` dell'API                   |
+| Sito Web             | `homepage` / `website` del repo                |
+| Source Code          | URL passato nello shortcode                    |
+| Data aggiornamento   | `updated_at`                                   |
+| Versione             | Tag dell'ultima release; fallback al tag git   |
+| Stelle               | `stargazers_count` / `stars_count`             |
 
-Se il repository non ha un sito web impostato, il bottone viene mostrato come disabilitato con la scritta "Nessun sito".
+Se il repository non ha un sito web impostato, il bottone viene mostrato come disabilitato.
 
 ## Configurazione
 
 Andare in **Impostazioni > EG Ranking Repo**:
 
-- **GitHub Personal Access Token**: senza token il limite è 60 richieste/ora. Con token personale il limite sale a 5000 richieste/ora.
-- **Forgejo API Token**: necessario solo per repository privati.
+- **GitHub Personal Access Token**: senza token il limite è 60 richieste/ora. Con token personale il limite sale a 5.000/ora e consente l'accesso a repository privati.
+- **Forgejo API Token**: necessario solo per repository privati o istanze con autenticazione obbligatoria.
 - **Durata cache**: i dati vengono messi in cache tramite WordPress transients. Default: 6 ore.
-- **Colori**: è possibile personalizzare il colore dello sfondo della card, lo sfondo e il testo dei bottoni.
-- **Rimuovi token**: sezione dedicata per eliminare un token compromesso senza accedere al database.
+- **Colori**: personalizza sfondo card, testo card, sfondo bottoni e testo bottoni.
+- **Rimuovi token**: elimina un token compromesso senza accedere al database.
 
 ## Aggiornamenti
 
@@ -68,6 +84,7 @@ EG Forgejo Updater rileva la nuova versione leggendo direttamente il campo `Vers
 eg-ranking-repo/
 ├── eg-ranking-repo.php          Header WP, costanti, bootstrap
 ├── uninstall.php                Cleanup opzioni e transient alla disinstallazione
+├── screenshot-1.png             Screenshot card
 ├── includes/
 │   ├── class-egr-main.php       Init, hook EG Forgejo Updater
 │   ├── class-egr-api.php        Chiamate API GitHub/Forgejo, cache, formattazione

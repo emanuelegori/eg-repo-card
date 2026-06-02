@@ -4,7 +4,7 @@ Tags: repository, github, forgejo, card, shortcode
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,11 +16,14 @@ EG Ranking Repo displays a compact card with data from a GitHub repository or an
 
 Features:
 
+* Responsive card, as wide as the post column
+* Unified action row: Website · Source Code · Date · Version · Stars · ?
+* Version badge from the latest release; falls back to the latest git tag
+* Localised tooltips on every element (based on WordPress language)
+* `?` badge linking to the plugin repository
 * GitHub REST API v3 and Forgejo/Gitea API v1 support
-* Displays repository name, description, star count, and last updated date
-* "Source Code" and "Website" buttons (the latter shown only when a homepage is set)
-* Configurable transient cache to reduce API calls
-* Customisable colours from the admin settings page (card background, text, buttons)
+* Configurable transient cache to reduce API calls (default 6 hours)
+* Customisable colours from the admin settings page
 * Inline SVG icons — no CDN or external font dependency
 * Anti-SSRF protection via `wp_safe_remote_get()`
 * Internationalised (it_IT included)
@@ -56,8 +59,7 @@ Data for each repository is stored as a WordPress transient. The duration is con
 
 == Screenshots ==
 
-1. Repository card showing name, description, star count, last updated date, and action buttons.
-2. Admin settings page: API tokens, cache duration, colours.
+1. Repository card: name, description, unified action row (Website, Source Code, Date, Version, Stars, ?) with localised tooltips.
 
 == Changelog ==
 
