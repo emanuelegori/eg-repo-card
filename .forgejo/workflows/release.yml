@@ -1,0 +1,102 @@
+name: Auto Release on version bump
+
+# A ogni push su main: legge la versione dall'header del plugin e, se non esiste
+# già una release per quella versione, crea la Release Forgejo (tag vX.Y.Z + note
+# dal CHANGELOG + zip del plugin allegato). Se la release esiste ma ha solo le note
+# di fallback, le aggiorna con quelle del CHANGELOG. Idempotente.
+# Repo senza header "Version:" in root (es. monorepo) vengono saltati.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Crea/aggiorna release dalla versione dell'header
+        env:
+          TOKEN: ${{ secrets.GITEA_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          SLUG="${GITHUB_REPOSITORY##*/}"
+          API="${GITHUB_SERVER_URL}/api/v1/repos/${GITHUB_REPOSITORY}"
+          AUTH="Authorization: token $TOKEN"
+
+          # 1) File principale del plugin (root, con header Version:)
+          MAIN=""
+          for f in *.php; do
+            [ -e "$f" ] || continue
+            if grep -qiE '^[[:space:]]*\*?[[:space:]]*Version:' "$f"; then MAIN="$f"; break; fi
+          done
+          if [ -z "$MAIN" ]; then
+            echo "Nessun file plugin con header Version: in root → niente da rilasciare."
+            exit 0
+          fi
+
+          # 2) Versione
+          VERSION=$(grep -iE '^[[:space:]]*\*?[[:space:]]*Version:' "$MAIN" | head -1 \
+            | sed -E 's/.*[Vv]ersion:[[:space:]]*//' | tr -d '[:space:]\r')
+          [ -z "$VERSION" ] && { echo "Versione vuota in $MAIN → esco."; exit 0; }
+          TAG="v${VERSION}"
+          FALLBACK="Release $TAG"
+          echo "Plugin: $SLUG | file: $MAIN | versione: $VERSION"
+
+          # 3) Note dal CHANGELOG.md (sezione della versione, sotto-titoli inclusi)
+          NOTES=""
+          if [ -f CHANGELOG.md ]; then
+            NOTES=$(mawk -v ver="$VERSION" '
+              function hlevel(s,  n){ n=0; while(substr(s,n+1,1)=="#") n++; return n }
+              /^#+[ \t]/ {
+                lvl=hlevel($0)
+                if(!found){ if(index($0,ver)>0){found=1;startlvl=lvl;next} else next }
+                else { if(lvl<=startlvl) exit; print; next }
+              }
+              found { print }
+            ' CHANGELOG.md | sed -e 's/[[:space:]]*$//')
+            NOTES=$(printf '%s\n' "$NOTES" | sed -e '/./,$!d' | tac | sed -e '/./,$!d' | tac)
+          fi
+          [ -z "$NOTES" ] && NOTES="$FALLBACK"
+
+          # 4) La release esiste già?
+          EXIST=$(curl -s -H "$AUTH" "$API/releases/tags/$TAG")
+          REL_ID=$(printf '%s' "$EXIST" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{const j=JSON.parse(s);console.log(j.id||"")}catch(e){console.log("")}})')
+
+          if [ -n "$REL_ID" ]; then
+            CUR_BODY=$(printf '%s' "$EXIST" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log((JSON.parse(s).body||"").trim())}catch(e){console.log("")}})')
+            if { [ -z "$CUR_BODY" ] || [ "$CUR_BODY" = "$FALLBACK" ]; } && [ "$NOTES" != "$FALLBACK" ]; then
+              PATCH=$(NOTES="$NOTES" node -e 'console.log(JSON.stringify({body:process.env.NOTES}))')
+              curl -s -X PATCH -H "$AUTH" -H "Content-Type: application/json" -d "$PATCH" \
+                "$API/releases/$REL_ID" -o /dev/null -w "patch note HTTP %{http_code}\n"
+              echo "✓ Note della release $TAG aggiornate dal CHANGELOG."
+            else
+              echo "Release $TAG già presente e a posto → nulla da fare."
+            fi
+            exit 0
+          fi
+
+          # 5) Zip del plugin (cartella top-level <slug>/, come si aspetta WordPress)
+          git archive --format=zip --prefix="$SLUG/" -o "/tmp/$SLUG.zip" HEAD
+          echo "Zip creato: $(du -h /tmp/$SLUG.zip | cut -f1)"
+
+          # 6) Crea la release (payload JSON-safe via node)
+          PAYLOAD=$(TAG="$TAG" SHA="$GITHUB_SHA" NOTES="$NOTES" node -e '
+            console.log(JSON.stringify({
+              tag_name: process.env.TAG, target_commitish: process.env.SHA,
+              name: process.env.TAG, body: process.env.NOTES,
+              draft: false, prerelease: false
+            }))')
+          RESP=$(curl -s -X POST -H "$AUTH" -H "Content-Type: application/json" -d "$PAYLOAD" "$API/releases")
+          REL_ID=$(printf '%s' "$RESP" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{const j=JSON.parse(s);if(!j.id){console.error(s);process.exit(1)}console.log(j.id)}catch(e){console.error(s);process.exit(1)}})')
+          echo "Release creata, id=$REL_ID"
+
+          # 7) Allega lo zip
+          curl -s -X POST -H "$AUTH" -F "attachment=@/tmp/$SLUG.zip" \
+            "$API/releases/$REL_ID/assets?name=$SLUG.zip" -o /dev/null -w "asset upload HTTP %{http_code}\n"
+          echo "✓ Release $TAG pubblicata con zip allegato."
