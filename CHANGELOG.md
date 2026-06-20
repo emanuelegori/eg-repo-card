@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.1] - 2026-06-20
+
+### Fixed
+- Author name typo in the plugin header and translation template: "Emanuele Egori" → "Emanuele Gori".
+
 ## [1.5.0] - 2026-06-20
 
 ### Added

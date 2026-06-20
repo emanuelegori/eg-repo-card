@@ -4,7 +4,7 @@ Tags: repository, github, forgejo, codeberg, shortcode
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ Data for each repository is stored as a WordPress transient. The duration is con
 Repository card: name, description, unified action row (Website, Source Code, Date, Version, Stars, ?) with localised tooltips.
 
 == Changelog ==
+
+= 1.5.1 =
+* Fixed: author name typo in plugin header ("Emanuele Egori" → "Emanuele Gori")
 
 = 1.5.0 =
 * Added: dedicated "Codeberg" label and blue badge for Codeberg repositories (instead of the generic "Forgejo")

@@ -1,4 +1,4 @@
-# Copyright (C) 2026 Emanuele Egori
+# Copyright (C) 2026 Emanuele Gori
 # This file is distributed under the same license as the EG Ranking Repo plugin.
 msgid ""
 msgstr ""
