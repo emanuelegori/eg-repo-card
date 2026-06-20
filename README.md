@@ -5,7 +5,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
 
-WordPress plugin that displays a compact card with repository data from GitHub or Forgejo via shortcode.
+WordPress plugin that displays a compact card with repository data from GitHub, Codeberg or Forgejo via shortcode.
 
 ![Card example](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo/raw/branch/main/screenshot-1.png)
 

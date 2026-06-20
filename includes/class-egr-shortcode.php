@@ -64,7 +64,9 @@ class EGR_Shortcode {
         $btn_txt  = get_option( 'egr_btn_txt_color',  '#111111' );
 
         $has_homepage    = ! empty( $data['homepage'] );
-        $platform_label  = ( $data['platform'] === 'github' ) ? 'GitHub' : 'Forgejo';
+        // Fallback per entry in cache create da versioni precedenti (< 1.5.0)
+        // che non avevano ancora il campo 'platform_label'.
+        $platform_label  = $data['platform_label'] ?? ( $data['platform'] === 'github' ? 'GitHub' : 'Forgejo' );
         $stars_formatted = EGR_API::format_stars( $data['stars'] );
         $date_formatted  = EGR_API::format_date( $data['updated_at'] );
         $stars_raw       = number_format( $data['stars'], 0, ',', '.' );

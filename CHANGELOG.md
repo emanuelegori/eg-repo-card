@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.0] - 2026-06-20
+
+### Added
+- Dedicated platform label and badge colour for Codeberg repositories. Codeberg runs Forgejo, so it shares the Gitea/Forgejo API, but the card now shows "Codeberg" (blue badge) instead of the generic "Forgejo".
+- New `egr_platform_label` filter to register custom labels for additional hosts.
+
 ## [1.4.5] - 2026-06-02
 
 ### Fixed

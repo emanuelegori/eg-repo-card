@@ -58,6 +58,11 @@
     color: #fff;
 }
 
+.egr-card__platform--codeberg {
+    background-color: #2185d0;
+    color: #fff;
+}
+
 /* ── Repository description ──────────────────────────── */
 
 .egr-card__description {

@@ -44,6 +44,18 @@ class EGR_API {
         $repo      = $parts[1];
         $is_github = ( $host === 'github.com' );
 
+        // Slug della piattaforma per la classe CSS del badge.
+        // L'API resta binaria (GitHub vs Gitea/Forgejo): Codeberg gira su
+        // Forgejo, quindi usa lo stesso endpoint /api/v1, ma vogliamo
+        // un'etichetta dedicata.
+        if ( $is_github ) {
+            $platform = 'github';
+        } elseif ( $host === 'codeberg.org' ) {
+            $platform = 'codeberg';
+        } else {
+            $platform = 'forgejo';
+        }
+
         // Transient cache key: unique per generation + host + owner + repo.
         // La generation viene incrementata ad ogni flush manuale, rendendo
         // obsolete le entry precedenti senza dover svuotare Redis/Memcached.
@@ -144,7 +156,8 @@ class EGR_API {
             'updated_at'  => $data['updated_at']  ?? '',
             'homepage'    => filter_var( $homepage, FILTER_VALIDATE_URL ) ? $homepage : '',
             'repo_url'    => esc_url_raw( rtrim( $url, '/' ) ),
-            'platform'    => $is_github ? 'github' : 'forgejo',
+            'platform'    => $platform,
+            'platform_label' => self::platform_label( $host, $platform ),
             'version'     => self::fetch_latest_version( $is_github, $host, $owner, $repo, $headers ),
         ];
 
@@ -153,6 +166,35 @@ class EGR_API {
         set_transient( $cache_key, $result, $cache_hours * HOUR_IN_SECONDS );
 
         return $result;
+    }
+
+    /**
+     * Resolve a human-readable platform label from the repository host.
+     *
+     * Codeberg runs Forgejo, so it shares the Gitea/Forgejo API but deserves
+     * its own brand name. Unknown self-hosted instances fall back to "Forgejo".
+     * Filterable via `egr_platform_label` to register additional hosts.
+     *
+     * @param  string $host      Lower-cased repository host.
+     * @param  string $platform  Platform slug (github|codeberg|forgejo).
+     * @return string
+     */
+    private static function platform_label( string $host, string $platform ): string {
+        $map = [
+            'github.com'   => 'GitHub',
+            'codeberg.org' => 'Codeberg',
+        ];
+
+        $label = $map[ $host ] ?? 'Forgejo';
+
+        /**
+         * Filter the platform label shown on the repository card.
+         *
+         * @param string $label     The resolved label.
+         * @param string $host      The repository host.
+         * @param string $platform  The platform slug.
+         */
+        return (string) apply_filters( 'egr_platform_label', $label, $host, $platform );
     }
 
     /**

@@ -5,7 +5,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
 
-Plugin WordPress che mostra una card con i dati di un repository GitHub o Forgejo tramite shortcode.
+Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeberg o Forgejo tramite shortcode.
 
 ![Card di esempio](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo/raw/branch/main/screenshot-1.png)
 
