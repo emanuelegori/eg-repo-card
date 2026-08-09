@@ -1,6 +1,6 @@
 # EG Ranking Repo
 
-[![Version](https://img.shields.io/badge/Version-1.4.5-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
+[![Version](https://img.shields.io/badge/Version-1.5.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -101,6 +101,13 @@ eg-ranking-repo/
 ---
 
 ## Changelog
+
+### [1.5.1] - 2026-06-20
+- Author name typo fixed in plugin header and translation template
+
+### [1.5.0] - 2026-06-20
+- Dedicated label and badge colour for Codeberg repositories
+- New `egr_platform_label` filter to register custom labels for additional hosts
 
 ### [1.4.5] - 2026-06-02
 - Cache invalidation via generation counter — reliable with Redis selective flush

@@ -1,6 +1,6 @@
 # EG Ranking Repo
 
-[![Versione](https://img.shields.io/badge/Versione-1.4.5-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
+[![Versione](https://img.shields.io/badge/Versione-1.5.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
 [![Licenza](https://img.shields.io/badge/Licenza-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -101,6 +101,13 @@ eg-ranking-repo/
 ---
 
 ## Changelog
+
+### [1.5.1] - 2026-06-20
+- Corretto refuso nel nome autore nell'header del plugin e nel template di traduzione
+
+### [1.5.0] - 2026-06-20
+- Label ed etichetta colorata dedicate per i repository Codeberg
+- Nuovo filtro `egr_platform_label` per registrare label custom per altri host
 
 ### [1.4.5] - 2026-06-02
 - Invalidazione cache via generation counter — affidabile con Redis selective flush
