@@ -1,0 +1,6 @@
+# Export clean archives without development files
+.gitattributes export-ignore
+.gitignore export-ignore
+.distignore export-ignore
+.forgejo/ export-ignore
+*.md export-ignore
