@@ -117,7 +117,7 @@ class EG_Repo_Card_Shortcode {
         }
 
         $updated     = EG_Repo_Card_API::timestamp( (string) $data['updated_at'] );
-        $date_label  = $updated ? wp_date( 'd-m-Y', $updated ) : __( 'N/A', 'eg-repo-card' );
+        $date_label  = $updated ? wp_date( (string) get_option( 'date_format', 'Y-m-d' ), $updated ) : __( 'N/A', 'eg-repo-card' );
         $date_title  = $updated
             ? sprintf(
                 /* translators: %s: time since the last update, e.g. "3 days" */

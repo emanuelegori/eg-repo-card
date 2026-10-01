@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.1] - 2026-10-01
+
+Correzioni emerse guardando i primi screenshot fatti con Chromium headless sullo stage.
+
+### Changed
+- Data dell'ultimo aggiornamento: dal formato fisso `d-m-Y` al formato data di WordPress (`date_format`, Impostazioni → Generali). Un sito in inglese mostrava "27-09-2026" invece di "September 27, 2026". Il tooltip con il tempo trascorso resta.
+
+### Fixed
+- Pallino del linguaggio: il viola del PHP (`#4f5d95`) quasi spariva sulle card scure. Aggiunto un anello di 1px nel colore del testo al 45% (`color-mix()`), che funziona su qualsiasi sfondo senza dover conoscere il colore della card. Sui browser senza `color-mix()` l'anello semplicemente non compare.
+
+### Added
+- Screenshot per WordPress.org in `.wordpress-org/` (fuori dal pacchetto), con le didascalie in `readme.txt` e le immagini nei README.
+
 ## [2.1.0] - 2026-10-01
 
 ### Added

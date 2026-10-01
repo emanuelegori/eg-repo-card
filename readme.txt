@@ -4,7 +4,7 @@ Tags: repository, github, forgejo, codeberg, gitea
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,9 +108,16 @@ The image is off by default. When you enable it, visitors' browsers load the own
 
 == Screenshots ==
 
-1. A repository card: name, platform, description, buttons and badges with tooltips.
+1. Repository cards from Forgejo, Codeberg, GitHub and Gitea.
+2. WordPress.org plugin cards: rating, active installations, tested WordPress version, and a closed plugin.
+3. "Follow the visitor browser": the same cards in dark mode, with the optional shadow.
+4. The settings page: API tokens, cache and appearance.
 
 == Changelog ==
+
+= 2.1.1 =
+* Changed: the update date follows the date format set in WordPress.
+* Fixed: language dots are easier to see on dark backgrounds.
 
 = 2.1.0 =
 * New: cards for plugins in the WordPress.org directory, with plugin page, download, tested WordPress version, active installations and rating.

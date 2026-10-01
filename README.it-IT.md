@@ -1,6 +1,6 @@
 # EG Repo Card
 
-[![Versione](https://img.shields.io/badge/Versione-2.1.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Versione](https://img.shields.io/badge/Versione-2.1.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![Licenza](https://img.shields.io/badge/Licenza-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -8,6 +8,8 @@
 Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeberg, Forgejo o Gitea, oppure di un plugin della directory di WordPress.org: ultima versione, pulsante per scaricarla, stelle o valutazione.
 
 *English: [README.md](README.md)*
+
+![Card di repository Forgejo, Codeberg, GitHub e Gitea](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-1.png)
 
 > **Prima si chiamava EG Ranking Repo.** La versione 2.0.0 rinomina il plugin. Vedi [Passare da EG Ranking Repo](#passare-da-eg-ranking-repo).
 
@@ -77,9 +79,18 @@ Senza sito web il pulsante resta visibile, in grigio. Linguaggio, licenza, versi
 | Valutazione         | `rating` (su 5) e `num_ratings` nel tooltip             |
 | Chiuso              | `closed`                                                |
 
+### Screenshot
+
+| | |
+|---|---|
+| ![Card dei plugin di WordPress.org](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-2.png) | ![Tema scuro](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-3.png) |
+| Card dei plugin di WordPress.org | "Segui il browser del visitatore" in tema scuro |
+
 ---
 
 ## Impostazioni
+
+![Pagina delle impostazioni](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-4.png)
 
 **Impostazioni > EG Repo Card**
 
@@ -138,6 +149,11 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.1.1] - 2026-10-01
+- La data di aggiornamento segue il formato data di WordPress
+- Pallini dei linguaggi più visibili sugli sfondi scuri
+- Screenshot
 
 ### [2.1.0] - 2026-10-01
 - Card per i plugin di WordPress.org: pagina del plugin, Scarica, versione di WordPress testata, installazioni attive, valutazione, etichetta "Chiuso"

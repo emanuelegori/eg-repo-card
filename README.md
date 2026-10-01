@@ -1,6 +1,6 @@
 # EG Repo Card
 
-[![Version](https://img.shields.io/badge/Version-2.1.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Version](https://img.shields.io/badge/Version-2.1.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -8,6 +8,8 @@
 WordPress plugin that shows a card with the data of a GitHub, Codeberg, Forgejo or Gitea repository, or of a plugin in the WordPress.org directory: latest version, download button, stars or rating.
 
 *Italiano: [README.it-IT.md](README.it-IT.md)*
+
+![Repository cards from Forgejo, Codeberg, GitHub and Gitea](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-1.png)
 
 > **Formerly EG Ranking Repo.** Version 2.0.0 renames the plugin. See [Upgrading from EG Ranking Repo](#upgrading-from-eg-ranking-repo).
 
@@ -77,9 +79,18 @@ Without a website the button stays visible, greyed out. Language, license, versi
 | Rating          | `rating` (out of 5) and `num_ratings` in the tooltip  |
 | Closed          | `closed`                                               |
 
+### Screenshots
+
+| | |
+|---|---|
+| ![WordPress.org plugin cards](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-2.png) | ![Dark mode](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-3.png) |
+| WordPress.org plugin cards | "Follow the visitor browser" in dark mode |
+
 ---
 
 ## Settings
+
+![Settings page](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-4.png)
 
 **Settings > EG Repo Card**
 
@@ -138,6 +149,11 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.1.1] - 2026-10-01
+- The update date follows the WordPress date format
+- Language dots easier to see on dark backgrounds
+- Screenshots
 
 ### [2.1.0] - 2026-10-01
 - Cards for WordPress.org plugins: plugin page, download, tested WordPress version, active installations, rating, "Closed" label

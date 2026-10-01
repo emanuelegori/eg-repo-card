@@ -110,6 +110,9 @@
     height: 10px;
     border-radius: 50%;
     flex-shrink: 0;
+    /* Anello nel colore del testo: stacca dallo sfondo anche i colori scuri
+       (PHP, C) sulle card scure e quelli chiari (JavaScript) su quelle chiare. */
+    box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 45%, transparent);
 }
 
 /* ── Action buttons and badges ───────────────────────── */
