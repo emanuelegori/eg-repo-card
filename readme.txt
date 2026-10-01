@@ -1,10 +1,11 @@
 === EG Repo Card ===
 Contributors: emanuelegori
+Donate link: https://emanuelegori.uno/en/donate/
 Tags: repository, github, forgejo, codeberg, gitea
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,6 +115,10 @@ The image is off by default. When you enable it, visitors' browsers load the own
 4. The settings page: API tokens, cache and appearance.
 
 == Changelog ==
+
+= 2.1.2 =
+* New: links to documentation, repository and donations at the bottom of the settings page.
+* Changed: the plugin version moved to the bottom right of the settings page.
 
 = 2.1.1 =
 * Changed: the update date follows the date format set in WordPress.

@@ -1,6 +1,6 @@
 # EG Repo Card
 
-[![Versione](https://img.shields.io/badge/Versione-2.1.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Versione](https://img.shields.io/badge/Versione-2.1.2-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![Licenza](https://img.shields.io/badge/Licenza-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -149,6 +149,9 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.1.2] - 2026-10-01
+- Footer nella pagina impostazioni: documentazione, repository, donazioni, versione e licenza
 
 ### [2.1.1] - 2026-10-01
 - La data di aggiornamento segue il formato data di WordPress

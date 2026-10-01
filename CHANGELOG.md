@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.2] - 2026-10-01
+
+### Added
+- Footer della pagina impostazioni identico a eg-social-timeline: a sinistra "Developed with ❤️ and maintained by Emanuele Gori · Documentation · Repository · Support the project", a destra "EG Repo Card v2.1.2 · License GPL-2.0-or-later". Solo sulla schermata `settings_page_eg-repo-card` (`current_screen`), negli slot `admin_footer_text` e `update_footer` (priorità 20), testo filtrato con `wp_kses` (solo link).
+- Indirizzi traducibili: in inglese `/en/`, `/en/plugins/eg-repo-card/`, `/en/donate/`; in italiano home, `/plugin/eg-repo-card/`, `/sostieni/`. Anche il link "Documentation" nella riga del plugin usa ora la pagina del sito invece del repo.
+- ⏳ Le due pagine del plugin sul sito non esistono ancora (404 al 2026-10-01): scelta dell'utente, sono il prossimo lavoro.
+- `Donate link` nell'header di `readme.txt`.
+
+### Removed
+- Riga "Plugin version" in fondo alla pagina: la versione è nel footer a destra.
+
 ## [2.1.1] - 2026-10-01
 
 Correzioni emerse guardando i primi screenshot fatti con Chromium headless sullo stage.

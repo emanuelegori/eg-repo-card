@@ -13,10 +13,12 @@ class EG_Repo_Card_Admin {
 
     private const OPTION_GROUP = 'eg_repo_card_options';
     private const PAGE_SLUG    = 'eg-repo-card';
+    private const REPO_URL     = 'https://git.emanuelegori.uno/emanuelegori/eg-repo-card';
 
     public static function init(): void {
         add_action( 'admin_menu', [ __CLASS__, 'add_page' ] );
         add_action( 'admin_init', [ __CLASS__, 'register' ] );
+        add_action( 'current_screen', [ __CLASS__, 'footer_hooks' ] );
         add_filter(
             'plugin_action_links_' . plugin_basename( EG_REPO_CARD_FILE ),
             [ __CLASS__, 'action_links' ]
@@ -31,11 +33,98 @@ class EG_Repo_Card_Admin {
         );
         $docs_link = sprintf(
             '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
-            esc_url( 'https://git.emanuelegori.uno/emanuelegori/eg-repo-card' ),
+            esc_url( self::project_urls()['docs'] ),
             esc_html__( 'Documentation', 'eg-repo-card' )
         );
         array_unshift( $links, $docs_link, $settings_link );
         return $links;
+    }
+
+    /**
+     * Indirizzi del progetto, nella lingua di chi guarda.
+     *
+     * Stringhe traducibili invece di costanti: una traduzione puo' puntarle
+     * alle pagine localizzate, senza controlli sul locale nel codice. In
+     * amministrazione conta la lingua scelta dall'utente.
+     *
+     * @return array<string, string>
+     */
+    private static function project_urls(): array {
+        return [
+            /* translators: address of the author's website. Translate with the localized home page, if any; otherwise leave unchanged. */
+            'author' => __( 'https://emanuelegori.uno/en/', 'eg-repo-card' ),
+            /* translators: address of the plugin page. Translate with the localized page, if any; otherwise leave unchanged. */
+            'docs'   => __( 'https://emanuelegori.uno/en/plugins/eg-repo-card/', 'eg-repo-card' ),
+            /* translators: address of the page to support the project. Translate with the localized page, if any; otherwise leave unchanged. */
+            'donate' => __( 'https://emanuelegori.uno/en/donate/', 'eg-repo-card' ),
+            'repo'   => self::REPO_URL,
+        ];
+    }
+
+    /**
+     * Footer only on the plugin settings page, in the native WordPress slots.
+     * `update_footer` at priority 20: core_update_footer is already at 10.
+     *
+     * @param WP_Screen $screen
+     */
+    public static function footer_hooks( $screen ): void {
+        if ( ! isset( $screen->id ) || 'settings_page_' . self::PAGE_SLUG !== $screen->id ) {
+            return;
+        }
+        add_filter( 'admin_footer_text', [ __CLASS__, 'footer_text' ] );
+        add_filter( 'update_footer', [ __CLASS__, 'footer_version' ], 20 );
+    }
+
+    /**
+     * Left side of the footer: author and project links.
+     *
+     * @param  string $text
+     * @return string
+     */
+    public static function footer_text( $text ): string {
+        $urls = self::project_urls();
+        $link = static function ( string $url, string $label ): string {
+            return sprintf( '<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>', esc_url( $url ), esc_html( $label ) );
+        };
+
+        $credit = sprintf(
+            /* translators: %s: HTML link to the developer's website */
+            __( 'Developed with ❤️ and maintained by %s', 'eg-repo-card' ),
+            $link( $urls['author'], 'Emanuele Gori' )
+        );
+
+        $links = [
+            $link( $urls['docs'], __( 'Documentation', 'eg-repo-card' ) ),
+            $link( $urls['repo'], __( 'Repository', 'eg-repo-card' ) ),
+            $link( $urls['donate'], __( 'Support the project', 'eg-repo-card' ) ),
+        ];
+
+        return wp_kses(
+            $credit . ' &middot; ' . implode( ' &middot; ', $links ),
+            [
+                'a' => [
+                    'href'   => [],
+                    'target' => [],
+                    'rel'    => [],
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Right side of the footer: plugin version and license.
+     *
+     * @param  string $text
+     * @return string
+     */
+    public static function footer_version( $text ): string {
+        $version = sprintf(
+            /* translators: %s: plugin version number */
+            esc_html__( 'EG Repo Card v%s', 'eg-repo-card' ),
+            esc_html( EG_REPO_CARD_VERSION )
+        );
+
+        return $version . ' &middot; ' . esc_html__( 'License GPL-2.0-or-later', 'eg-repo-card' );
     }
 
     public static function add_page(): void {
@@ -340,17 +429,6 @@ class EG_Repo_Card_Admin {
             <p><code>[eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]</code></p>
             <p class="description">
                 <?php esc_html_e( 'Works with GitHub, Codeberg, any Forgejo or Gitea instance and the WordPress.org plugin directory.', 'eg-repo-card' ); ?>
-            </p>
-
-            <hr>
-            <p class="description">
-                <?php
-                printf(
-                    /* translators: %s: plugin version number */
-                    esc_html__( 'Plugin version: %s', 'eg-repo-card' ),
-                    '<strong>' . esc_html( EG_REPO_CARD_VERSION ) . '</strong>'
-                );
-                ?>
             </p>
         </div>
         <?php

@@ -2,9 +2,9 @@
 # Copyright (C) 2025-2026 Emanuele Gori
 msgid ""
 msgstr ""
-"Project-Id-Version: EG Repo Card 2.1.0\n"
+"Project-Id-Version: EG Repo Card 2.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/eg-repo-card\n"
-"POT-Creation-Date: 2026-10-01T09:36:06+00:00\n"
+"POT-Creation-Date: 2026-10-01T19:00:13+00:00\n"
 "PO-Revision-Date: 2026-10-01\n"
 "Last-Translator: Emanuele Gori\n"
 "Language-Team: Italian\n"
@@ -15,9 +15,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Plugin Name of the plugin
-#: eg-repo-card.php includes/class-eg-repo-card-admin.php:43
-#: includes/class-eg-repo-card-admin.php:44
-#: includes/class-eg-repo-card-admin.php:278
+#: eg-repo-card.php includes/class-eg-repo-card-admin.php:132
+#: includes/class-eg-repo-card-admin.php:133
+#: includes/class-eg-repo-card-admin.php:367
 msgid "EG Repo Card"
 msgstr "EG Repo Card"
 
@@ -41,172 +41,204 @@ msgstr ""
 msgid "https://emanuelegori.uno"
 msgstr ""
 
-#: includes/class-eg-repo-card-admin.php:30
+#: includes/class-eg-repo-card-admin.php:32
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: includes/class-eg-repo-card-admin.php:35
+#: includes/class-eg-repo-card-admin.php:37
+#: includes/class-eg-repo-card-admin.php:97
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: includes/class-eg-repo-card-admin.php:78
+#. translators: address of the author's website. Translate with the localized home page, if any; otherwise leave unchanged.
+#: includes/class-eg-repo-card-admin.php:55
+msgid "https://emanuelegori.uno/en/"
+msgstr "https://emanuelegori.uno"
+
+#. translators: address of the plugin page. Translate with the localized page, if any; otherwise leave unchanged.
+#: includes/class-eg-repo-card-admin.php:57
+msgid "https://emanuelegori.uno/en/plugins/eg-repo-card/"
+msgstr "https://emanuelegori.uno/plugin/eg-repo-card/"
+
+#. translators: address of the page to support the project. Translate with the localized page, if any; otherwise leave unchanged.
+#: includes/class-eg-repo-card-admin.php:59
+msgid "https://emanuelegori.uno/en/donate/"
+msgstr "https://emanuelegori.uno/sostieni/"
+
+#. translators: %s: HTML link to the developer's website
+#: includes/class-eg-repo-card-admin.php:92
+msgid "Developed with ❤️ and maintained by %s"
+msgstr "Sviluppato con ❤️ e mantenuto da %s"
+
+#: includes/class-eg-repo-card-admin.php:98
+msgid "Repository"
+msgstr "Repository"
+
+#: includes/class-eg-repo-card-admin.php:99
+msgid "Support the project"
+msgstr "Sostieni il progetto"
+
+#. translators: %s: plugin version number
+#: includes/class-eg-repo-card-admin.php:123
+msgid "EG Repo Card v%s"
+msgstr "EG Repo Card v%s"
+
+#: includes/class-eg-repo-card-admin.php:127
+msgid "License GPL-2.0-or-later"
+msgstr "Licenza GPL-2.0-or-later"
+
+#: includes/class-eg-repo-card-admin.php:167
 msgid "API tokens"
 msgstr "Token API"
 
-#: includes/class-eg-repo-card-admin.php:81
+#: includes/class-eg-repo-card-admin.php:170
 msgid "Optional. Leave a field empty to keep the saved token."
 msgstr "Facoltativi. Lascia un campo vuoto per mantenere il token salvato."
 
-#: includes/class-eg-repo-card-admin.php:89
+#: includes/class-eg-repo-card-admin.php:178
 msgid "GitHub personal access token"
 msgstr "Token di accesso personale GitHub"
 
-#: includes/class-eg-repo-card-admin.php:90
+#: includes/class-eg-repo-card-admin.php:179
 msgid "Raises the GitHub limit from 60 to 5,000 requests per hour."
 msgstr "Alza il limite di GitHub da 60 a 5.000 richieste all'ora."
 
-#: includes/class-eg-repo-card-admin.php:95
+#: includes/class-eg-repo-card-admin.php:184
 msgid "Forgejo or Gitea token"
 msgstr "Token Forgejo o Gitea"
 
-#: includes/class-eg-repo-card-admin.php:96
+#: includes/class-eg-repo-card-admin.php:185
 msgid "Needed only for private repositories or instances that require login."
 msgstr "Necessario solo per repository privati o istanze che richiedono l'accesso."
 
-#: includes/class-eg-repo-card-admin.php:102
+#: includes/class-eg-repo-card-admin.php:191
 msgid "Cache"
 msgstr "Cache"
 
-#: includes/class-eg-repo-card-admin.php:109
+#: includes/class-eg-repo-card-admin.php:198
 msgid "Cache duration (hours)"
 msgstr "Durata cache (ore)"
 
-#: includes/class-eg-repo-card-admin.php:115
+#: includes/class-eg-repo-card-admin.php:204
 msgid "From 1 to 168 hours. Default: 6"
 msgstr "Da 1 a 168 ore. Predefinito: 6"
 
-#: includes/class-eg-repo-card-admin.php:126
+#: includes/class-eg-repo-card-admin.php:215
 msgid "Appearance"
 msgstr "Aspetto"
 
-#: includes/class-eg-repo-card-admin.php:129
+#: includes/class-eg-repo-card-admin.php:218
 msgid "Text and icons switch between light and dark to match the background."
 msgstr "Testo e icone passano da chiari a scuri in base allo sfondo."
 
-#: includes/class-eg-repo-card-admin.php:137
+#: includes/class-eg-repo-card-admin.php:226
 msgid "Card background"
 msgstr "Sfondo della card"
 
-#: includes/class-eg-repo-card-admin.php:138
+#: includes/class-eg-repo-card-admin.php:227
 msgid "Neutral preset (light grey)"
 msgstr "Preset neutro (grigio chiaro)"
 
-#: includes/class-eg-repo-card-admin.php:143
+#: includes/class-eg-repo-card-admin.php:232
 msgid "Button background"
 msgstr "Sfondo dei pulsanti"
 
-#: includes/class-eg-repo-card-admin.php:144
+#: includes/class-eg-repo-card-admin.php:233
 msgid "Neutral preset (grey)"
 msgstr "Preset neutro (grigio)"
 
-#: includes/class-eg-repo-card-admin.php:147
+#: includes/class-eg-repo-card-admin.php:236
 msgid "Border"
 msgstr "Bordo"
 
-#: includes/class-eg-repo-card-admin.php:147
+#: includes/class-eg-repo-card-admin.php:236
 msgid "Show a border around the card"
 msgstr "Mostra un bordo intorno alla card"
 
-#: includes/class-eg-repo-card-admin.php:148
+#: includes/class-eg-repo-card-admin.php:237
 msgid "Shadow"
 msgstr "Ombra"
 
-#: includes/class-eg-repo-card-admin.php:148
+#: includes/class-eg-repo-card-admin.php:237
 msgid "Show a shadow under the card"
 msgstr "Mostra un'ombra sotto la card"
 
-#: includes/class-eg-repo-card-admin.php:151
+#: includes/class-eg-repo-card-admin.php:240
 msgid "Avatar"
 msgstr "Avatar"
 
-#: includes/class-eg-repo-card-admin.php:152
+#: includes/class-eg-repo-card-admin.php:241
 msgid "Show the owner avatar or the plugin icon"
 msgstr "Mostra l'avatar del proprietario o l'icona del plugin"
 
-#: includes/class-eg-repo-card-admin.php:153
+#: includes/class-eg-repo-card-admin.php:242
 msgid "The image is loaded from the platform that hosts it."
 msgstr "L'immagine viene caricata dalla piattaforma che la ospita."
 
-#: includes/class-eg-repo-card-admin.php:187
+#: includes/class-eg-repo-card-admin.php:276
 msgid "Transparent"
 msgstr "Trasparente"
 
-#: includes/class-eg-repo-card-admin.php:188
+#: includes/class-eg-repo-card-admin.php:277
 msgid "Follow the visitor browser"
 msgstr "Segui il browser del visitatore"
 
-#: includes/class-eg-repo-card-admin.php:189
-#: includes/class-eg-repo-card-admin.php:207
+#: includes/class-eg-repo-card-admin.php:278
+#: includes/class-eg-repo-card-admin.php:296
 msgid "Custom color"
 msgstr "Colore personalizzato"
 
-#: includes/class-eg-repo-card-admin.php:211
+#: includes/class-eg-repo-card-admin.php:300
 msgid "\"Follow the visitor browser\" switches between light and dark with the system theme. The color picker applies only to \"Custom color\"."
 msgstr "«Segui il browser del visitatore» passa da chiaro a scuro con il tema del sistema. Il selettore di colore vale solo per «Colore personalizzato»."
 
 # translators: %s: platform name (GitHub or Forgejo)
 #. translators: %s: platform name (GitHub or Forgejo / Gitea)
-#: includes/class-eg-repo-card-admin.php:261
+#: includes/class-eg-repo-card-admin.php:350
 msgid "%s token removed."
 msgstr "Token %s rimosso."
 
-#: includes/class-eg-repo-card-admin.php:273
+#: includes/class-eg-repo-card-admin.php:362
 msgid "Cache cleared."
 msgstr "Cache svuotata."
 
-#: includes/class-eg-repo-card-admin.php:284
+#: includes/class-eg-repo-card-admin.php:373
 msgid "Save settings"
 msgstr "Salva impostazioni"
 
-#: includes/class-eg-repo-card-admin.php:290
+#: includes/class-eg-repo-card-admin.php:379
 msgid "Flush cache"
 msgstr "Svuota cache"
 
-#: includes/class-eg-repo-card-admin.php:292
+#: includes/class-eg-repo-card-admin.php:381
 msgid "Cards load fresh data from the repositories on the next page view."
 msgstr "Le card caricano dati aggiornati dai repository alla prossima visualizzazione."
 
-#: includes/class-eg-repo-card-admin.php:296
+#: includes/class-eg-repo-card-admin.php:385
 msgid "Flush cache now"
 msgstr "Svuota cache ora"
 
-#: includes/class-eg-repo-card-admin.php:301
+#: includes/class-eg-repo-card-admin.php:390
 msgid "Remove API tokens"
 msgstr "Rimuovi token API"
 
 # translators: %s: platform name (GitHub or Forgejo)
 #. translators: %s: platform name (GitHub or Forgejo / Gitea)
-#: includes/class-eg-repo-card-admin.php:317
+#: includes/class-eg-repo-card-admin.php:406
 msgid "Remove %s token"
 msgstr "Rimuovi token %s"
 
-#: includes/class-eg-repo-card-admin.php:330
+#: includes/class-eg-repo-card-admin.php:419
 msgid "No token saved."
 msgstr "Nessun token salvato."
 
-#: includes/class-eg-repo-card-admin.php:337
+#: includes/class-eg-repo-card-admin.php:426
 msgid "Shortcode usage"
 msgstr "Utilizzo shortcode"
 
-#: includes/class-eg-repo-card-admin.php:342
+#: includes/class-eg-repo-card-admin.php:431
 msgid "Works with GitHub, Codeberg, any Forgejo or Gitea instance and the WordPress.org plugin directory."
 msgstr "Funziona con GitHub, Codeberg, qualsiasi istanza Forgejo o Gitea e la directory dei plugin di WordPress.org."
-
-# translators: %s: plugin version number
-#. translators: %s: plugin version number
-#: includes/class-eg-repo-card-admin.php:350
-msgid "Plugin version: %s"
-msgstr "Versione plugin: %s"
 
 #: includes/class-eg-repo-card-api.php:85
 #: includes/class-eg-repo-card-api.php:109
@@ -359,3 +391,4 @@ msgstr "Meno di 10"
 #: includes/class-eg-repo-card-shortcode.php:328
 msgid "EG Repo Card error"
 msgstr "Errore di EG Repo Card"
+
