@@ -1,136 +1,140 @@
-# EG Ranking Repo
+# EG Repo Card
 
-[![Version](https://img.shields.io/badge/Version-1.5.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo)
+[![Version](https://img.shields.io/badge/Version-2.0.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
 
-WordPress plugin that displays a compact card with repository data from GitHub, Codeberg or Forgejo via shortcode.
+WordPress plugin that shows a card with the data of a GitHub, Codeberg, Forgejo or Gitea repository: latest release, download button, language, stars.
 
-![Card example](https://git.emanuelegori.uno/emanuelegori/eg-ranking-repo/raw/branch/main/screenshot-1.png)
+*Italiano: [README.it-IT.md](README.it-IT.md)*
+
+> **Formerly EG Ranking Repo.** Version 2.0.0 renames the plugin. See [Upgrading from EG Ranking Repo](#upgrading-from-eg-ranking-repo).
 
 ---
 
 ## Features
 
-- Responsive card, as wide as the post column
-- Unified action row: **Website · Source Code · Date · Version · Stars · ?**
-- Version badge from the latest release; falls back to the latest git tag
-- Localised tooltips on every element (based on WordPress language)
-- `?` badge linking to the plugin repository
-- Transient cache with configurable duration (default 6 hours)
-- Anti-SSRF protection via `wp_safe_remote_get()`
-- Customisable colours from the admin settings page
-- Internationalised (it_IT included)
-
----
-
-## Installation
-
-1. Upload the `eg-ranking-repo` folder to `wp-content/plugins/`
-2. Activate the plugin from the WordPress Plugins page
-3. Configure the options under **Settings > EG Ranking Repo**
-
-### Automatic updates
-
-Install [EG Forgejo Updater](https://git.emanuelegori.uno/emanuelegori/eg-forgejo-updater) to receive automatic updates directly inside WordPress.
+- Responsive card, as wide as the content column
+- Platform logo for GitHub, Codeberg, Forgejo and Gitea (Forgejo and Gitea are told apart automatically)
+- Buttons: **Website · Source Code · Download**
+- Badges: **last update · version · language · license · stars**, each with a tooltip
+- Download button: the `.zip` attached to the latest release, or the release page
+- Version from the latest release; falls back to the latest git tag
+- "Archived" label for read-only repositories
+- Appearance: neutral preset, transparent, custom color or follow the visitor browser (light/dark), for the card and for the buttons; text adapts to the background
+- Optional border, shadow and owner avatar
+- Transient cache (default 6 hours); when an API does not answer, the last data received stays on the card
+- Errors visible only to editors, never to visitors
+- Inline SVG icons, no CDN or external fonts
+- Internationalised (Italian included)
 
 ---
 
 ## Usage
 
-Insert the shortcode in any page, post, or widget:
-
 ```
-[eg-ranking-repo url="https://github.com/owner/repo"]
-[eg-ranking-repo url="https://git.emanuelegori.uno/owner/repo"]
+[eg-repo-card url="https://github.com/owner/repo"]
+[eg-repo-card url="https://codeberg.org/owner/repo"]
+[eg-repo-card url="https://git.example.com/owner/repo"]
 ```
-
-Works with GitHub and any self-hosted Forgejo or Gitea instance.
 
 ---
 
-## Card Data
+## Card data
 
-| Field              | Source                                        |
-|--------------------|-----------------------------------------------|
-| Repository name    | `full_name` API field                         |
-| Description        | `description` API field                       |
-| Website            | `homepage` / `website` of the repo            |
-| Source Code        | URL passed in the shortcode                   |
-| Last updated       | `updated_at`                                  |
-| Version            | Latest release tag; falls back to git tag     |
-| Stars              | `stargazers_count` / `stars_count`            |
+| Element      | Source                                                          |
+|--------------|-----------------------------------------------------------------|
+| Name         | `full_name`                                                     |
+| Description  | `description`                                                   |
+| Website      | `homepage` (GitHub) / `website` (Forgejo, Gitea)                |
+| Source Code  | URL written in the shortcode                                    |
+| Download     | single `.zip` asset of the latest release, else the release page |
+| Last update  | `updated_at`                                                    |
+| Version      | latest release tag; falls back to the latest git tag            |
+| Language     | `language`                                                      |
+| License      | `license.spdx_id` (GitHub) / `licenses` (Forgejo, Gitea)        |
+| Stars        | `stargazers_count` / `stars_count`                              |
+| Archived     | `archived`                                                      |
 
-If no website is set in the repository, the button is shown as disabled.
-
----
-
-## Configuration
-
-Go to **Settings > EG Ranking Repo**:
-
-- **GitHub Personal Access Token**: without a token the limit is 60 requests/hour. With a personal token it rises to 5,000/hour and enables access to private repositories.
-- **Forgejo API Token**: required only for private repositories or instances with mandatory authentication.
-- **Cache duration**: data is cached via WordPress transients. Default: 6 hours.
-- **Colours**: customise card background, card text, button background and button text.
-- **Remove token**: delete a compromised token without accessing the database.
+Without a website the button stays visible, greyed out. Language, license, version and Download appear only when the platform provides them.
 
 ---
 
-## File Structure
+## Settings
+
+**Settings > EG Repo Card**
+
+- **GitHub personal access token**: raises the limit from 60 to 5,000 requests per hour.
+- **Forgejo or Gitea token**: only for private repositories or instances that require login.
+- **Cache duration**: 1 to 168 hours, default 6. The page also has a button to flush the cache.
+- **Card background / Button background**: neutral preset, transparent, follow the visitor browser, custom color.
+- **Border, Shadow, Avatar**: on/off. The avatar is loaded from the repository host.
+
+### Filters
+
+| Filter                          | Use                                         |
+|---------------------------------|---------------------------------------------|
+| `eg_repo_card_platform_label`   | change the platform label (label, host, platform) |
+| `eg_repo_card_language_colors`  | add or change language colors (lowercase name → hex) |
+
+`egr_platform_label` (1.x) still works but is deprecated.
+
+---
+
+## Upgrading from EG Ranking Repo
+
+1. Deactivate **EG Ranking Repo**.
+2. Install and activate **EG Repo Card**: cache duration, colors and tokens are imported.
+3. Check your cards. `[eg-ranking-repo]` shortcodes keep working but are deprecated: replace them with `[eg-repo-card]`.
+4. Delete EG Ranking Repo.
+
+The text color settings are gone: the text now adapts to the background.
+
+---
+
+## External services
+
+The plugin contacts only the hosts written in your shortcodes (GitHub API, Codeberg, Forgejo or Gitea instances) to read public repository data. Details are in the *External services* section of `readme.txt`.
+
+---
+
+## File structure
 
 ```
-eg-ranking-repo/
-├── eg-ranking-repo.php          WP header, constants, bootstrap
-├── uninstall.php                Options and transient cleanup on uninstall
-├── screenshot-1.png             Card screenshot
+eg-repo-card/
+├── eg-repo-card.php                       Header, constants, bootstrap
+├── uninstall.php                          Options and transient cleanup
 ├── includes/
-│   ├── class-egr-main.php       Init, EG Forgejo Updater hook
-│   ├── class-egr-api.php        GitHub/Forgejo API calls, cache, formatting
-│   ├── class-egr-shortcode.php  Shortcode and card HTML rendering
-│   └── class-egr-settings.php  wp-admin settings page
-├── assets/
-│   └── css/
-│       └── eg-ranking-repo.css  Frontend card styles
-└── languages/
-    ├── eg-ranking-repo.pot      Translation template
-    └── eg-ranking-repo-it_IT.po Italian translation
+│   ├── class-eg-repo-card-main.php        Hooks
+│   ├── class-eg-repo-card-settings.php    Options and defaults
+│   ├── class-eg-repo-card-migration.php   Import from EG Ranking Repo 1.x
+│   ├── class-eg-repo-card-api.php         API calls and cache
+│   ├── class-eg-repo-card-style.php       CSS of the appearance settings
+│   ├── class-eg-repo-card-shortcode.php   Shortcode and card markup
+│   └── class-eg-repo-card-admin.php       Settings page
+├── assets/css/eg-repo-card.css            Card layout
+└── languages/eg-repo-card.pot             Translation template
 ```
 
 ---
 
 ## Changelog
 
-### [1.5.1] - 2026-06-20
-- Author name typo fixed in plugin header and translation template
+### [2.0.0] - 2026-10-01
+- Renamed from EG Ranking Repo; new `[eg-repo-card]` shortcode, `[eg-ranking-repo]` deprecated alias
+- Settings imported from EG Ranking Repo
+- Appearance: neutral, transparent, custom or browser-driven backgrounds; border, shadow, avatar
+- Platform logos, Gitea detection, Download button, language, license, "Archived" label
+- Relative time in the date tooltip
+- Last good data shown when an API fails; errors only for editors
+- Removed the "?" badge and the text color settings
 
-### [1.5.0] - 2026-06-20
-- Dedicated label and badge colour for Codeberg repositories
-- New `egr_platform_label` filter to register custom labels for additional hosts
-
-### [1.4.5] - 2026-06-02
-- Cache invalidation via generation counter — reliable with Redis selective flush
-
-### [1.4.x] - 2026-06-02
-- i18n refactor: English msgids, `it_IT.mo` Italian translations
-- Version badges in README, unified EN/IT structure
-- Plugin header description in English
-- Screenshot with absolute URL in readme.txt
-
-### [1.3.x] - 2026-06-02
-- Version badge from API releases/tags
-- Unified action row: Website · Source Code · Date · Version · Stars · ?
-- `?` badge linking to plugin repository
-- Card full-width responsive
-
-### [1.2.x] - 2026-06-02
-- Plugin Check compliance fixes
-- HTTPS forced for Forgejo API, error caching, uninstall.php
+The 1.x history is in [changelog.txt](changelog.txt).
 
 ---
 
-## Licence
+## License
 
 GPL-2.0-or-later — https://www.gnu.org/licenses/gpl-2.0.html
 

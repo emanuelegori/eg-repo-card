@@ -1,5 +1,47 @@
 # Changelog
 
+## [2.0.0] - 2026-10-01
+
+Il plugin cambia nome: **EG Ranking Repo → EG Repo Card**. Il vecchio nome non diceva cosa fa il plugin (non c'è nessuna classifica: mostra una card per un singolo repository). È anche il primo passo verso WordPress.org.
+
+Repository nuovo, `emanuelegori/eg-repo-card`, con dentro tutta la storia di `eg-ranking-repo`. Il vecchio repository resta così com'è, archiviato, per le installazioni che non sono ancora passate al nuovo plugin.
+
+### Nome, prefissi, shortcode
+- Slug e text domain `eg-repo-card`. Prefissi completi al posto delle abbreviazioni `EGR_`/`egr_`, come chiede la revisione di WordPress.org: classi `EG_Repo_Card_*`, costanti `EG_REPO_CARD_*`, option e transient `eg_repo_card_*`, classi CSS `eg-repo-card__*`.
+- Nuovo shortcode `[eg-repo-card]`. `[eg-ranking-repo]` resta come alias deprecato, senza avvisi sul frontend, per i contenuti già pubblicati. Se il vecchio plugin è ancora attivo, il tag resta suo.
+- Filtro `egr_platform_label` deprecato con `apply_filters_deprecated()`, sostituito da `eg_repo_card_platform_label`. Nuovo filtro `eg_repo_card_language_colors`.
+
+### Migrazione
+- Alla prima esecuzione, se `eg_repo_card_settings` non esiste, vengono **copiate** le option `egr_*`: durata cache, token, colori. Un colore di sfondo diverso dal default 1.x diventa "Colore personalizzato", altrimenti resta il preset neutro (stesso aspetto di prima). Le option vecchie non vengono toccate: le cancella la disinstallazione di EG Ranking Repo.
+- I colori del testo non vengono importati: ora si ricavano dallo sfondo.
+
+### Aspetto
+- Card e pulsanti hanno ognuno un menu come in eg-social-timeline: preset neutro, trasparente, segui il browser del visitatore (`prefers-color-scheme`), colore personalizzato.
+- Il colore del testo si calcola dalla luminanza dello sfondo (soglia 0,18, dove il contrasto con testo scuro e chiaro si equivale). Con lo sfondo trasparente il testo eredita dal tema.
+- Checkbox per bordo (attivo), ombra (spenta) e avatar del proprietario (spento: l'immagine arriva dal server del repository, quindi il browser del visitatore lo contatta).
+- Il CSS delle impostazioni viene generato da `EG_Repo_Card_Style` e aggiunto con `wp_add_inline_style()`, una volta per pagina. Il foglio statico contiene solo il layout.
+- Loghi Simple Icons (CC0) per GitHub, Codeberg, Forgejo e Gitea nel badge della piattaforma. Il badge Forgejo passa dal verde Gitea all'arancio.
+
+### Contenuto della card
+- Badge `?` rimosso: era un "Powered by" sempre acceso sul frontend.
+- Gitea riconosciuto: le istanze che rispondono a `/api/forgejo/v1/version` sono Forgejo, le altre Gitea. Esito in cache per host, una settimana.
+- Pulsante **Scarica**: lo `.zip` allegato all'ultima release se è l'unico `.zip`, altrimenti la pagina della release (Forgejo stesso ha 21 allegati). Senza release il pulsante non c'è: lo zip sorgente di un tag avrebbe il nome cartella sbagliato per un plugin.
+- Release su Forgejo/Gitea filtrate con `draft=false&pre-release=false`, come fa già `/releases/latest` di GitHub.
+- Nuovi badge: linguaggio (pallino colorato, colori di GitHub Linguist), licenza (su Forgejo il campo `licenses` è quasi sempre vuoto, quindi compare soprattutto su GitHub e Gitea), etichetta "Archiviato".
+- Data: resta la data completa; nel tooltip il tempo trascorso (`human_time_diff()`).
+- Invariati, per scelta: pulsante grigio "Nessun sito" e stelle anche a 0.
+
+### Affidabilità
+- Oltre alla cache normale, l'ultimo risultato valido resta 30 giorni in un transient a parte. Se l'API fallisce, la card mostra quello invece dell'errore.
+- I messaggi d'errore li vede solo chi ha `edit_posts`; per i visitatori lo shortcode non produce nulla.
+- Gli URL vengono accettati solo con schema http/https; gestiti porta e suffisso `.git`.
+
+### WordPress.org
+- Tolti l'header `Forgejo Plugin URI` e l'hook `eg_forgejo_updater_register` (linea guida 8). Sul sito il plugin si aggiunge dal form "Installa plugin da Forgejo" di EG Forgejo Updater.
+- `readme.txt` con la sezione `== External services ==`, `Tested up to: 7.1`, changelog solo della 2.x; lo storico 1.x va in `changelog.txt`.
+- `.gitattributes` con elenco esplicito: il vecchio `*.md export-ignore` escludeva anche `README.md` dal pacchetto. Fuori anche `.po`/`.mo` (il `.pot` resta). Eliminato `.distignore`, duplicato.
+- Aggiunto `LICENSE.md`.
+
 ## [1.5.1] - 2026-06-20
 
 ### Fixed

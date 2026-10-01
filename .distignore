@@ -1,4 +1,0 @@
-# File presenti nel repository Forgejo ma da escludere dall'installazione WordPress.
-# Sintassi: un pattern per riga, supporta glob. Righe con # sono commenti.
-.gitignore
-README.it-IT.md

@@ -1,6 +1,17 @@
-# Export clean archives without development files
+# Archivi di release puliti: fuori i file di sviluppo, dentro la licenza e il
+# README che accompagnano il plugin installato.
+# Elenco esplicito e non *.md: il glob escludeva anche LICENSE.md e README.md.
 .gitattributes export-ignore
 .gitignore export-ignore
-.distignore export-ignore
 .forgejo/ export-ignore
-*.md export-ignore
+tests/ export-ignore
+/CHANGELOG.md export-ignore
+/README.it-IT.md export-ignore
+/LICENSE.IT.md export-ignore
+# Asset della pagina WordPress.org (screenshot, banner, icona). Non assets/:
+# li' c'e' il CSS che serve al plugin installato.
+.wordpress-org/ export-ignore
+# Traduzione italiana fuori dal pacchetto: su WordPress.org le traduzioni le
+# distribuisce translate.wordpress.org. Il .pot resta nel pacchetto.
+/languages/eg-repo-card-it_IT.po export-ignore
+/languages/eg-repo-card-it_IT.mo export-ignore

@@ -1,0 +1,182 @@
+/*
+ * EG Repo Card — Frontend Card Styles
+ *
+ * Sfondi, colore del testo, bordo e ombra NON stanno qui: li genera
+ * EG_Repo_Card_Style dalle impostazioni (CSS inline aggiunto a questo
+ * foglio), cosi' "Trasparente" e "Segui il browser" funzionano davvero.
+ */
+
+/* ── Card container ─────────────────────────────────── */
+
+.eg-repo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Header: avatar + repo name + platform + archived ── */
+
+.eg-repo-card__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.eg-repo-card__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.eg-repo-card__name {
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.eg-repo-card__platform,
+.eg-repo-card__archived {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+
+.eg-repo-card__platform--github {
+    background-color: #24292e;
+    color: #fff;
+}
+
+.eg-repo-card__platform--forgejo {
+    background-color: #c2410c;
+    color: #fff;
+}
+
+.eg-repo-card__platform--codeberg {
+    background-color: #2185d0;
+    color: #fff;
+}
+
+.eg-repo-card__platform--gitea {
+    background-color: #4c7a1f;
+    color: #fff;
+}
+
+.eg-repo-card__archived {
+    background-color: #fef3c7;
+    color: #78350f;
+}
+
+/* ── Repository description ──────────────────────────── */
+
+.eg-repo-card__description {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+/* ── Inline SVG icons ────────────────────────────────── */
+
+.eg-repo-card__icon {
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.eg-repo-card__dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ── Action buttons and badges ───────────────────────── */
+
+.eg-repo-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.eg-repo-card .eg-repo-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    white-space: nowrap;
+}
+
+.eg-repo-card a.eg-repo-card__btn:hover {
+    opacity: 0.82;
+    text-decoration: none;
+}
+
+.eg-repo-card .eg-repo-card__btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Badge non interattivi: data, versione, linguaggio, licenza, stelle */
+.eg-repo-card .eg-repo-card__btn--badge {
+    cursor: default;
+}
+
+/* "Nessun sito" */
+.eg-repo-card .eg-repo-card__btn--disabled {
+    opacity: 0.4;
+    cursor: default;
+    user-select: none;
+}
+
+.eg-repo-card .eg-repo-card__btn--download {
+    font-weight: 600;
+}
+
+/* ── Error message (editors only) ────────────────────── */
+
+.eg-repo-card-error {
+    color: #b91c1c;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* ── Responsive: shrink on very narrow viewports ─────── */
+
+@media ( max-width: 380px ) {
+    .eg-repo-card {
+        padding: 11px 12px;
+    }
+    .eg-repo-card__actions {
+        flex-direction: column;
+    }
+    .eg-repo-card .eg-repo-card__btn {
+        justify-content: center;
+    }
+}
