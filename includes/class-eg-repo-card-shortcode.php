@@ -283,7 +283,7 @@ class EG_Repo_Card_Shortcode {
      */
     private static function rating( int $rating, int $num_ratings ): array {
         if ( $num_ratings < 1 ) {
-            return [ '–', __( 'No ratings yet', 'eg-repo-card' ) ];
+            return [ '0', __( 'No ratings yet', 'eg-repo-card' ) ];
         }
 
         $score = number_format_i18n( round( $rating / 20, 1 ), 1 );

@@ -17,7 +17,9 @@
     font-family: inherit;
     font-size: 0.875rem;
     line-height: 1.5;
-    width: 100%;
+    /* Nessuna width: la larghezza la decide il tema. Nei layout "constrained"
+       (Blocksy, temi a blocchi) e' il tema a dare ai figli del contenuto la
+       larghezza del testo; un width qui la scavalcherebbe. */
     box-sizing: border-box;
 }
 

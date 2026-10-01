@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.3] - 2026-10-01
+
+### Fixed
+- La card occupava tutta la larghezza della finestra invece di quella del testo. Causa: `width: 100%` su `.eg-repo-card`, ereditato dalla 1.2.7 di EG Ranking Repo. Blocksy e i temi a blocchi limitano i contenuti con `.is-layout-constrained > :where(...) { width: var(--theme-block-width) }`: specificità (0,1,0), uguale alla nostra regola che, caricata dopo, vinceva. Misurato sullo stage (Blocksy, finestra 1280 px): paragrafo 1152 px a 64 px dal bordo, card 1280 px a 0. Senza la proprietà la card coincide con il paragrafo anche su mobile (343 px). Nei temi classici non cambia nulla: la card è un blocco e occupa comunque la colonna. Il problema c'era anche nel vecchio plugin, quindi anche in produzione.
+
+### Changed
+- Plugin di WordPress.org senza valutazioni: "0" invece di "–", con il tooltip "Nessuna valutazione", come le stelle a 0 dei repository (richiesta dell'utente: badge allineati).
+
 ## [2.1.2] - 2026-10-01
 
 ### Added

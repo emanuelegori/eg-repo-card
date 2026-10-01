@@ -5,7 +5,7 @@ Tags: repository, github, forgejo, codeberg, gitea
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -115,6 +115,10 @@ The image is off by default. When you enable it, visitors' browsers load the own
 4. The settings page: API tokens, cache and appearance.
 
 == Changelog ==
+
+= 2.1.3 =
+* Fixed: the card follows the width of the post content.
+* Changed: WordPress.org plugins without ratings show 0, like repositories without stars.
 
 = 2.1.2 =
 * New: links to documentation, repository and donations at the bottom of the settings page.
