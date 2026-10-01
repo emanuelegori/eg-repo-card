@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.1] - 2026-10-01
+
+### Fixed
+- Rimesso nell'header `Gitea Plugin URI: https://git.emanuelegori.uno/emanuelegori/eg-repo-card`. Nella 2.0.0 l'avevo tolto pensando che violasse la linea guida 8 di WordPress.org: non è così, eg-social-timeline è stato approvato con lo stesso header (è una riga letta da un altro plugin, non codice di aggiornamento). Senza l'header EG Forgejo Updater non trova il plugin: il form "Installa plugin da Forgejo" installa ma non registra, quindi la 2.0.0 sarebbe rimasta senza aggiornamenti automatici.
+- Il vecchio `do_action( 'eg_forgejo_updater_register' )` resta fuori: con l'header non serve, ed eg-social-timeline non ce l'ha.
+
 ## [2.0.0] - 2026-10-01
 
 Il plugin cambia nome: **EG Ranking Repo → EG Repo Card**. Il vecchio nome non diceva cosa fa il plugin (non c'è nessuna classifica: mostra una card per un singolo repository). È anche il primo passo verso WordPress.org.
@@ -37,7 +43,7 @@ Repository nuovo, `emanuelegori/eg-repo-card`, con dentro tutta la storia di `eg
 - Gli URL vengono accettati solo con schema http/https; gestiti porta e suffisso `.git`.
 
 ### WordPress.org
-- Tolti l'header `Forgejo Plugin URI` e l'hook `eg_forgejo_updater_register` (linea guida 8). Sul sito il plugin si aggiunge dal form "Installa plugin da Forgejo" di EG Forgejo Updater.
+- Tolti l'header `Forgejo Plugin URI` e l'hook `eg_forgejo_updater_register` (linea guida 8). ⚠️ Scelta sbagliata, corretta nella 2.0.1: senza header l'updater non trova il plugin.
 - `readme.txt` con la sezione `== External services ==`, `Tested up to: 7.1`, changelog solo della 2.x; lo storico 1.x va in `changelog.txt`.
 - `.gitattributes` con elenco esplicito: il vecchio `*.md export-ignore` escludeva anche `README.md` dal pacchetto. Fuori anche `.po`/`.mo` (il `.pot` resta). Eliminato `.distignore`, duplicato.
 - Aggiunto `LICENSE.md`.

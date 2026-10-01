@@ -4,7 +4,7 @@ Tags: repository, github, forgejo, codeberg, gitea
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,9 @@ The avatar is off by default. When you enable it, visitors' browsers load the ow
 1. A repository card: name, platform, description, buttons and badges with tooltips.
 
 == Changelog ==
+
+= 2.0.1 =
+* Fixed: automatic updates.
 
 = 2.0.0 =
 * New name: EG Ranking Repo is now EG Repo Card, with the new `[eg-repo-card]` shortcode. `[eg-ranking-repo]` still works but is deprecated.

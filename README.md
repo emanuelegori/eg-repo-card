@@ -1,6 +1,6 @@
 # EG Repo Card
 
-[![Version](https://img.shields.io/badge/Version-2.0.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Version](https://img.shields.io/badge/Version-2.0.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -120,6 +120,9 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.0.1] - 2026-10-01
+- Fixed automatic updates
 
 ### [2.0.0] - 2026-10-01
 - Renamed from EG Ranking Repo; new `[eg-repo-card]` shortcode, `[eg-ranking-repo]` deprecated alias
