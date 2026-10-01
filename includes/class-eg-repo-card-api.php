@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class EG_Repo_Card_API {
 
     /** Bump when the shape of the cached array changes */
-    private const SCHEMA = 2;
+    private const SCHEMA = 3;
 
     /** How long the last good result is kept as a fallback for API failures */
     private const LAST_GOOD_TTL = 30 * DAY_IN_SECONDS;
@@ -99,6 +99,24 @@ class EG_Repo_Card_API {
             );
         }
 
+        // Plugin della directory: wordpress.org/plugins/<slug>/, anche dai
+        // sottodomini delle lingue (it.wordpress.org).
+        if ( ( 'wordpress.org' === $host || str_ends_with( $host, '.wordpress.org' ) ) && 'plugins' === $parts[0] ) {
+            $slug = sanitize_key( $parts[1] );
+            if ( '' === $slug ) {
+                return new WP_Error(
+                    'eg_repo_card_invalid_url',
+                    __( 'Invalid repository URL.', 'eg-repo-card' )
+                );
+            }
+            return [
+                'url'   => 'https://' . $host . '/plugins/' . $slug . '/',
+                'host'  => 'wordpress.org',
+                'owner' => 'plugins',
+                'repo'  => $slug,
+            ];
+        }
+
         $repo = preg_replace( '/\.git$/', '', $parts[1] );
 
         return [
@@ -120,6 +138,10 @@ class EG_Repo_Card_API {
         $owner     = $target['owner'];
         $repo      = $target['repo'];
         $is_github = ( 'github.com' === $host );
+
+        if ( 'wordpress.org' === $host && 'plugins' === $owner ) {
+            return self::fetch_wporg_plugin( $target );
+        }
 
         if ( $is_github ) {
             $platform = 'github';
@@ -162,6 +184,117 @@ class EG_Repo_Card_API {
             'version'        => $release['version'],
             'download_url'   => $release['download_url'],
             'download_type'  => $release['download_type'],
+        ];
+    }
+
+    /**
+     * Data of a plugin hosted in the WordPress.org directory.
+     *
+     * L'API risponde 404 sia per i plugin inesistenti sia per quelli chiusi:
+     * li distingue il campo "error" del corpo.
+     *
+     * @param  array $target  Output of parse_url().
+     * @return array|WP_Error
+     */
+    private static function fetch_wporg_plugin( array $target ): array|WP_Error {
+        $fields = [
+            'short_description' => 1,
+            'icons'             => 1,
+            'active_installs'   => 1,
+            'sections'          => 0,
+            'reviews'           => 0,
+            'versions'          => 0,
+            'screenshots'       => 0,
+            'banners'           => 0,
+            'contributors'      => 0,
+            'tags'              => 0,
+            'compatibility'     => 0,
+            'ratings'           => 0,
+            'donate_link'       => 0,
+        ];
+        $api_url = add_query_arg(
+            [
+                'action'  => 'plugin_information',
+                'request' => [
+                    'slug'   => $target['repo'],
+                    'fields' => $fields,
+                ],
+            ],
+            'https://api.wordpress.org/plugins/info/1.2/'
+        );
+
+        $response = wp_safe_remote_get( $api_url, [
+            'timeout' => 10,
+            'headers' => [
+                'Accept'     => 'application/json',
+                'User-Agent' => 'EG-Repo-Card/' . EG_REPO_CARD_VERSION . '; WordPress/' . get_bloginfo( 'version' ),
+            ],
+        ] );
+
+        if ( is_wp_error( $response ) ) {
+            return new WP_Error( 'eg_repo_card_api_error', $response->get_error_message() );
+        }
+
+        $code = (int) wp_remote_retrieve_response_code( $response );
+        $data = json_decode( wp_remote_retrieve_body( $response ), true );
+
+        if ( ! is_array( $data ) ) {
+            return new WP_Error(
+                'eg_repo_card_api_error',
+                sprintf(
+                    /* translators: %d: HTTP response status code */
+                    __( 'API error: HTTP status %d.', 'eg-repo-card' ),
+                    $code
+                )
+            );
+        }
+
+        $closed = ! empty( $data['closed'] ) || ( 'closed' === ( $data['error'] ?? '' ) );
+
+        if ( ! $closed && ( 200 !== $code || ! empty( $data['error'] ) ) ) {
+            return new WP_Error(
+                'eg_repo_card_not_found',
+                __( 'Plugin not found in the WordPress.org directory.', 'eg-repo-card' )
+            );
+        }
+
+        $text = static function ( $value ): string {
+            return trim( wp_strip_all_tags( html_entity_decode( (string) $value, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+        };
+
+        $icons = is_array( $data['icons'] ?? null ) ? $data['icons'] : [];
+        $icon  = (string) ( $icons['2x'] ?? $icons['1x'] ?? $icons['svg'] ?? $icons['default'] ?? '' );
+
+        // Molti plugin indicano come sito la propria pagina sulla directory:
+        // sarebbe un doppione del pulsante "Pagina del plugin".
+        $homepage  = trim( (string) ( $data['homepage'] ?? '' ) );
+        $home_host = strtolower( (string) wp_parse_url( $homepage, PHP_URL_HOST ) );
+        if ( 'wordpress.org' === $home_host || str_ends_with( $home_host, '.wordpress.org' ) ) {
+            $homepage = '';
+        }
+        $download = $closed ? '' : esc_url_raw( (string) ( $data['download_link'] ?? '' ) );
+
+        return [
+            'full_name'      => $text( $data['name'] ?? $target['repo'] ),
+            'description'    => $closed ? '' : $text( $data['short_description'] ?? '' ),
+            'stars'          => 0,
+            'rating'         => (int) ( $data['rating'] ?? 0 ),
+            'num_ratings'    => (int) ( $data['num_ratings'] ?? 0 ),
+            'installs'       => $closed || ! isset( $data['active_installs'] ) ? null : (int) $data['active_installs'],
+            'tested'         => sanitize_text_field( (string) ( $data['tested'] ?? '' ) ),
+            'updated_at'     => (string) ( $data['last_updated'] ?? '' ),
+            'homepage'       => wp_http_validate_url( $homepage ) ? $homepage : '',
+            'repo_url'       => esc_url_raw( $target['url'] ),
+            'platform'       => 'wordpress',
+            'platform_label' => self::platform_label( 'wordpress.org', 'wordpress' ),
+            'avatar'         => esc_url_raw( $icon ),
+            'language'       => '',
+            'license'        => '',
+            'archived'       => false,
+            'closed'         => $closed,
+            'version'        => $closed ? '' : sanitize_text_field( (string) ( $data['version'] ?? '' ) ),
+            'download_url'   => $download,
+            'download_type'  => '' !== $download ? 'file' : '',
         ];
     }
 
@@ -271,10 +404,11 @@ class EG_Repo_Card_API {
      */
     private static function platform_label( string $host, string $platform ): string {
         $labels = [
-            'github'   => 'GitHub',
-            'codeberg' => 'Codeberg',
-            'forgejo'  => 'Forgejo',
-            'gitea'    => 'Gitea',
+            'github'    => 'GitHub',
+            'codeberg'  => 'Codeberg',
+            'forgejo'   => 'Forgejo',
+            'gitea'     => 'Gitea',
+            'wordpress' => 'WordPress.org',
         ];
 
         $label = $labels[ $platform ] ?? 'Forgejo';

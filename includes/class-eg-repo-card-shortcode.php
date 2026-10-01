@@ -1,7 +1,8 @@
 <?php
 /**
  * EG_Repo_Card_Shortcode
- * Registers and renders the [eg-repo-card url="..."] shortcode.
+ * Registers and renders the [eg-repo-card url="..."] shortcode for code
+ * repositories and WordPress.org plugins.
  * [eg-ranking-repo] is kept as a deprecated alias.
  */
 
@@ -101,12 +102,19 @@ class EG_Repo_Card_Shortcode {
         $has_homepage = ! empty( $data['homepage'] );
         $show_avatar  = EG_Repo_Card_Settings::get( 'avatar' ) && ! empty( $data['avatar'] );
         $platform     = (string) ( $data['platform'] ?? 'forgejo' );
-        $stars_raw    = number_format_i18n( (int) $data['stars'] );
-        $stars_title  = sprintf(
-            /* translators: %s: formatted star count */
-            _n( '%s star', '%s stars', (int) $data['stars'], 'eg-repo-card' ),
-            $stars_raw
-        );
+        $is_wporg     = 'wordpress' === $platform;
+        $closed       = ! empty( $data['closed'] );
+
+        if ( $is_wporg ) {
+            [ $stars_label, $stars_title ] = self::rating( (int) ( $data['rating'] ?? 0 ), (int) ( $data['num_ratings'] ?? 0 ) );
+        } else {
+            $stars_label = EG_Repo_Card_API::format_stars( (int) $data['stars'] );
+            $stars_title = sprintf(
+                /* translators: %s: formatted star count */
+                _n( '%s star', '%s stars', (int) $data['stars'], 'eg-repo-card' ),
+                number_format_i18n( (int) $data['stars'] )
+            );
+        }
 
         $updated     = EG_Repo_Card_API::timestamp( (string) $data['updated_at'] );
         $date_label  = $updated ? wp_date( 'd-m-Y', $updated ) : __( 'N/A', 'eg-repo-card' );
@@ -121,6 +129,8 @@ class EG_Repo_Card_Shortcode {
         $version       = (string) ( $data['version'] ?? '' );
         $language      = (string) ( $data['language'] ?? '' );
         $license       = (string) ( $data['license'] ?? '' );
+        $tested        = (string) ( $data['tested'] ?? '' );
+        $installs      = $data['installs'] ?? null;
         $download_url  = (string) ( $data['download_url'] ?? '' );
         $download_type = (string) ( $data['download_type'] ?? '' );
 
@@ -140,6 +150,11 @@ class EG_Repo_Card_Shortcode {
                 <?php if ( ! empty( $data['archived'] ) ) : ?>
                 <span class="eg-repo-card__archived" title="<?php esc_attr_e( 'This repository is read-only', 'eg-repo-card' ); ?>">
                     <?php esc_html_e( 'Archived', 'eg-repo-card' ); ?>
+                </span>
+                <?php endif; ?>
+                <?php if ( $closed ) : ?>
+                <span class="eg-repo-card__archived" title="<?php esc_attr_e( 'This plugin is no longer available for download', 'eg-repo-card' ); ?>">
+                    <?php esc_html_e( 'Closed', 'eg-repo-card' ); ?>
                 </span>
                 <?php endif; ?>
             </div>
@@ -162,12 +177,22 @@ class EG_Repo_Card_Shortcode {
                 <?php else : ?>
                 <span class="eg-repo-card__btn eg-repo-card__btn--disabled"
                       aria-disabled="true"
-                      title="<?php esc_attr_e( 'No website set in the repository', 'eg-repo-card' ); ?>">
+                      title="<?php echo esc_attr( $is_wporg ? __( 'No website set for the plugin', 'eg-repo-card' ) : __( 'No website set in the repository', 'eg-repo-card' ) ); ?>">
                     <?php echo self::icon( 'globe' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hardcoded SVG ?>
                     <?php esc_html_e( 'No website', 'eg-repo-card' ); ?>
                 </span>
                 <?php endif; ?>
 
+                <?php if ( $is_wporg ) : ?>
+                <a href="<?php echo esc_url( $data['repo_url'] ); ?>"
+                   class="eg-repo-card__btn"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   title="<?php esc_attr_e( 'Go to the plugin page on WordPress.org', 'eg-repo-card' ); ?>">
+                    <?php echo self::icon( 'plugin' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hardcoded SVG ?>
+                    <?php esc_html_e( 'Plugin page', 'eg-repo-card' ); ?>
+                </a>
+                <?php else : ?>
                 <a href="<?php echo esc_url( $data['repo_url'] ); ?>"
                    class="eg-repo-card__btn"
                    target="_blank"
@@ -176,6 +201,7 @@ class EG_Repo_Card_Shortcode {
                     <?php echo self::icon( 'code' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hardcoded SVG ?>
                     <?php esc_html_e( 'Source Code', 'eg-repo-card' ); ?>
                 </a>
+                <?php endif; ?>
 
                 <?php if ( '' !== $download_url ) : ?>
                 <a href="<?php echo esc_url( $download_url ); ?>"
@@ -187,6 +213,7 @@ class EG_Repo_Card_Shortcode {
                 </a>
                 <?php endif; ?>
 
+                <?php if ( ! $closed ) : ?>
                 <span class="eg-repo-card__btn eg-repo-card__btn--badge"
                       title="<?php echo esc_attr( $date_title ); ?>">
                     <?php echo self::icon( 'calendar' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hardcoded SVG ?>
@@ -209,6 +236,22 @@ class EG_Repo_Card_Shortcode {
                 </span>
                 <?php endif; ?>
 
+                <?php if ( '' !== $tested ) : ?>
+                <span class="eg-repo-card__btn eg-repo-card__btn--badge"
+                      title="<?php echo esc_attr( sprintf( /* translators: %s: WordPress version, e.g. 7.1 */ __( 'Tested up to WordPress %s', 'eg-repo-card' ), $tested ) ); ?>">
+                    <?php echo self::platform_icon( 'wordpress' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hardcoded SVG ?>
+                    <?php echo esc_html( $tested ); ?>
+                </span>
+                <?php endif; ?>
+
+                <?php if ( null !== $installs ) : ?>
+                <span class="eg-repo-card__btn eg-repo-card__btn--badge"
+                      title="<?php esc_attr_e( 'Active installations', 'eg-repo-card' ); ?>">
+                    <?php echo self::icon( 'users' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hardcoded SVG ?>
+                    <?php echo esc_html( self::installs( (int) $installs ) ); ?>
+                </span>
+                <?php endif; ?>
+
                 <?php if ( '' !== $license ) : ?>
                 <span class="eg-repo-card__btn eg-repo-card__btn--badge"
                       title="<?php esc_attr_e( 'License', 'eg-repo-card' ); ?>">
@@ -220,14 +263,53 @@ class EG_Repo_Card_Shortcode {
                 <span class="eg-repo-card__btn eg-repo-card__btn--badge"
                       title="<?php echo esc_attr( $stars_title ); ?>">
                     <?php echo self::icon( 'star' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hardcoded SVG ?>
-                    <?php echo esc_html( EG_Repo_Card_API::format_stars( (int) $data['stars'] ) ); ?>
+                    <?php echo esc_html( $stars_label ); ?>
                 </span>
+                <?php endif; ?>
 
             </div>
 
         </div>
         <?php
         return (string) ob_get_clean();
+    }
+
+    /**
+     * Rating of a WordPress.org plugin: label and tooltip.
+     *
+     * @param  int $rating       0-100, as returned by the API.
+     * @param  int $num_ratings
+     * @return array{0: string, 1: string}
+     */
+    private static function rating( int $rating, int $num_ratings ): array {
+        if ( $num_ratings < 1 ) {
+            return [ '–', __( 'No ratings yet', 'eg-repo-card' ) ];
+        }
+
+        $score = number_format_i18n( round( $rating / 20, 1 ), 1 );
+
+        return [
+            $score,
+            sprintf(
+                /* translators: 1: average rating, e.g. 4.5; 2: number of ratings */
+                _n( '%1$s out of 5, %2$s rating', '%1$s out of 5, %2$s ratings', $num_ratings, 'eg-repo-card' ),
+                $score,
+                number_format_i18n( $num_ratings )
+            ),
+        ];
+    }
+
+    /**
+     * Active installations, rounded like on WordPress.org.
+     *
+     * @param  int $count
+     * @return string
+     */
+    private static function installs( int $count ): string {
+        if ( $count < 10 ) {
+            return __( 'Fewer than 10', 'eg-repo-card' );
+        }
+        return number_format_i18n( $count ) . '+';
     }
 
     /**
@@ -290,6 +372,7 @@ class EG_Repo_Card_Shortcode {
             'forgejo'  => 'M16.7773 0c1.6018 0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854 0-2.0315-.596-2.5288-1.4787H12.91c-2.3322 0-4.2272 1.8718-4.2649 4.195l-.0007 2.1175a7.0759 7.0759 0 0 1 4.148-1.4205l.1176-.001 1.3385.0002c.4973-.8827 1.4434-1.4788 2.5288-1.4788 1.6018 0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854 0-2.0315-.596-2.5288-1.4787H12.91c-2.3322 0-4.2272 1.8718-4.2649 4.195l-.0007 2.319c.8827.4973 1.4788 1.4434 1.4788 2.5287 0 1.602-1.2986 2.9005-2.9005 2.9005-1.6018 0-2.9004-1.2986-2.9004-2.9005 0-1.0853.596-2.0314 1.4788-2.5287l-.0002-9.9831c0-3.887 3.1195-7.0453 6.9915-7.108l.1176-.001h1.3385C14.7458.5962 15.692 0 16.7773 0ZM7.2227 19.9052c-.6596 0-1.1943.5347-1.1943 1.1943s.5347 1.1943 1.1943 1.1943 1.1944-.5347 1.1944-1.1943-.5348-1.1943-1.1944-1.1943Zm9.5546-10.4644c-.6596 0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943c.6596 0 1.1943-.5347 1.1943-1.1943s-.5347-1.1943-1.1943-1.1943Zm0-7.7346c-.6596 0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943c.6596 0 1.1943-.5347 1.1943-1.1943s-.5347-1.1943-1.1943-1.1943Z',
             'codeberg' => 'M11.999.747A11.974 11.974 0 0 0 0 12.75c0 2.254.635 4.465 1.833 6.376L11.837 6.19c.072-.092.251-.092.323 0l4.178 5.402h-2.992l.065.239h3.113l.882 1.138h-3.674l.103.374h3.86l.777 1.003h-4.358l.135.483h4.593l.695.894h-5.038l.165.589h5.326l.609.785h-5.717l.182.65h6.038l.562.727h-6.397l.183.65h6.717A12.003 12.003 0 0 0 24 12.75 11.977 11.977 0 0 0 11.999.747zm3.654 19.104.182.65h5.326c.173-.204.353-.433.513-.65zm.385 1.377.18.65h3.563c.233-.198.485-.428.712-.65zm.383 1.377.182.648h1.203c.356-.204.685-.412 1.042-.648zz',
             'gitea'    => 'M4.209 4.603c-.247 0-.525.02-.84.088-.333.07-1.28.283-2.054 1.027C-.403 7.25.035 9.685.089 10.052c.065.446.263 1.687 1.21 2.768 1.749 2.141 5.513 2.092 5.513 2.092s.462 1.103 1.168 2.119c.955 1.263 1.936 2.248 2.89 2.367 2.406 0 7.212-.004 7.212-.004s.458.004 1.08-.394c.535-.324 1.013-.893 1.013-.893s.492-.527 1.18-1.73c.21-.37.385-.729.538-1.068 0 0 2.107-4.471 2.107-8.823-.042-1.318-.367-1.55-.443-1.627-.156-.156-.366-.153-.366-.153s-4.475.252-6.792.306c-.508.011-1.012.023-1.512.027v4.474l-.634-.301c0-1.39-.004-4.17-.004-4.17-1.107.016-3.405-.084-3.405-.084s-5.399-.27-5.987-.324c-.187-.011-.401-.032-.648-.032zm.354 1.832h.111s.271 2.269.6 3.597C5.549 11.147 6.22 13 6.22 13s-.996-.119-1.641-.348c-.99-.324-1.409-.714-1.409-.714s-.73-.511-1.096-1.52C1.444 8.73 2.021 7.7 2.021 7.7s.32-.859 1.47-1.145c.395-.106.863-.12 1.072-.12zm8.33 2.554c.26.003.509.127.509.127l.868.422-.529 1.075a.686.686 0 0 0-.614.359.685.685 0 0 0 .072.756l-.939 1.924a.69.69 0 0 0-.66.527.687.687 0 0 0 .347.763.686.686 0 0 0 .867-.206.688.688 0 0 0-.069-.882l.916-1.874a.667.667 0 0 0 .237-.02.657.657 0 0 0 .271-.137 8.826 8.826 0 0 1 1.016.512.761.761 0 0 1 .286.282c.073.21-.073.569-.073.569-.087.29-.702 1.55-.702 1.55a.692.692 0 0 0-.676.477.681.681 0 1 0 1.157-.252c.073-.141.141-.282.214-.431.19-.397.515-1.16.515-1.16.035-.066.218-.394.103-.814-.095-.435-.48-.638-.48-.638-.467-.301-1.116-.58-1.116-.58s0-.156-.042-.27a.688.688 0 0 0-.148-.241l.516-1.062 2.89 1.401s.48.218.583.619c.073.282-.019.534-.069.657-.24.587-2.1 4.317-2.1 4.317s-.232.554-.748.588a1.065 1.065 0 0 1-.393-.045l-.202-.08-4.31-2.1s-.417-.218-.49-.596c-.083-.31.104-.691.104-.691l2.073-4.272s.183-.37.466-.497a.855.855 0 0 1 .35-.077z',
+            'wordpress' => 'M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0',
         ];
 
         if ( ! isset( $paths[ $platform ] ) ) {
@@ -313,6 +396,8 @@ class EG_Repo_Card_Shortcode {
             'tag'      => '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>',
             'globe'    => '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
             'download' => '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+            'plugin'   => '<path d="M9 2v6"/><path d="M15 2v6"/><path d="M6 8h12v4a6 6 0 0 1-12 0z"/><path d="M12 18v4"/>',
+            'users'    => '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
             'scale'    => '<path d="M12 3v18"/><path d="M5 21h14"/><path d="M3 7h18"/><path d="M6 7l-3 7a3 3 0 0 0 6 0z"/><path d="M18 7l-3 7a3 3 0 0 0 6 0z"/>',
         ];
 

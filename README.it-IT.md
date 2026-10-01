@@ -1,11 +1,11 @@
 # EG Repo Card
 
-[![Versione](https://img.shields.io/badge/Versione-2.0.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Versione](https://img.shields.io/badge/Versione-2.1.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![Licenza](https://img.shields.io/badge/Licenza-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
 
-Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeberg, Forgejo o Gitea: ultima versione, pulsante per scaricarla, linguaggio, stelle.
+Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeberg, Forgejo o Gitea, oppure di un plugin della directory di WordPress.org: ultima versione, pulsante per scaricarla, stelle o valutazione.
 
 *English: [README.md](README.md)*
 
@@ -22,6 +22,7 @@ Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeber
 - Pulsante Scarica: lo `.zip` allegato all'ultima release, oppure la pagina della release
 - Versione dall'ultima release; in mancanza, dall'ultimo tag git
 - Etichetta "Archiviato" per i repository in sola lettura
+- Card per i plugin di WordPress.org: icona, pagina del plugin, Scarica, versione di WordPress testata, installazioni attive, valutazione, etichetta "Chiuso"
 - Aspetto: preset neutro, trasparente, colore personalizzato o segui il browser del visitatore (chiaro/scuro), per la card e per i pulsanti; il testo si adatta allo sfondo
 - Bordo, ombra e avatar del proprietario opzionali
 - Cache con transient (predefinito 6 ore); se un'API non risponde, la card mostra gli ultimi dati ricevuti
@@ -37,6 +38,7 @@ Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeber
 [eg-repo-card url="https://github.com/owner/repo"]
 [eg-repo-card url="https://codeberg.org/owner/repo"]
 [eg-repo-card url="https://git.example.com/owner/repo"]
+[eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]
 ```
 
 ---
@@ -59,6 +61,22 @@ Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeber
 
 Senza sito web il pulsante resta visibile, in grigio. Linguaggio, licenza, versione e Scarica compaiono solo se la piattaforma li fornisce.
 
+### Plugin di WordPress.org
+
+| Elemento            | Fonte (API `plugins/info/1.2`)                          |
+|---------------------|---------------------------------------------------------|
+| Nome, icona         | `name`, `icons`                                         |
+| Descrizione         | `short_description`                                     |
+| Sito web            | `homepage` (nascosto se è la pagina su WordPress.org)   |
+| Pagina del plugin   | URL scritto nello shortcode                             |
+| Scarica             | `download_link`                                         |
+| Ultimo aggiornamento | `last_updated`                                         |
+| Versione            | `version`                                               |
+| Testato fino a      | `tested`                                                |
+| Installazioni       | `active_installs`                                       |
+| Valutazione         | `rating` (su 5) e `num_ratings` nel tooltip             |
+| Chiuso              | `closed`                                                |
+
 ---
 
 ## Impostazioni
@@ -69,7 +87,7 @@ Senza sito web il pulsante resta visibile, in grigio. Linguaggio, licenza, versi
 - **Token Forgejo o Gitea**: solo per repository privati o istanze che richiedono l'accesso.
 - **Durata cache**: da 1 a 168 ore, predefinito 6. Nella pagina c'è anche il pulsante per svuotarla.
 - **Sfondo della card / Sfondo dei pulsanti**: preset neutro, trasparente, segui il browser del visitatore, colore personalizzato.
-- **Bordo, Ombra, Avatar**: attivabili singolarmente. L'avatar viene caricato dal server del repository.
+- **Bordo, Ombra, Avatar**: attivabili singolarmente. Avatar mostra l'avatar del proprietario o l'icona del plugin, caricati dalla piattaforma che li ospita.
 
 ### Filtri
 
@@ -95,7 +113,7 @@ Le impostazioni del colore del testo non ci sono più: ora il testo si adatta al
 
 ## Servizi esterni
 
-Il plugin contatta solo gli host scritti nei tuoi shortcode (API di GitHub, Codeberg, istanze Forgejo o Gitea) per leggere i dati pubblici del repository. I dettagli sono nella sezione *External services* di `readme.txt`.
+Il plugin contatta solo gli host scritti nei tuoi shortcode (API di GitHub, Codeberg, istanze Forgejo o Gitea, API di WordPress.org) per leggere i dati pubblici. I dettagli sono nella sezione *External services* di `readme.txt`.
 
 ---
 
@@ -120,6 +138,10 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.1.0] - 2026-10-01
+- Card per i plugin di WordPress.org: pagina del plugin, Scarica, versione di WordPress testata, installazioni attive, valutazione, etichetta "Chiuso"
+- L'opzione Avatar mostra anche l'icona del plugin
 
 ### [2.0.1] - 2026-10-01
 - Corretti gli aggiornamenti automatici

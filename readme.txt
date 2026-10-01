@@ -4,11 +4,11 @@ Tags: repository, github, forgejo, codeberg, gitea
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.0.1
+Stable tag: 2.1.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A card with the data of a GitHub, Codeberg, Forgejo or Gitea repository: latest release, download button, language, stars.
+A card for a GitHub, Codeberg, Forgejo or Gitea repository, or a WordPress.org plugin: latest version, download button, stars or rating.
 
 == Description ==
 
@@ -20,6 +20,8 @@ EG Repo Card shows a compact card for a code repository hosted on GitHub, Codebe
 * latest version, from the latest release or, when there are none, the latest git tag
 * main language, license and star count
 * an "Archived" label for read-only repositories
+
+The same shortcode works with plugins from the WordPress.org directory. Their card shows the plugin name, icon and description, the plugin page, the download of the latest version, the WordPress version it is tested up to, the active installations and the average rating. Closed plugins get a "Closed" label.
 
 The card adapts to your theme: card and buttons can use a neutral preset, a transparent background, a custom color, or follow the light or dark mode of the visitor browser. Text and icons always stay readable on the chosen background.
 
@@ -38,12 +40,13 @@ Insert the shortcode in any post, page, or widget:
   [eg-repo-card url="https://github.com/owner/repo"]
   [eg-repo-card url="https://codeberg.org/owner/repo"]
   [eg-repo-card url="https://git.example.com/owner/repo"]
+  [eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]
 
 == Frequently Asked Questions ==
 
 = Which platforms are supported? =
 
-GitHub, Codeberg and any self-hosted Forgejo or Gitea instance. The plugin tells Forgejo and Gitea apart and shows the right logo.
+GitHub, Codeberg, any self-hosted Forgejo or Gitea instance, and the WordPress.org plugin directory. The plugin tells Forgejo and Gitea apart and shows the right logo.
 
 = Is an API token required? =
 
@@ -51,7 +54,7 @@ No. Without a token, GitHub allows 60 requests per hour from your server. A pers
 
 = Where does the Download button point? =
 
-To the `.zip` file attached to the latest release, when the release has exactly one. Otherwise it opens the release page. Without releases the button is not shown.
+For a repository: to the `.zip` file attached to the latest release, when the release has exactly one. Otherwise it opens the release page. Without releases the button is not shown. For a WordPress.org plugin: to the official `.zip` of the latest version.
 
 = How does the cache work? =
 
@@ -63,7 +66,7 @@ EG Repo Card is the new name of EG Ranking Repo. Deactivate EG Ranking Repo, the
 
 == External services ==
 
-To build a card, the plugin asks the platform that hosts the repository for its public data. It contacts only the hosts written in the shortcodes on your site.
+To build a card, the plugin asks the platform that hosts the repository or the plugin for its public data. It contacts only the hosts written in the shortcodes on your site.
 
 = GitHub =
 
@@ -91,15 +94,27 @@ To build a card, the plugin asks the platform that hosts the repository for its 
 * **Data received**: public repository data, as above.
 * Terms and privacy policy depend on the instance and are published by whoever runs it.
 
-= Owner avatar =
+= WordPress.org =
 
-The avatar is off by default. When you enable it, visitors' browsers load the owner's image directly from the platform hosting the repository (GitHub, Codeberg or the instance), which receives the visitor's IP address like for any image request.
+* **What**: the WordPress.org plugin directory API at `https://api.wordpress.org/plugins/info/1.2/`.
+* **When**: when a page with a WordPress.org plugin card is displayed and the cached data has expired.
+* **Data sent**: the slug of the plugin. No token is used.
+* **Data received**: public plugin data (name, description, icon, version, last update, tested WordPress version, active installations, rating, download link).
+* Privacy policy: https://wordpress.org/about/privacy/
+
+= Owner avatar and plugin icon =
+
+The image is off by default. When you enable it, visitors' browsers load the owner's avatar or the plugin icon directly from the platform that hosts it (GitHub, Codeberg, the Forgejo or Gitea instance, or WordPress.org), which receives the visitor's IP address like for any image request.
 
 == Screenshots ==
 
 1. A repository card: name, platform, description, buttons and badges with tooltips.
 
 == Changelog ==
+
+= 2.1.0 =
+* New: cards for plugins in the WordPress.org directory, with plugin page, download, tested WordPress version, active installations and rating.
+* New: the Avatar option also shows the plugin icon.
 
 = 2.0.1 =
 * Fixed: automatic updates.
@@ -121,6 +136,9 @@ The avatar is off by default. When you enable it, visitors' browsers load the ow
 The changelog of EG Ranking Repo 1.x is in `changelog.txt`.
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+The shortcode now also accepts WordPress.org plugin addresses.
 
 = 2.0.0 =
 EG Ranking Repo is now EG Repo Card. Deactivate EG Ranking Repo before activating this plugin; your settings are imported. Replace `[eg-ranking-repo]` with `[eg-repo-card]` in your content.

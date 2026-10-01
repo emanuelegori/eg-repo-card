@@ -78,6 +78,11 @@
     color: #fff;
 }
 
+.eg-repo-card__platform--wordpress {
+    background-color: #21759b;
+    color: #fff;
+}
+
 .eg-repo-card__archived {
     background-color: #fef3c7;
     color: #78350f;

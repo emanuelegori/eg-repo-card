@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.1.0] - 2026-10-01
+
+### Added
+- **Card per i plugin della directory di WordPress.org**: `[eg-repo-card url="https://wordpress.org/plugins/<slug>/"]`, anche dai sottodomini delle lingue (`it.wordpress.org`), il cui indirizzo resta quello del pulsante. Una sola chiamata a `api.wordpress.org/plugins/info/1.2/` con i soli campi necessari (niente sezioni, recensioni, versioni), nessun token. Stessa cache e stesso fallback all'ultimo dato valido dei repository.
+- Mappatura rispetto ai repository: logo WordPress e badge blu `#21759b`; icona del plugin al posto dell'avatar (stessa opzione); "Pagina del plugin" al posto di "Codice sorgente"; Scarica = `download_link`; "Testato fino a" al posto del linguaggio; installazioni attive al posto della licenza; valutazione media su 5 al posto delle stelle, con il numero di recensioni nel tooltip.
+- Senza recensioni la valutazione mostra "–" con tooltip "Nessuna valutazione": uno "0" avrebbe fatto pensare a un voto pessimo. Sotto le 10 installazioni "Meno di 10", come su WordPress.org.
+- Plugin chiusi: l'API risponde 404 sia per i chiusi sia per gli inesistenti, li distingue `"error":"closed"` nel corpo. Card ridotta con etichetta "Chiuso", pagina del plugin, nessun Scarica e nessun badge. Inesistente = errore (solo per gli editor).
+- Se `homepage` punta alla pagina del plugin su WordPress.org (succede spesso, es. WP Fastest Cache) viene trattato come "nessun sito", per non avere due pulsanti verso lo stesso indirizzo.
+- Nomi e descrizioni arrivano con entità HTML (`&#8211;`): decodificate prima dell'escape.
+- `readme.txt`: nuova voce WordPress.org in External services (link alla privacy policy).
+
+### Changed
+- Cache: schema 3, i dati in cache delle versioni precedenti vengono riletti.
+- Testi dell'opzione Avatar e dell'aiuto sullo shortcode estesi ai plugin di WordPress.org.
+
 ## [2.0.1] - 2026-10-01
 
 ### Fixed

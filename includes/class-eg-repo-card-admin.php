@@ -149,8 +149,8 @@ class EG_Repo_Card_Admin {
         self::add_checkbox_field(
             'avatar',
             __( 'Avatar', 'eg-repo-card' ),
-            __( 'Show the avatar of the repository owner', 'eg-repo-card' ),
-            __( 'The image is loaded from the repository host.', 'eg-repo-card' )
+            __( 'Show the owner avatar or the plugin icon', 'eg-repo-card' ),
+            __( 'The image is loaded from the platform that hosts it.', 'eg-repo-card' )
         );
     }
 
@@ -337,8 +337,9 @@ class EG_Repo_Card_Admin {
             <h2><?php esc_html_e( 'Shortcode usage', 'eg-repo-card' ); ?></h2>
             <p><code>[eg-repo-card url="https://github.com/owner/repo"]</code></p>
             <p><code>[eg-repo-card url="https://codeberg.org/owner/repo"]</code></p>
+            <p><code>[eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]</code></p>
             <p class="description">
-                <?php esc_html_e( 'Works with GitHub, Codeberg and any Forgejo or Gitea instance.', 'eg-repo-card' ); ?>
+                <?php esc_html_e( 'Works with GitHub, Codeberg, any Forgejo or Gitea instance and the WordPress.org plugin directory.', 'eg-repo-card' ); ?>
             </p>
 
             <hr>

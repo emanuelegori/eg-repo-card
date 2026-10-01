@@ -1,11 +1,11 @@
 # EG Repo Card
 
-[![Version](https://img.shields.io/badge/Version-2.0.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Version](https://img.shields.io/badge/Version-2.1.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
 
-WordPress plugin that shows a card with the data of a GitHub, Codeberg, Forgejo or Gitea repository: latest release, download button, language, stars.
+WordPress plugin that shows a card with the data of a GitHub, Codeberg, Forgejo or Gitea repository, or of a plugin in the WordPress.org directory: latest version, download button, stars or rating.
 
 *Italiano: [README.it-IT.md](README.it-IT.md)*
 
@@ -22,6 +22,7 @@ WordPress plugin that shows a card with the data of a GitHub, Codeberg, Forgejo 
 - Download button: the `.zip` attached to the latest release, or the release page
 - Version from the latest release; falls back to the latest git tag
 - "Archived" label for read-only repositories
+- Cards for WordPress.org plugins: icon, plugin page, download, tested WordPress version, active installations, rating, "Closed" label
 - Appearance: neutral preset, transparent, custom color or follow the visitor browser (light/dark), for the card and for the buttons; text adapts to the background
 - Optional border, shadow and owner avatar
 - Transient cache (default 6 hours); when an API does not answer, the last data received stays on the card
@@ -37,6 +38,7 @@ WordPress plugin that shows a card with the data of a GitHub, Codeberg, Forgejo 
 [eg-repo-card url="https://github.com/owner/repo"]
 [eg-repo-card url="https://codeberg.org/owner/repo"]
 [eg-repo-card url="https://git.example.com/owner/repo"]
+[eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]
 ```
 
 ---
@@ -59,6 +61,22 @@ WordPress plugin that shows a card with the data of a GitHub, Codeberg, Forgejo 
 
 Without a website the button stays visible, greyed out. Language, license, version and Download appear only when the platform provides them.
 
+### WordPress.org plugins
+
+| Element         | Source (`plugins/info/1.2` API)                        |
+|-----------------|--------------------------------------------------------|
+| Name, icon      | `name`, `icons`                                        |
+| Description     | `short_description`                                    |
+| Website         | `homepage` (hidden when it is the WordPress.org page)  |
+| Plugin page     | URL written in the shortcode                           |
+| Download        | `download_link`                                        |
+| Last update     | `last_updated`                                         |
+| Version         | `version`                                              |
+| Tested up to    | `tested`                                               |
+| Installations   | `active_installs`                                      |
+| Rating          | `rating` (out of 5) and `num_ratings` in the tooltip  |
+| Closed          | `closed`                                               |
+
 ---
 
 ## Settings
@@ -69,7 +87,7 @@ Without a website the button stays visible, greyed out. Language, license, versi
 - **Forgejo or Gitea token**: only for private repositories or instances that require login.
 - **Cache duration**: 1 to 168 hours, default 6. The page also has a button to flush the cache.
 - **Card background / Button background**: neutral preset, transparent, follow the visitor browser, custom color.
-- **Border, Shadow, Avatar**: on/off. The avatar is loaded from the repository host.
+- **Border, Shadow, Avatar**: on/off. Avatar shows the owner avatar or the plugin icon, loaded from the platform that hosts it.
 
 ### Filters
 
@@ -95,7 +113,7 @@ The text color settings are gone: the text now adapts to the background.
 
 ## External services
 
-The plugin contacts only the hosts written in your shortcodes (GitHub API, Codeberg, Forgejo or Gitea instances) to read public repository data. Details are in the *External services* section of `readme.txt`.
+The plugin contacts only the hosts written in your shortcodes (GitHub API, Codeberg, Forgejo or Gitea instances, WordPress.org API) to read public data. Details are in the *External services* section of `readme.txt`.
 
 ---
 
@@ -120,6 +138,10 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.1.0] - 2026-10-01
+- Cards for WordPress.org plugins: plugin page, download, tested WordPress version, active installations, rating, "Closed" label
+- The Avatar option also shows the plugin icon
 
 ### [2.0.1] - 2026-10-01
 - Fixed automatic updates
