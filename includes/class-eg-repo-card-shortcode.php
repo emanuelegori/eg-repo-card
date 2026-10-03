@@ -3,7 +3,6 @@
  * EG_Repo_Card_Shortcode
  * Registers and renders the [eg-repo-card url="..."] shortcode for code
  * repositories and WordPress.org plugins.
- * [eg-ranking-repo] is kept as a deprecated alias.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,9 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class EG_Repo_Card_Shortcode {
 
     public const TAG = 'eg-repo-card';
-
-    /** Shortcode of EG Ranking Repo 1.x, still rendered for existing content */
-    public const LEGACY_TAG = 'eg-ranking-repo';
 
     /** Language colours (GitHub Linguist), grey for anything else */
     private const LANGUAGE_COLORS = [
@@ -55,11 +51,6 @@ class EG_Repo_Card_Shortcode {
     public static function register(): void {
         add_action( 'init', static function () {
             add_shortcode( self::TAG, [ __CLASS__, 'render' ] );
-
-            // Il vecchio plugin, se ancora attivo, registra lo stesso tag: non sovrascriverlo.
-            if ( ! shortcode_exists( self::LEGACY_TAG ) ) {
-                add_shortcode( self::LEGACY_TAG, [ __CLASS__, 'render' ] );
-            }
         } );
         add_action( 'wp_enqueue_scripts', [ __CLASS__, 'register_style' ] );
     }

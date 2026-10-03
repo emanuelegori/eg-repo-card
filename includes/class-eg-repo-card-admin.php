@@ -424,9 +424,9 @@ class EG_Repo_Card_Admin {
             <hr>
 
             <h2><?php esc_html_e( 'Shortcode usage', 'eg-repo-card' ); ?></h2>
-            <p><code>[eg-repo-card url="https://github.com/owner/repo"]</code></p>
-            <p><code>[eg-repo-card url="https://codeberg.org/owner/repo"]</code></p>
-            <p><code>[eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]</code></p>
+            <p><code>[eg-repo-card url="https://github.com/WordPress/wordpress-develop"]</code></p>
+            <p><code>[eg-repo-card url="https://codeberg.org/forgejo/forgejo"]</code></p>
+            <p><code>[eg-repo-card url="https://wordpress.org/plugins/akismet/"]</code></p>
             <p class="description">
                 <?php esc_html_e( 'Works with GitHub, Codeberg, any Forgejo or Gitea instance and the WordPress.org plugin directory.', 'eg-repo-card' ); ?>
             </p>

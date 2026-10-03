@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.2.0] - 2026-10-03
+
+Risposta alla prima revisione di WordPress.org (AUTOPREREVIEW del 3 ottobre): nome "EG", prefissi, URL 404, servizi esterni non documentati. Tre dei quattro rilievi erano gli stessi ricevuti da eg-social-timeline.
+
+### Removed
+- Shortcode `[eg-ranking-repo]`, filtro `egr_platform_label` e importazione delle option `egr_*` (classe `EG_Repo_Card_Migration`): nomi senza il prefisso del plugin, contestati dalla revisione. Servivano solo al passaggio da EG Ranking Repo, già completato in produzione con i 14 shortcode sostituiti; il vecchio plugin non è mai stato sulla directory. Scelta dell'utente.
+
+### Changed
+- Esempi d'uso con indirizzi reali (readme, README, pagina impostazioni): `github.com/owner/repo` dava 404 alla revisione, e con lui `codeberg.org/owner/repo`, `git.example.com` e la base `codeberg.org/api/v1`. Gli indirizzi delle API ora sono scritti come host e percorso, senza schema.
+- Sezione External services: per GitHub, Codeberg e le istanze Forgejo/Gitea elenca le richieste fatte, e spiega che Forgejo e Gitea non sono un servizio centrale: si contatta solo l'istanza scritta nello shortcode. La revisione aveva segnalato le chiamate a `https://{$host}/api/v1/...` e `/api/forgejo/v1/version` come non documentate.
+- Rimossa la FAQ sul passaggio da EG Ranking Repo; Upgrade Notice 2.0.0 sostituita da quella della 2.2.0.
+
+### Nome
+- Nessun cambio: "EG" sono le iniziali dell'autore, come per EG Social Timeline (approvato). Spiegato nella risposta al team.
+
 ## [2.1.3] - 2026-10-01
 
 ### Fixed

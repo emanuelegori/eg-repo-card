@@ -5,7 +5,7 @@ Tags: repository, github, forgejo, codeberg, gitea
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.1.3
+Stable tag: 2.2.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,10 +38,12 @@ Repository data is cached. If the platform does not answer, the card keeps showi
 
 Insert the shortcode in any post, page, or widget:
 
-  [eg-repo-card url="https://github.com/owner/repo"]
-  [eg-repo-card url="https://codeberg.org/owner/repo"]
-  [eg-repo-card url="https://git.example.com/owner/repo"]
-  [eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]
+  [eg-repo-card url="https://github.com/WordPress/wordpress-develop"]
+  [eg-repo-card url="https://codeberg.org/forgejo/forgejo"]
+  [eg-repo-card url="https://git.emanuelegori.uno/emanuelegori/eg-repo-card"]
+  [eg-repo-card url="https://wordpress.org/plugins/akismet/"]
+
+The address is the one you see in the browser on the repository or plugin page. For Forgejo and Gitea, any instance works, self-hosted ones included.
 
 == Frequently Asked Questions ==
 
@@ -61,18 +63,15 @@ For a repository: to the `.zip` file attached to the latest release, when the re
 
 Data for each repository is stored as a WordPress transient for the duration set in the settings (default 6 hours, maximum 168). The settings page has a button to flush the cache.
 
-= I used EG Ranking Repo. What do I need to do? =
-
-EG Repo Card is the new name of EG Ranking Repo. Deactivate EG Ranking Repo, then activate EG Repo Card: it imports the cache duration, the colors and the tokens. Existing `[eg-ranking-repo]` shortcodes keep working, but they are deprecated: replace them with `[eg-repo-card]`. Once your cards look right, delete EG Ranking Repo.
-
 == External services ==
 
-To build a card, the plugin asks the platform that hosts the repository or the plugin for its public data. It contacts only the hosts written in the shortcodes on your site.
+To build a card, the plugin asks the platform that hosts the repository or the plugin for its public data. It contacts only the hosts written in the shortcodes on your site, from your server, and only when a page with a card is displayed and the cached data has expired. No data about your visitors is sent.
 
 = GitHub =
 
-* **What**: the GitHub REST API at `https://api.github.com`.
+* **What**: the GitHub REST API (host `api.github.com`), used to read the data of a public GitHub repository.
 * **When**: when a page with a GitHub card is displayed and the cached data has expired.
+* **Requests**: `/repos/{owner}/{repo}`, `/repos/{owner}/{repo}/releases/latest` and, when there are no releases, `/repos/{owner}/{repo}/tags`.
 * **Data sent**: the owner and name of the repository, and the personal access token if you saved one.
 * **Data received**: public repository data (description, website, stars, language, license, latest release and tag).
 * Terms of service: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
@@ -80,8 +79,9 @@ To build a card, the plugin asks the platform that hosts the repository or the p
 
 = Codeberg =
 
-* **What**: the Codeberg API at `https://codeberg.org/api/v1`.
+* **What**: the Codeberg API (host `codeberg.org`, path `/api/v1`), used to read the data of a public Codeberg repository.
 * **When**: when a page with a Codeberg card is displayed and the cached data has expired.
+* **Requests**: the same as for Forgejo and Gitea instances, below.
 * **Data sent**: the owner and name of the repository, and the Forgejo token if you saved one.
 * **Data received**: public repository data (description, website, stars, language, license, latest release and tag).
 * Terms of use: https://codeberg.org/codeberg/org/src/branch/main/TermsOfUse.md
@@ -89,15 +89,18 @@ To build a card, the plugin asks the platform that hosts the repository or the p
 
 = Forgejo and Gitea instances =
 
-* **What**: the instance written in the shortcode, for example `https://git.example.com`.
-* **When**: when a page with a card from that instance is displayed and the cached data has expired. The plugin also requests `/api/forgejo/v1/version` once a week to tell Forgejo from Gitea.
-* **Data sent**: the owner and name of the repository, and the Forgejo token if you saved one.
-* **Data received**: public repository data, as above.
-* Terms and privacy policy depend on the instance and are published by whoever runs it.
+Forgejo and Gitea are free software that anyone can host; there is no central service. The plugin contacts only the instance whose address the site owner writes in a shortcode (for example `git.emanuelegori.uno` in `[eg-repo-card url="https://git.emanuelegori.uno/emanuelegori/eg-repo-card"]`), through the instance's own API.
+
+* **What**: the API of that instance, used to read the data of a public repository hosted there.
+* **When**: when a page with a card from that instance is displayed and the cached data has expired.
+* **Requests**: `/api/v1/repos/{owner}/{repo}`, `/api/v1/repos/{owner}/{repo}/releases` and, when there are no releases, `/api/v1/repos/{owner}/{repo}/tags`. Once a week per instance, `/api/forgejo/v1/version`, only to tell Forgejo from Gitea and show the right logo.
+* **Data sent**: the owner and name of the repository, and the Forgejo or Gitea token if you saved one.
+* **Data received**: public repository data (description, website, stars, language, license, latest release and tag).
+* Terms of service and privacy policy are those of the chosen instance, published by whoever runs it.
 
 = WordPress.org =
 
-* **What**: the WordPress.org plugin directory API at `https://api.wordpress.org/plugins/info/1.2/`.
+* **What**: the WordPress.org plugin directory API (host `api.wordpress.org`, path `/plugins/info/1.2/`), used to read the data of a plugin listed in the directory.
 * **When**: when a page with a WordPress.org plugin card is displayed and the cached data has expired.
 * **Data sent**: the slug of the plugin. No token is used.
 * **Data received**: public plugin data (name, description, icon, version, last update, tested WordPress version, active installations, rating, download link).
@@ -115,6 +118,10 @@ The image is off by default. When you enable it, visitors' browsers load the own
 4. The settings page: API tokens, cache and appearance.
 
 == Changelog ==
+
+= 2.2.0 =
+* Removed: the `[eg-ranking-repo]` shortcode, the `egr_platform_label` filter and the import of EG Ranking Repo settings.
+* Changed: real, working addresses in the usage examples.
 
 = 2.1.3 =
 * Fixed: the card follows the width of the post content.
@@ -153,8 +160,8 @@ The changelog of EG Ranking Repo 1.x is in `changelog.txt`.
 
 == Upgrade Notice ==
 
+= 2.2.0 =
+`[eg-ranking-repo]` no longer works: replace it with `[eg-repo-card]` before updating.
+
 = 2.1.0 =
 The shortcode now also accepts WordPress.org plugin addresses.
-
-= 2.0.0 =
-EG Ranking Repo is now EG Repo Card. Deactivate EG Ranking Repo before activating this plugin; your settings are imported. Replace `[eg-ranking-repo]` with `[eg-repo-card]` in your content.

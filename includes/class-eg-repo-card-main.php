@@ -1,7 +1,7 @@
 <?php
 /**
  * EG_Repo_Card_Main
- * Bootstraps the plugin: settings import, shortcode, admin page.
+ * Bootstraps the plugin: shortcode and admin page.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,9 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class EG_Repo_Card_Main {
 
     public static function init(): void {
-        // Import the settings of EG Ranking Repo 1.x, once
-        add_action( 'init', [ 'EG_Repo_Card_Migration', 'maybe_run' ], 5 );
-
         // Register shortcode and front-end assets
         EG_Repo_Card_Shortcode::register();
 

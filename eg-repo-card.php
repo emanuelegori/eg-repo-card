@@ -4,7 +4,7 @@
  * Plugin URI:        https://git.emanuelegori.uno/emanuelegori/eg-repo-card
  * Gitea Plugin URI:  https://git.emanuelegori.uno/emanuelegori/eg-repo-card
  * Description:       Display a card with the data of a GitHub, Codeberg, Forgejo or Gitea repository, or of a plugin in the WordPress.org directory.
- * Version:           2.1.3
+ * Version:           2.2.0
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Emanuele Gori
@@ -20,14 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'EG_REPO_CARD_VERSION', '2.1.3' );
+define( 'EG_REPO_CARD_VERSION', '2.2.0' );
 define( 'EG_REPO_CARD_FILE',    __FILE__ );
 define( 'EG_REPO_CARD_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'EG_REPO_CARD_URL',     plugin_dir_url( __FILE__ ) );
 
 // Load classes
 require_once EG_REPO_CARD_DIR . 'includes/class-eg-repo-card-settings.php';
-require_once EG_REPO_CARD_DIR . 'includes/class-eg-repo-card-migration.php';
 require_once EG_REPO_CARD_DIR . 'includes/class-eg-repo-card-api.php';
 require_once EG_REPO_CARD_DIR . 'includes/class-eg-repo-card-style.php';
 require_once EG_REPO_CARD_DIR . 'includes/class-eg-repo-card-shortcode.php';

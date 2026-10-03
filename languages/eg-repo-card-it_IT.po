@@ -2,9 +2,9 @@
 # Copyright (C) 2025-2026 Emanuele Gori
 msgid ""
 msgstr ""
-"Project-Id-Version: EG Repo Card 2.1.2\n"
+"Project-Id-Version: EG Repo Card 2.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/eg-repo-card\n"
-"POT-Creation-Date: 2026-10-01T19:00:13+00:00\n"
+"POT-Creation-Date: 2026-10-03T14:18:36+00:00\n"
 "PO-Revision-Date: 2026-10-01\n"
 "Last-Translator: Emanuele Gori\n"
 "Language-Team: Italian\n"
@@ -264,131 +264,130 @@ msgstr "Plugin non trovato nella directory di WordPress.org."
 msgid "Could not parse the API JSON response."
 msgstr "Impossibile analizzare la risposta JSON dell'API."
 
-#: includes/class-eg-repo-card-shortcode.php:91
+#: includes/class-eg-repo-card-shortcode.php:82
 msgid "Missing url attribute in the shortcode."
 msgstr "Attributo url mancante nello shortcode."
 
 #. translators: %s: formatted star count
-#: includes/class-eg-repo-card-shortcode.php:114
+#: includes/class-eg-repo-card-shortcode.php:105
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] "%s stella"
 msgstr[1] "%s stelle"
 
-#: includes/class-eg-repo-card-shortcode.php:120
+#: includes/class-eg-repo-card-shortcode.php:111
 msgid "N/A"
 msgstr "N/D"
 
 #. translators: %s: time since the last update, e.g. "3 days"
-#: includes/class-eg-repo-card-shortcode.php:124
+#: includes/class-eg-repo-card-shortcode.php:115
 msgid "Last updated %s ago"
 msgstr "Ultimo aggiornamento %s fa"
 
-#: includes/class-eg-repo-card-shortcode.php:127
+#: includes/class-eg-repo-card-shortcode.php:118
 msgid "Last updated"
 msgstr "Ultimo aggiornamento"
 
-#: includes/class-eg-repo-card-shortcode.php:151
+#: includes/class-eg-repo-card-shortcode.php:142
 msgid "This repository is read-only"
 msgstr "Questo repository è in sola lettura"
 
-#: includes/class-eg-repo-card-shortcode.php:152
+#: includes/class-eg-repo-card-shortcode.php:143
 msgid "Archived"
 msgstr "Archiviato"
 
-#: includes/class-eg-repo-card-shortcode.php:156
+#: includes/class-eg-repo-card-shortcode.php:147
 msgid "This plugin is no longer available for download"
 msgstr "Questo plugin non è più disponibile per il download"
 
-#: includes/class-eg-repo-card-shortcode.php:157
+#: includes/class-eg-repo-card-shortcode.php:148
 msgid "Closed"
 msgstr "Chiuso"
 
-#: includes/class-eg-repo-card-shortcode.php:173
+#: includes/class-eg-repo-card-shortcode.php:164
 msgid "Project website"
 msgstr "Sito web del progetto"
 
-#: includes/class-eg-repo-card-shortcode.php:175
+#: includes/class-eg-repo-card-shortcode.php:166
 msgid "Website"
 msgstr "Sito web"
 
-#: includes/class-eg-repo-card-shortcode.php:180
+#: includes/class-eg-repo-card-shortcode.php:171
 msgid "No website set for the plugin"
 msgstr "Nessun sito web impostato per il plugin"
 
-#: includes/class-eg-repo-card-shortcode.php:180
+#: includes/class-eg-repo-card-shortcode.php:171
 msgid "No website set in the repository"
 msgstr "Nessun sito web impostato nel repository"
 
-#: includes/class-eg-repo-card-shortcode.php:182
+#: includes/class-eg-repo-card-shortcode.php:173
 msgid "No website"
 msgstr "Nessun sito"
 
-#: includes/class-eg-repo-card-shortcode.php:191
+#: includes/class-eg-repo-card-shortcode.php:182
 msgid "Go to the plugin page on WordPress.org"
 msgstr "Vai alla pagina del plugin su WordPress.org"
 
-#: includes/class-eg-repo-card-shortcode.php:193
+#: includes/class-eg-repo-card-shortcode.php:184
 msgid "Plugin page"
 msgstr "Pagina del plugin"
 
-#: includes/class-eg-repo-card-shortcode.php:200
+#: includes/class-eg-repo-card-shortcode.php:191
 msgid "Go to repository"
 msgstr "Vai al repository"
 
-#: includes/class-eg-repo-card-shortcode.php:202
+#: includes/class-eg-repo-card-shortcode.php:193
 msgid "Source Code"
 msgstr "Codice sorgente"
 
-#: includes/class-eg-repo-card-shortcode.php:210
+#: includes/class-eg-repo-card-shortcode.php:201
 msgid "Download the latest release"
 msgstr "Scarica l'ultima versione"
 
-#: includes/class-eg-repo-card-shortcode.php:210
+#: includes/class-eg-repo-card-shortcode.php:201
 msgid "Open the latest release page"
 msgstr "Apri la pagina dell'ultima versione"
 
-#: includes/class-eg-repo-card-shortcode.php:212
+#: includes/class-eg-repo-card-shortcode.php:203
 msgid "Download"
 msgstr "Scarica"
 
-#: includes/class-eg-repo-card-shortcode.php:225
+#: includes/class-eg-repo-card-shortcode.php:216
 msgid "Latest release"
 msgstr "Ultima versione rilasciata"
 
-#: includes/class-eg-repo-card-shortcode.php:233
+#: includes/class-eg-repo-card-shortcode.php:224
 msgid "Main language"
 msgstr "Linguaggio principale"
 
 #. translators: %s: WordPress version, e.g. 7.1
-#: includes/class-eg-repo-card-shortcode.php:241
+#: includes/class-eg-repo-card-shortcode.php:232
 msgid "Tested up to WordPress %s"
 msgstr "Testato fino a WordPress %s"
 
-#: includes/class-eg-repo-card-shortcode.php:249
+#: includes/class-eg-repo-card-shortcode.php:240
 msgid "Active installations"
 msgstr "Installazioni attive"
 
-#: includes/class-eg-repo-card-shortcode.php:257
+#: includes/class-eg-repo-card-shortcode.php:248
 msgid "License"
 msgstr "Licenza"
 
-#: includes/class-eg-repo-card-shortcode.php:286
+#: includes/class-eg-repo-card-shortcode.php:277
 msgid "No ratings yet"
 msgstr "Nessuna valutazione"
 
 #. translators: 1: average rating, e.g. 4.5; 2: number of ratings
-#: includes/class-eg-repo-card-shortcode.php:295
+#: includes/class-eg-repo-card-shortcode.php:286
 msgid "%1$s out of 5, %2$s rating"
 msgid_plural "%1$s out of 5, %2$s ratings"
 msgstr[0] "%1$s su 5, %2$s valutazione"
 msgstr[1] "%1$s su 5, %2$s valutazioni"
 
-#: includes/class-eg-repo-card-shortcode.php:310
+#: includes/class-eg-repo-card-shortcode.php:301
 msgid "Fewer than 10"
 msgstr "Meno di 10"
 
-#: includes/class-eg-repo-card-shortcode.php:328
+#: includes/class-eg-repo-card-shortcode.php:319
 msgid "EG Repo Card error"
 msgstr "Errore di EG Repo Card"
-

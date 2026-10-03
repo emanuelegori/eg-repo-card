@@ -1,6 +1,6 @@
 # EG Repo Card
 
-[![Versione](https://img.shields.io/badge/Versione-2.1.3-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Versione](https://img.shields.io/badge/Versione-2.2.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![Licenza](https://img.shields.io/badge/Licenza-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -10,8 +10,6 @@ Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeber
 *English: [README.md](README.md)*
 
 ![Card di repository Forgejo, Codeberg, GitHub e Gitea](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-1.png)
-
-> **Prima si chiamava EG Ranking Repo.** La versione 2.0.0 rinomina il plugin. Vedi [Passare da EG Ranking Repo](#passare-da-eg-ranking-repo).
 
 ---
 
@@ -37,10 +35,10 @@ Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeber
 ## Utilizzo
 
 ```
-[eg-repo-card url="https://github.com/owner/repo"]
-[eg-repo-card url="https://codeberg.org/owner/repo"]
-[eg-repo-card url="https://git.example.com/owner/repo"]
-[eg-repo-card url="https://wordpress.org/plugins/plugin-slug/"]
+[eg-repo-card url="https://github.com/WordPress/wordpress-develop"]
+[eg-repo-card url="https://codeberg.org/forgejo/forgejo"]
+[eg-repo-card url="https://git.emanuelegori.uno/emanuelegori/eg-repo-card"]
+[eg-repo-card url="https://wordpress.org/plugins/akismet/"]
 ```
 
 ---
@@ -107,19 +105,6 @@ Senza sito web il pulsante resta visibile, in grigio. Linguaggio, licenza, versi
 | `eg_repo_card_platform_label`   | cambia l'etichetta della piattaforma (etichetta, host, piattaforma) |
 | `eg_repo_card_language_colors`  | aggiunge o cambia i colori dei linguaggi (nome minuscolo → hex) |
 
-`egr_platform_label` (1.x) funziona ancora ma è deprecato.
-
----
-
-## Passare da EG Ranking Repo
-
-1. Disattiva **EG Ranking Repo**.
-2. Installa e attiva **EG Repo Card**: durata della cache, colori e token vengono importati.
-3. Controlla le card. Gli shortcode `[eg-ranking-repo]` continuano a funzionare ma sono deprecati: sostituiscili con `[eg-repo-card]`.
-4. Elimina EG Ranking Repo.
-
-Le impostazioni del colore del testo non ci sono più: ora il testo si adatta allo sfondo.
-
 ---
 
 ## Servizi esterni
@@ -137,7 +122,6 @@ eg-repo-card/
 ├── includes/
 │   ├── class-eg-repo-card-main.php        Hook
 │   ├── class-eg-repo-card-settings.php    Option e valori predefiniti
-│   ├── class-eg-repo-card-migration.php   Import da EG Ranking Repo 1.x
 │   ├── class-eg-repo-card-api.php         Chiamate API e cache
 │   ├── class-eg-repo-card-style.php       CSS delle impostazioni Aspetto
 │   ├── class-eg-repo-card-shortcode.php   Shortcode e markup della card
@@ -149,6 +133,10 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.2.0] - 2026-10-03
+- Rimossi lo shortcode `[eg-ranking-repo]`, il filtro `egr_platform_label` e l'importazione delle impostazioni di EG Ranking Repo
+- Indirizzi reali e funzionanti negli esempi d'uso
 
 ### [2.1.3] - 2026-10-01
 - La card segue la larghezza del contenuto dell'articolo

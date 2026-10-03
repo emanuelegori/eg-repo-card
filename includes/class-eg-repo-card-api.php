@@ -26,7 +26,7 @@ class EG_Repo_Card_API {
      * Se l'API fallisce ma esiste un risultato valido precedente, restituisce
      * quello: meglio un dato di qualche ora fa che una card rotta.
      *
-     * @param  string $url  Full repository URL, e.g. https://github.com/owner/repo
+     * @param  string $url  Full repository URL, e.g. https://github.com/WordPress/wordpress-develop
      * @return array|WP_Error  Normalised repo data array on success, WP_Error on failure.
      */
     public static function fetch( string $url ): array|WP_Error {
@@ -412,8 +412,6 @@ class EG_Repo_Card_API {
         ];
 
         $label = $labels[ $platform ] ?? 'Forgejo';
-
-        $label = apply_filters_deprecated( 'egr_platform_label', [ $label, $host, $platform ], '2.0.0', 'eg_repo_card_platform_label' );
 
         /**
          * Filter the platform label shown on the repository card.
