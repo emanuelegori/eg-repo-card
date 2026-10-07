@@ -117,7 +117,7 @@ msgstr "Cache"
 
 #: includes/class-eg-repo-card-admin.php:198
 msgid "Cache duration (hours)"
-msgstr "Durata cache (ore)"
+msgstr "Durata della cache (ore)"
 
 #: includes/class-eg-repo-card-admin.php:204
 msgid "From 1 to 168 hours. Default: 6"
@@ -129,7 +129,7 @@ msgstr "Aspetto"
 
 #: includes/class-eg-repo-card-admin.php:218
 msgid "Text and icons switch between light and dark to match the background."
-msgstr "Testo e icone passano da chiari a scuri in base allo sfondo."
+msgstr "Testo e icone diventano chiari o scuri in base allo sfondo."
 
 #: includes/class-eg-repo-card-admin.php:226
 msgid "Card background"
@@ -173,7 +173,7 @@ msgstr "Mostra l'avatar del proprietario o l'icona del plugin"
 
 #: includes/class-eg-repo-card-admin.php:242
 msgid "The image is loaded from the platform that hosts it."
-msgstr "L'immagine viene caricata dalla piattaforma che la ospita."
+msgstr "L'immagine arriva direttamente dalla piattaforma che la ospita."
 
 #: includes/class-eg-repo-card-admin.php:276
 msgid "Transparent"
@@ -190,7 +190,7 @@ msgstr "Colore personalizzato"
 
 #: includes/class-eg-repo-card-admin.php:300
 msgid "\"Follow the visitor browser\" switches between light and dark with the system theme. The color picker applies only to \"Custom color\"."
-msgstr "«Segui il browser del visitatore» passa da chiaro a scuro con il tema del sistema. Il selettore di colore vale solo per «Colore personalizzato»."
+msgstr "\"Segui il browser del visitatore\" alterna chiaro e scuro seguendo il tema del sistema. Il selettore di colore vale solo per \"Colore personalizzato\"."
 
 # translators: %s: platform name (GitHub or Forgejo)
 #. translators: %s: platform name (GitHub or Forgejo / Gitea)
@@ -212,7 +212,7 @@ msgstr "Svuota cache"
 
 #: includes/class-eg-repo-card-admin.php:381
 msgid "Cards load fresh data from the repositories on the next page view."
-msgstr "Le card caricano dati aggiornati dai repository alla prossima visualizzazione."
+msgstr "Le card caricano dati aggiornati dai repository alla prossima visualizzazione della pagina."
 
 #: includes/class-eg-repo-card-admin.php:385
 msgid "Flush cache now"
@@ -234,7 +234,7 @@ msgstr "Nessun token salvato."
 
 #: includes/class-eg-repo-card-admin.php:426
 msgid "Shortcode usage"
-msgstr "Utilizzo shortcode"
+msgstr "Uso dello shortcode"
 
 #: includes/class-eg-repo-card-admin.php:431
 msgid "Works with GitHub, Codeberg, any Forgejo or Gitea instance and the WordPress.org plugin directory."
@@ -243,11 +243,11 @@ msgstr "Funziona con GitHub, Codeberg, qualsiasi istanza Forgejo o Gitea e la di
 #: includes/class-eg-repo-card-api.php:85
 #: includes/class-eg-repo-card-api.php:109
 msgid "Invalid repository URL."
-msgstr "URL repository non valido."
+msgstr "URL del repository non valido."
 
 #: includes/class-eg-repo-card-api.php:98
 msgid "Invalid repository URL: missing owner/repo in path."
-msgstr "URL repository non valido: owner/repo mancante nel percorso."
+msgstr "URL del repository non valido: owner/repo mancante nel percorso."
 
 # translators: %d: HTTP response status code
 #. translators: %d: HTTP response status code
@@ -375,7 +375,7 @@ msgstr "Licenza"
 
 #: includes/class-eg-repo-card-shortcode.php:277
 msgid "No ratings yet"
-msgstr "Nessuna valutazione"
+msgstr "Ancora nessuna valutazione"
 
 #. translators: 1: average rating, e.g. 4.5; 2: number of ratings
 #: includes/class-eg-repo-card-shortcode.php:286
