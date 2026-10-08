@@ -216,7 +216,7 @@ msgstr "Le card caricano dati aggiornati dai repository alla prossima visualizza
 
 #: includes/class-eg-repo-card-admin.php:385
 msgid "Flush cache now"
-msgstr "Svuota cache ora"
+msgstr "Svuota cache"
 
 #: includes/class-eg-repo-card-admin.php:390
 msgid "Remove API tokens"
