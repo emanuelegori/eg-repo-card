@@ -208,7 +208,7 @@ msgstr "Salva impostazioni"
 
 #: includes/class-eg-repo-card-admin.php:379
 msgid "Flush cache"
-msgstr "Svuota cache"
+msgstr "Svuota cache manualmente"
 
 #: includes/class-eg-repo-card-admin.php:381
 msgid "Cards load fresh data from the repositories on the next page view."
