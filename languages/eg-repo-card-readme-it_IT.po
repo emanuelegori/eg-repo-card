@@ -1,0 +1,368 @@
+# Translation of Plugins - EG Repo Card - Stable Readme (latest release) in Italian
+# This file is distributed under the same license as the Plugins - EG Repo Card - Stable Readme (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: +0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.1.0\n"
+"Language: it\n"
+"Project-Id-Version: Plugins - EG Repo Card - Stable Readme (latest release)\n"
+
+#. Short description.
+msgid "A card for a GitHub, Codeberg, Forgejo or Gitea repository, or a WordPress.org plugin: latest version, download button, stars or rating."
+msgstr "Una card per un repository GitHub, Codeberg, Forgejo o Gitea, oppure per un plugin di WordPress.org: ultima versione, pulsante di download, stelle o valutazione."
+
+#. Plugin name.
+msgid "EG Repo Card"
+msgstr "EG Repo Card"
+
+#. Found in faq paragraph.
+msgid "Data for each repository is stored as a WordPress transient for the duration set in the settings (default 6 hours, maximum 168). The settings page has a button to flush the cache."
+msgstr "Il plugin salva i dati di ogni repository come transient di WordPress per la durata scelta nelle impostazioni (predefinita 6 ore, massimo 168). Nella pagina delle impostazioni c'è un pulsante per svuotare la cache."
+
+#. Found in faq paragraph.
+msgid "For a repository: to the <code>.zip</code> file attached to the latest release, when the release has exactly one. Otherwise it opens the release page. Without releases the button is not shown. For a WordPress.org plugin: to the official <code>.zip</code> of the latest version."
+msgstr "Per un repository: al file <code>.zip</code> allegato all'ultima versione pubblicata, se ne ha esattamente uno. Altrimenti apre la pagina di quella versione. Se il repository non ha versioni pubblicate, il pulsante non compare. Per un plugin di WordPress.org: al <code>.zip</code> ufficiale dell'ultima versione."
+
+#. Found in faq paragraph.
+msgid "No. Without a token, GitHub allows 60 requests per hour from your server. A personal access token raises the limit to 5,000. A Forgejo or Gitea token is only needed for private repositories or instances that require login."
+msgstr "No. Senza token, GitHub consente 60 richieste all'ora dal tuo server. Un token di accesso personale alza il limite a 5.000. Un token Forgejo o Gitea serve solo per repository privati o istanze che richiedono l'accesso."
+
+#. Found in faq paragraph.
+msgid "GitHub, Codeberg, any self-hosted Forgejo or Gitea instance, and the WordPress.org plugin directory. The plugin tells Forgejo and Gitea apart and shows the right logo."
+msgstr "GitHub, Codeberg, qualsiasi istanza Forgejo o Gitea self-hosted e la directory dei plugin di WordPress.org. Il plugin distingue Forgejo da Gitea e mostra il logo giusto."
+
+#. Found in faq header.
+msgid "How does the cache work?"
+msgstr "Come funziona la cache?"
+
+#. Found in faq header.
+msgid "Where does the Download button point?"
+msgstr "Dove porta il pulsante Scarica?"
+
+#. Found in faq header.
+msgid "Is an API token required?"
+msgstr "È necessario un token API?"
+
+#. Found in faq header.
+msgid "Which platforms are supported?"
+msgstr "Con quali piattaforme funziona?"
+
+#. Found in installation list item.
+msgid "Optionally, go to <strong>Settings &gt; EG Repo Card</strong> to add API tokens and choose the appearance."
+msgstr "Se vuoi, vai su <strong>Impostazioni &gt; EG Repo Card</strong> per aggiungere i token API e scegliere l'aspetto."
+
+#. Found in installation list item.
+msgid "Activate the plugin."
+msgstr "Attiva il plugin."
+
+#. Found in installation list item.
+msgid "Upload the <code>eg-repo-card</code> folder to <code>/wp-content/plugins/</code>, or install the plugin from the <strong>Plugins</strong> screen."
+msgstr "Carica la cartella <code>eg-repo-card</code> in <code>/wp-content/plugins/</code>, oppure installa il plugin dalla schermata <strong>Plugin</strong>."
+
+#. Found in description paragraph.
+msgid "The image is off by default. When you enable it, visitors' browsers load the owner's avatar or the plugin icon directly from the platform that hosts it (GitHub, Codeberg, the Forgejo or Gitea instance, or WordPress.org), which receives the visitor's IP address like for any image request."
+msgstr "L'immagine è disattivata per impostazione predefinita. Se la abiliti, i browser dei visitatori caricano l'avatar del proprietario o l'icona del plugin direttamente dalla piattaforma che li ospita (GitHub, Codeberg, l'istanza Forgejo o Gitea, oppure WordPress.org), che riceve l'indirizzo IP del visitatore come per qualsiasi immagine."
+
+#. Found in description paragraph.
+msgid "Forgejo and Gitea are free software that anyone can host; there is no central service. The plugin contacts only the instance whose address the site owner writes in a shortcode (for example <code>git.emanuelegori.uno</code> in <code>[eg-repo-card url=\"https://git.emanuelegori.uno/emanuelegori/eg-repo-card\"]</code>), through the instance's own API."
+msgstr "Forgejo e Gitea sono software libero che chiunque può ospitare: non esiste un servizio centrale. Il plugin contatta solo l'istanza che il proprietario del sito indica in uno shortcode (per esempio <code>git.emanuelegori.uno</code> in <code>[eg-repo-card url=\"https://git.emanuelegori.uno/emanuelegori/eg-repo-card\"]</code>), tramite l'API dell'istanza stessa."
+
+#. Found in description paragraph.
+msgid "To build a card, the plugin asks the platform that hosts the repository or the plugin for its public data. It contacts only the hosts written in the shortcodes on your site, from your server, and only when a page with a card is displayed and the cached data has expired. No data about your visitors is sent."
+msgstr "Per costruire una card, il plugin chiede i dati pubblici alla piattaforma che ospita il repository o il plugin. Contatta solo gli host scritti negli shortcode del tuo sito, dal tuo server, e solo quando qualcuno visualizza una pagina con una card e i dati in cache sono scaduti. Non invia nessun dato sui tuoi visitatori."
+
+#. Found in description paragraph.
+msgid "The address is the one you see in the browser on the repository or plugin page. For Forgejo and Gitea, any instance works, self-hosted ones included."
+msgstr "L'indirizzo è quello che vedi nel browser sulla pagina del repository o del plugin. Per Forgejo e Gitea va bene qualsiasi istanza, comprese quelle self-hosted."
+
+#. Found in description paragraph.
+msgid ""
+"[eg-repo-card url=\"https://github.com/WordPress/wordpress-develop\"]\n"
+"  [eg-repo-card url=\"https://codeberg.org/forgejo/forgejo\"]\n"
+"  [eg-repo-card url=\"https://git.emanuelegori.uno/emanuelegori/eg-repo-card\"]\n"
+"  [eg-repo-card url=\"https://wordpress.org/plugins/akismet/\"]"
+msgstr ""
+"[eg-repo-card url=\"https://github.com/WordPress/wordpress-develop\"]\n"
+"  [eg-repo-card url=\"https://codeberg.org/forgejo/forgejo\"]\n"
+"  [eg-repo-card url=\"https://git.emanuelegori.uno/emanuelegori/eg-repo-card\"]\n"
+"  [eg-repo-card url=\"https://wordpress.org/plugins/akismet/\"]"
+
+#. Found in description paragraph.
+msgid "Insert the shortcode in any post, page, or widget:"
+msgstr "Inserisci lo shortcode in qualsiasi articolo, pagina o widget:"
+
+#. Found in description paragraph.
+msgid "Repository data is cached. If the platform does not answer, the card keeps showing the last data it received; visitors never see an error message."
+msgstr "Il plugin tiene in cache i dati dei repository. Se la piattaforma non risponde, la card continua a mostrare gli ultimi dati ricevuti: i visitatori non vedono mai un messaggio di errore."
+
+#. Found in description paragraph.
+msgid "The card adapts to your theme: card and buttons can use a neutral preset, a transparent background, a custom color, or follow the light or dark mode of the visitor browser. Text and icons always stay readable on the chosen background."
+msgstr "La card si adatta al tuo tema: card e pulsanti possono usare un preset neutro, uno sfondo trasparente, un colore personalizzato oppure seguire la modalità chiara o scura del browser del visitatore. Testo e icone restano sempre leggibili sullo sfondo scelto."
+
+#. Found in description paragraph.
+msgid "The same shortcode works with plugins from the WordPress.org directory. Their card shows the plugin name, icon and description, the plugin page, the download of the latest version, the WordPress version it is tested up to, the active installations and the average rating. Closed plugins get a \"Closed\" label."
+msgstr "Lo stesso shortcode funziona con i plugin della directory di WordPress.org. La loro card mostra nome, icona e descrizione del plugin, la pagina del plugin, il download dell'ultima versione, la versione di WordPress fino a cui è testato, le installazioni attive e la valutazione media. I plugin chiusi hanno l'etichetta \"Chiuso\"."
+
+#. Found in description paragraph.
+msgid "EG Repo Card shows a compact card for a code repository hosted on GitHub, Codeberg or any Forgejo or Gitea instance. Add the shortcode with the repository address and the card shows:"
+msgstr "EG Repo Card mostra una card compatta per un repository di codice ospitato su GitHub, Codeberg o qualsiasi istanza Forgejo o Gitea. Aggiungi lo shortcode con l'indirizzo del repository e la card mostra:"
+
+#. Found in description list item.
+msgid "Privacy policy: https://wordpress.org/about/privacy/"
+msgstr "Privacy policy: https://wordpress.org/about/privacy/"
+
+#. Found in description list item.
+msgid "<strong>Data received</strong>: public plugin data (name, description, icon, version, last update, tested WordPress version, active installations, rating, download link)."
+msgstr "<strong>Dati ricevuti</strong>: dati pubblici del plugin (nome, descrizione, icona, versione, ultimo aggiornamento, versione di WordPress testata, installazioni attive, valutazione, link per il download)."
+
+#. Found in description list item.
+msgid "<strong>Data sent</strong>: the slug of the plugin. No token is used."
+msgstr "<strong>Dati inviati</strong>: lo slug del plugin. Il plugin non usa nessun token."
+
+#. Found in description list item.
+msgid "<strong>When</strong>: when a page with a WordPress.org plugin card is displayed and the cached data has expired."
+msgstr "<strong>Quando</strong>: quando qualcuno visualizza una pagina con la card di un plugin di WordPress.org e i dati in cache sono scaduti."
+
+#. Found in description list item.
+msgid "<strong>What</strong>: the WordPress.org plugin directory API (host <code>api.wordpress.org</code>, path <code>/plugins/info/1.2/</code>), used to read the data of a plugin listed in the directory."
+msgstr "<strong>Che cosa</strong>: l'API della directory dei plugin di WordPress.org (host <code>api.wordpress.org</code>, percorso <code>/plugins/info/1.2/</code>), per leggere i dati di un plugin presente nella directory."
+
+#. Found in description list item.
+msgid "Terms of service and privacy policy are those of the chosen instance, published by whoever runs it."
+msgstr "Termini di servizio e privacy policy sono quelli dell'istanza scelta, pubblicati da chi la gestisce."
+
+#. Found in description list item.
+msgid "<strong>Data sent</strong>: the owner and name of the repository, and the Forgejo or Gitea token if you saved one."
+msgstr "<strong>Dati inviati</strong>: proprietario e nome del repository, più il token Forgejo o Gitea se ne hai salvato uno."
+
+#. Found in description list item.
+msgid "<strong>Requests</strong>: <code>/api/v1/repos/{owner}/{repo}</code>, <code>/api/v1/repos/{owner}/{repo}/releases</code> and, when there are no releases, <code>/api/v1/repos/{owner}/{repo}/tags</code>. Once a week per instance, <code>/api/forgejo/v1/version</code>, only to tell Forgejo from Gitea and show the right logo."
+msgstr "<strong>Richieste</strong>: <code>/api/v1/repos/{owner}/{repo}</code>, <code>/api/v1/repos/{owner}/{repo}/releases</code> e, se non ci sono versioni pubblicate, <code>/api/v1/repos/{owner}/{repo}/tags</code>. Una volta alla settimana per istanza, <code>/api/forgejo/v1/version</code>, solo per distinguere Forgejo da Gitea e mostrare il logo giusto."
+
+#. Found in description list item.
+msgid "<strong>When</strong>: when a page with a card from that instance is displayed and the cached data has expired."
+msgstr "<strong>Quando</strong>: quando qualcuno visualizza una pagina con una card di quell'istanza e i dati in cache sono scaduti."
+
+#. Found in description list item.
+msgid "<strong>What</strong>: the API of that instance, used to read the data of a public repository hosted there."
+msgstr "<strong>Che cosa</strong>: l'API di quell'istanza, per leggere i dati di un repository pubblico ospitato lì."
+
+#. Found in description list item.
+msgid "Privacy policy: https://codeberg.org/codeberg/org/src/branch/main/PrivacyPolicy.md"
+msgstr "Privacy policy: https://codeberg.org/codeberg/org/src/branch/main/PrivacyPolicy.md"
+
+#. Found in description list item.
+msgid "Terms of use: https://codeberg.org/codeberg/org/src/branch/main/TermsOfUse.md"
+msgstr "Termini di utilizzo: https://codeberg.org/codeberg/org/src/branch/main/TermsOfUse.md"
+
+#. Found in description list item.
+msgid "<strong>Data sent</strong>: the owner and name of the repository, and the Forgejo token if you saved one."
+msgstr "<strong>Dati inviati</strong>: proprietario e nome del repository, più il token Forgejo se ne hai salvato uno."
+
+#. Found in description list item.
+msgid "<strong>Requests</strong>: the same as for Forgejo and Gitea instances, below."
+msgstr "<strong>Richieste</strong>: le stesse delle istanze Forgejo e Gitea, qui sotto."
+
+#. Found in description list item.
+msgid "<strong>When</strong>: when a page with a Codeberg card is displayed and the cached data has expired."
+msgstr "<strong>Quando</strong>: quando qualcuno visualizza una pagina con una card di Codeberg e i dati in cache sono scaduti."
+
+#. Found in description list item.
+msgid "<strong>What</strong>: the Codeberg API (host <code>codeberg.org</code>, path <code>/api/v1</code>), used to read the data of a public Codeberg repository."
+msgstr "<strong>Che cosa</strong>: l'API di Codeberg (host <code>codeberg.org</code>, percorso <code>/api/v1</code>), per leggere i dati di un repository pubblico su Codeberg."
+
+#. Found in description list item.
+msgid "Privacy statement: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+msgstr "Privacy policy: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+
+#. Found in description list item.
+msgid "Terms of service: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service"
+msgstr "Termini di servizio: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service"
+
+#. Found in description list item.
+msgid "<strong>Data received</strong>: public repository data (description, website, stars, language, license, latest release and tag)."
+msgstr "<strong>Dati ricevuti</strong>: dati pubblici del repository (descrizione, sito web, stelle, linguaggio, licenza, ultima versione pubblicata e ultimo tag)."
+
+#. Found in description list item.
+msgid "<strong>Data sent</strong>: the owner and name of the repository, and the personal access token if you saved one."
+msgstr "<strong>Dati inviati</strong>: proprietario e nome del repository, più il token di accesso personale se ne hai salvato uno."
+
+#. Found in description list item.
+msgid "<strong>Requests</strong>: <code>/repos/{owner}/{repo}</code>, <code>/repos/{owner}/{repo}/releases/latest</code> and, when there are no releases, <code>/repos/{owner}/{repo}/tags</code>."
+msgstr "<strong>Richieste</strong>: <code>/repos/{owner}/{repo}</code>, <code>/repos/{owner}/{repo}/releases/latest</code> e, se non ci sono versioni pubblicate, <code>/repos/{owner}/{repo}/tags</code>."
+
+#. Found in description list item.
+msgid "<strong>When</strong>: when a page with a GitHub card is displayed and the cached data has expired."
+msgstr "<strong>Quando</strong>: quando qualcuno visualizza una pagina con una card di GitHub e i dati in cache sono scaduti."
+
+#. Found in description list item.
+msgid "<strong>What</strong>: the GitHub REST API (host <code>api.github.com</code>), used to read the data of a public GitHub repository."
+msgstr "<strong>Che cosa</strong>: l'API REST di GitHub (host <code>api.github.com</code>), per leggere i dati di un repository pubblico su GitHub."
+
+#. Found in description list item.
+msgid "an \"Archived\" label for read-only repositories"
+msgstr "l'etichetta \"Archiviato\" per i repository in sola lettura"
+
+#. Found in description list item.
+msgid "main language, license and star count"
+msgstr "linguaggio principale, licenza e numero di stelle"
+
+#. Found in description list item.
+msgid "latest version, from the latest release or, when there are none, the latest git tag"
+msgstr "numero di versione, preso dall'ultima versione pubblicata oppure, se non ce ne sono, dall'ultimo tag git"
+
+#. Found in description list item.
+msgid "last update date (the time since the update appears on hover)"
+msgstr "data dell'ultimo aggiornamento (al passaggio del mouse compare il tempo trascorso)"
+
+#. Found in description list item.
+msgid "buttons for the project website, the source code and the latest release download"
+msgstr "pulsanti per il sito web del progetto, il codice sorgente e il download dell'ultima versione"
+
+#. Found in description list item.
+msgid "repository name, platform logo and description"
+msgstr "nome del repository, logo della piattaforma e descrizione"
+
+#. Found in description header.
+msgid "Owner avatar and plugin icon"
+msgstr "Avatar del proprietario e icona del plugin"
+
+#. Found in description header.
+msgid "WordPress.org"
+msgstr "WordPress.org"
+
+#. Found in description header.
+msgid "Forgejo and Gitea instances"
+msgstr "Istanze Forgejo e Gitea"
+
+#. Found in description header.
+msgid "Codeberg"
+msgstr "Codeberg"
+
+#. Found in description header.
+msgid "GitHub"
+msgstr "GitHub"
+
+#. Found in description header.
+msgid "External services"
+msgstr "Servizi esterni"
+
+#. Found in description header.
+msgid "Usage"
+msgstr "Uso"
+
+#. Screenshot description.
+msgid "The settings page: API tokens, cache and appearance."
+msgstr "La pagina delle impostazioni: token API, cache e aspetto."
+
+#. Screenshot description.
+msgid "\"Follow the visitor browser\": the same cards in dark mode, with the optional shadow."
+msgstr "\"Segue il browser del visitatore\": le stesse card in modalità scura, con l'ombra opzionale."
+
+#. Screenshot description.
+msgid "WordPress.org plugin cards: rating, active installations, tested WordPress version, and a closed plugin."
+msgstr "Card di plugin di WordPress.org: valutazione, installazioni attive, versione di WordPress testata e un plugin chiuso."
+
+#. Screenshot description.
+msgid "Repository cards from Forgejo, Codeberg, GitHub and Gitea."
+msgstr "Card di repository da Forgejo, Codeberg, GitHub e Gitea."
+
+#. Found in changelog paragraph.
+msgid "The changelog of EG Ranking Repo 1.x is in <code>changelog.txt</code>."
+msgstr "The changelog of EG Ranking Repo 1.x is in <code>changelog.txt</code>."
+
+#. Found in changelog list item.
+msgid "Deprecated: the <code>egr_platform_label</code> filter, replaced by <code>eg_repo_card_platform_label</code>."
+msgstr "Deprecated: the <code>egr_platform_label</code> filter, replaced by <code>eg_repo_card_platform_label</code>."
+
+#. Found in changelog list item.
+msgid "Removed: the text color settings, now chosen automatically."
+msgstr "Removed: the text color settings, now chosen automatically."
+
+#. Found in changelog list item.
+msgid "Removed: the \"?\" badge on the card."
+msgstr "Removed: the \"?\" badge on the card."
+
+#. Found in changelog list item.
+msgid "Changed: when the platform does not answer, the card shows the last data received; error messages are visible only to editors."
+msgstr "Changed: when the platform does not answer, the card shows the last data received; error messages are visible only to editors."
+
+#. Found in changelog list item.
+msgid "New: the date tooltip shows the time since the last update."
+msgstr "New: the date tooltip shows the time since the last update."
+
+#. Found in changelog list item.
+msgid "New: main language, license and \"Archived\" label."
+msgstr "New: main language, license and \"Archived\" label."
+
+#. Found in changelog list item.
+msgid "New: Download button for the latest release."
+msgstr "New: Download button for the latest release."
+
+#. Found in changelog list item.
+msgid "New: platform logos for GitHub, Codeberg, Forgejo and Gitea; Gitea instances are now recognized."
+msgstr "New: platform logos for GitHub, Codeberg, Forgejo and Gitea; Gitea instances are now recognized."
+
+#. Found in changelog list item.
+msgid "New: optional border, shadow and owner avatar."
+msgstr "New: optional border, shadow and owner avatar."
+
+#. Found in changelog list item.
+msgid "New: card and button backgrounds offer a neutral preset, transparent, custom color, or follow the visitor browser; text adapts to the background."
+msgstr "New: card and button backgrounds offer a neutral preset, transparent, custom color, or follow the visitor browser; text adapts to the background."
+
+#. Found in changelog list item.
+msgid "New: settings, colors and tokens of EG Ranking Repo are imported on first activation."
+msgstr "New: settings, colors and tokens of EG Ranking Repo are imported on first activation."
+
+#. Found in changelog list item.
+msgid "New name: EG Ranking Repo is now EG Repo Card, with the new <code>[eg-repo-card]</code> shortcode. <code>[eg-ranking-repo]</code> still works but is deprecated."
+msgstr "New name: EG Ranking Repo is now EG Repo Card, with the new <code>[eg-repo-card]</code> shortcode. <code>[eg-ranking-repo]</code> still works but is deprecated."
+
+#. Found in changelog list item.
+msgid "Fixed: automatic updates."
+msgstr "Fixed: automatic updates."
+
+#. Found in changelog list item.
+msgid "New: the Avatar option also shows the plugin icon."
+msgstr "New: the Avatar option also shows the plugin icon."
+
+#. Found in changelog list item.
+msgid "New: cards for plugins in the WordPress.org directory, with plugin page, download, tested WordPress version, active installations and rating."
+msgstr "New: cards for plugins in the WordPress.org directory, with plugin page, download, tested WordPress version, active installations and rating."
+
+#. Found in changelog list item.
+msgid "Fixed: language dots are easier to see on dark backgrounds."
+msgstr "Fixed: language dots are easier to see on dark backgrounds."
+
+#. Found in changelog list item.
+msgid "Changed: the update date follows the date format set in WordPress."
+msgstr "Changed: the update date follows the date format set in WordPress."
+
+#. Found in changelog list item.
+msgid "Changed: the plugin version moved to the bottom right of the settings page."
+msgstr "Changed: the plugin version moved to the bottom right of the settings page."
+
+#. Found in changelog list item.
+msgid "New: links to documentation, repository and donations at the bottom of the settings page."
+msgstr "New: links to documentation, repository and donations at the bottom of the settings page."
+
+#. Found in changelog list item.
+msgid "Changed: WordPress.org plugins without ratings show 0, like repositories without stars."
+msgstr "Changed: WordPress.org plugins without ratings show 0, like repositories without stars."
+
+#. Found in changelog list item.
+msgid "Fixed: the card follows the width of the post content."
+msgstr "Fixed: the card follows the width of the post content."
+
+#. Found in changelog list item.
+msgid "Changed: real, working addresses in the usage examples."
+msgstr "Changed: real, working addresses in the usage examples."
+
+#. Found in changelog list item.
+msgid "Removed: the <code>[eg-ranking-repo]</code> shortcode, the <code>egr_platform_label</code> filter and the import of EG Ranking Repo settings."
+msgstr "Removed: the <code>[eg-ranking-repo]</code> shortcode, the <code>egr_platform_label</code> filter and the import of EG Ranking Repo settings."

@@ -181,7 +181,7 @@ msgstr "Trasparente"
 
 #: includes/class-eg-repo-card-admin.php:277
 msgid "Follow the visitor browser"
-msgstr "Segui il browser del visitatore"
+msgstr "Segue il browser del visitatore"
 
 #: includes/class-eg-repo-card-admin.php:278
 #: includes/class-eg-repo-card-admin.php:296
@@ -190,7 +190,7 @@ msgstr "Colore personalizzato"
 
 #: includes/class-eg-repo-card-admin.php:300
 msgid "\"Follow the visitor browser\" switches between light and dark with the system theme. The color picker applies only to \"Custom color\"."
-msgstr "\"Segui il browser del visitatore\" alterna chiaro e scuro seguendo il tema del sistema. Il selettore di colore vale solo per \"Colore personalizzato\"."
+msgstr "\"Segue il browser del visitatore\" alterna chiaro e scuro seguendo il tema del sistema. Il selettore di colore vale solo per \"Colore personalizzato\"."
 
 # translators: %s: platform name (GitHub or Forgejo)
 #. translators: %s: platform name (GitHub or Forgejo / Gitea)

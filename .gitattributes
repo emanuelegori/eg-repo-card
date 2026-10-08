@@ -15,3 +15,4 @@ tests/ export-ignore
 # distribuisce translate.wordpress.org. Il .pot resta nel pacchetto.
 /languages/eg-repo-card-it_IT.po export-ignore
 /languages/eg-repo-card-it_IT.mo export-ignore
+/languages/eg-repo-card-readme-it_IT.po export-ignore

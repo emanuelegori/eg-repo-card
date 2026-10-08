@@ -23,7 +23,7 @@ Plugin WordPress che mostra una card con i dati di un repository GitHub, Codeber
 - Versione dall'ultima release; in mancanza, dall'ultimo tag git
 - Etichetta "Archiviato" per i repository in sola lettura
 - Card per i plugin di WordPress.org: icona, pagina del plugin, Scarica, versione di WordPress testata, installazioni attive, valutazione, etichetta "Chiuso"
-- Aspetto: preset neutro, trasparente, colore personalizzato o segui il browser del visitatore (chiaro/scuro), per la card e per i pulsanti; il testo si adatta allo sfondo
+- Aspetto: preset neutro, trasparente, colore personalizzato o "Segue il browser del visitatore" (chiaro/scuro), per la card e per i pulsanti; il testo si adatta allo sfondo
 - Bordo, ombra e avatar del proprietario opzionali
 - Cache con transient (predefinito 6 ore); se un'API non risponde, la card mostra gli ultimi dati ricevuti
 - Errori visibili solo a chi modifica i contenuti, mai ai visitatori
@@ -82,7 +82,7 @@ Senza sito web il pulsante resta visibile, in grigio. Linguaggio, licenza, versi
 | | |
 |---|---|
 | ![Card dei plugin di WordPress.org](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-2.png) | ![Tema scuro](https://git.emanuelegori.uno/emanuelegori/eg-repo-card/raw/branch/main/.wordpress-org/screenshot-3.png) |
-| Card dei plugin di WordPress.org | "Segui il browser del visitatore" in tema scuro |
+| Card dei plugin di WordPress.org | "Segue il browser del visitatore" in tema scuro |
 
 ---
 
@@ -95,7 +95,7 @@ Senza sito web il pulsante resta visibile, in grigio. Linguaggio, licenza, versi
 - **Token di accesso personale GitHub**: alza il limite da 60 a 5.000 richieste all'ora.
 - **Token Forgejo o Gitea**: solo per repository privati o istanze che richiedono l'accesso.
 - **Durata cache**: da 1 a 168 ore, predefinito 6. Nella pagina c'è anche il pulsante per svuotarla.
-- **Sfondo della card / Sfondo dei pulsanti**: preset neutro, trasparente, segui il browser del visitatore, colore personalizzato.
+- **Sfondo della card / Sfondo dei pulsanti**: preset neutro, trasparente, segue il browser del visitatore, colore personalizzato.
 - **Bordo, Ombra, Avatar**: attivabili singolarmente. Avatar mostra l'avatar del proprietario o l'icona del plugin, caricati dalla piattaforma che li ospita.
 
 ### Filtri
