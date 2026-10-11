@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class EG_Repo_Card_API {
 
     /** Bump when the shape of the cached array changes */
-    private const SCHEMA = 3;
+    private const SCHEMA = 4;
 
     /** How long the last good result is kept as a fallback for API failures */
     private const LAST_GOOD_TTL = 30 * DAY_IN_SECONDS;
@@ -158,6 +158,7 @@ class EG_Repo_Card_API {
             return $data;
         }
 
+        // GitHub `updated_at` also changes with stars and metadata edits: `pushed_at` follows the code.
         // GitHub uses `stargazers_count` and `homepage`,
         // Forgejo/Gitea use `stars_count` and `website`.
         $stars    = (int) ( $is_github ? ( $data['stargazers_count'] ?? 0 ) : ( $data['stars_count'] ?? 0 ) );
@@ -172,7 +173,7 @@ class EG_Repo_Card_API {
             'full_name'      => (string) ( $data['full_name'] ?? rawurldecode( "{$owner}/{$repo}" ) ),
             'description'    => trim( (string) ( $data['description'] ?? '' ) ),
             'stars'          => $stars,
-            'updated_at'     => (string) ( $data['updated_at'] ?? '' ),
+            'updated_at'     => (string) ( $is_github ? ( $data['pushed_at'] ?? '' ) : ( $data['updated_at'] ?? '' ) ),
             'homepage'       => wp_http_validate_url( $homepage ) ? $homepage : '',
             'repo_url'       => esc_url_raw( $target['url'] ),
             'platform'       => $platform,

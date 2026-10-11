@@ -1,6 +1,6 @@
 # EG Repo Card
 
-[![Version](https://img.shields.io/badge/Version-2.2.0-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
+[![Version](https://img.shields.io/badge/Version-2.2.1-green)](https://git.emanuelegori.uno/emanuelegori/eg-repo-card)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0+-orange.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
@@ -133,6 +133,9 @@ eg-repo-card/
 ---
 
 ## Changelog
+
+### [2.2.1] - 2026-10-11
+- GitHub cards show the date of the last push
 
 ### [2.2.0] - 2026-10-03
 - Removed the `[eg-ranking-repo]` shortcode, the `egr_platform_label` filter and the import of EG Ranking Repo settings

@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.1] - 2026-10-11
+
+### Fixed
+- Data "Aggiornato" delle card GitHub: ora viene da `pushed_at` invece che da `updated_at`. Su GitHub `updated_at` cambia anche per stelle, fork e modifiche ai metadati, quindi sui repo con molte stelle sembrava sempre di ieri. Emerso scrivendo l'articolo su Mailrise: la card di YoRyan/mailrise diceva 10 ott 2026, ultimo commit 8 nov 2025. Misurato l'11 ott: jetmore/swaks `updated_at` 2026-10-09 contro `pushed_at` 2024-03-05; mailrise 2026-10-10 contro 2025-11-24; apprise 2026-10-11 contro 2026-10-05. Stesso JSON, nessuna chiamata in più.
+- Limite accettato: `pushed_at` conta anche i push su altri rami (dependabot: mailrise 24 nov contro l'8 nov dell'ultimo commit su main). La data esatta richiederebbe una chiamata in più per card (`/commits?per_page=1`) contro il limite di 60 richieste l'ora senza token: scartata.
+- Forgejo, Codeberg e Gitea invariati: lì `updated_at` non segue le stelle (scarto di minuti o giorni). WordPress.org invariato: `last_updated` è l'ultimo commit SVN.
+
+### Changed
+- `SCHEMA` della cache da 3 a 4: le card mostrano subito la data corretta senza aspettare la scadenza della cache.
+
 ## [2.2.0] - 2026-10-03
 
 Risposta alla prima revisione di WordPress.org (AUTOPREREVIEW del 3 ottobre): nome "EG", prefissi, URL 404, servizi esterni non documentati. Tre dei quattro rilievi erano gli stessi ricevuti da eg-social-timeline.

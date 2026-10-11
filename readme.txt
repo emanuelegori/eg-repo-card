@@ -5,7 +5,7 @@ Tags: repository, github, forgejo, codeberg, gitea
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -118,6 +118,9 @@ The image is off by default. When you enable it, visitors' browsers load the own
 4. The settings page: API tokens, cache and appearance.
 
 == Changelog ==
+
+= 2.2.1 =
+* Fixed: GitHub cards show the date of the last push instead of the last change to the repository details.
 
 = 2.2.0 =
 * Removed: the `[eg-ranking-repo]` shortcode, the `egr_platform_label` filter and the import of EG Ranking Repo settings.
